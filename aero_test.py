@@ -12,6 +12,60 @@ import fcntl
 import os
 import atexit
 
+""" TODO:
+Use IMU specific functions
+Add Yaw correction
+"""
+
+throttle = 1500
+
+LIMIT_ANGLE = 20
+ANGLE_RESTORE = 5
+ACCEL_LIMIT = 1200
+SCALE_LEVEL_PID = 1 
+SCALE_LEVEL_GYRO_PID = 180
+
+def setPID():
+  setLevelRollPID (3.5 *SCALE_LEVEL_PID, 0 *SCALE_LEVEL_PID,0 *SCALE_LEVEL_PID)  # 3.5, 0, 0 
+  setLevelPitchPID(3.5 *SCALE_LEVEL_PID, 0 *SCALE_LEVEL_PID,0 *SCALE_LEVEL_PID)
+  setLevelGyroRollPID (.149 *SCALE_LEVEL_GYRO_PID, 0.039 *SCALE_LEVEL_GYRO_PID, -.01 *SCALE_LEVEL_GYRO_PID) # .149, .039. -.01
+  setLevelGyroPitchPID(.149 *SCALE_LEVEL_GYRO_PID, 0.039 *SCALE_LEVEL_GYRO_PID, -.01 *SCALE_LEVEL_GYRO_PID)
+
+def dontCrash():
+  angles = getFlightAngles()
+  accel = getAccelReadings()
+  global throttle
+  
+  for i in range(len(angles)-1):
+    if (abs(angles[i]) > LIMIT_ANGLE):
+      print "angle limit reached"
+      throttle=1250
+      setThrottle(throttle)
+      angles = getFlightAngles()
+      while (abs(angles[i]) > ANGLE_RESTORE):
+        angles = getFlightAngles()
+        print angles
+        sleep(0.25)
+      print "restabilized"
+      setPID()
+      sleep(1.5)
+    
+  if (abs(accel[2]) > ACCEL_LIMIT):
+    print "accel limit reached"
+    throttle=1250
+    setThrottle(throttle)
+    accel = getAccelReadings()
+    while (abs(accel[2]) > ACCEL_LIMIT):
+      accel = getAccelReadings()
+      print accel
+      sleep(0.25)
+    print "restabilized"
+    setPID()
+    sleep(1.5)
+  
+def printData():
+  print getMotorCommands(), getFlightAngles(), getFlightCmds()
+"""  
 def myGetch():
     fd = sys.stdin.fileno()
 
@@ -29,39 +83,47 @@ def myGetch():
                 c = sys.stdin.read(1)
                 break
             except IOError: pass
-            [m1, m2, m3, m4]=getMotorCommands()
-            print [m1, m2, m3, m4]
+            dontCrash()
+            printData()
             sleep(0.25)
     finally:
         termios.tcsetattr(fd, termios.TCSAFLUSH, oldterm)
         fcntl.fcntl(fd, fcntl.F_SETFL, oldflags)
         return c
+"""
 
 #roboveroConfig()
-accelerometer=I2C_M_SETUP_Type()
-gyro = I2C_M_SETUP_Type()
 
-aeroInit(accelerometer.ptr, gyro.ptr)
+aeroInit()
+setPID()
 
 heartbeatOff()
 aeroLoopOn()
-
-throttle=1250
 
 setThrottle(throttle)
 
 try:
   while True:
-    c=myGetch()
-    if (c=='w'):
+    """
+    s=myGetch()
+    if (s=='w'):
       throttle=throttle+25
-    elif (c=='s'):
+    elif (s=='s'):
       throttle=throttle-25
     else:
       throttle=1250
     setThrottle(throttle)
-    #pass
-except KeyboardInterrupt:
+    """
+    printData()
+    throttle += 1
+    if (throttle > 1500):
+      throttle=1500
+    setThrottle(throttle)
+    for i in range(throttle/500):
+      dontCrash()
+      sleep(0.02)
+    #sleep(.1)
+except:
   aeroLoopOff()
   heartbeatOn()
   #stopAllMotors()
