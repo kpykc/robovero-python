@@ -79,6 +79,8 @@ def robocaller(function, ret_type, *args):
       if type(arg) == list:
         for sub_arg in arg:
           function += " %X" % (sub_arg)
+      elif type(arg) == str:
+        function += " " + arg
       else:
         function += " %X" % (arg)
     function += "\r\n"
@@ -103,7 +105,7 @@ def robocaller(function, ret_type, *args):
 def getIndex(fcn):
   """Get the table index of a function.
   """
-  return robocaller("search %s" % (fcn), "int")
+  return robocaller("search", "int", fcn)
     
 def getStatus():
   """Get the error status of the previous function call.
