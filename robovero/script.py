@@ -1,13 +1,14 @@
-""" Handles scripting for RoboVero
+""" Handles scripting for RoboVero. Script is written to RoboVero RAM
+and can be run at any time
 """
 
 from internals import robocaller, getIndex, getReturn, getStatus
 
 __author__ =      "Danny Chan"
-__email__ =        "danny@gumstix.com"
+__email__ =       "danny@gumstix.com"
 __copyright__ =   "Copyright 2012, Gumstix Inc."
 __license__ =     "BSD 2-Clause"
-__version__ =      "0.1"
+__version__ =     "0.1"
 
 class Script(object):
   """Allocates and initializes an script in RoboVero RAM.
@@ -21,21 +22,21 @@ class Script(object):
     if type(cmds) == list:
       for i in range(len(cmds)):
         self.append(cmds[i])
-        
-  """def __getitem__(self, key):
-    if key >= self.length:
-      raise IndexError
-    return robocaller("deref", "int", self.ptr + self.size*key, self.size)
+  
+  # TODO: Insert and delete individual elements
+
+  """
+  def __getitem__(self, key):
+    pass
+  
 
   def __setitem__(self, key, value):
-    if key >= self.length:
-      raise IndexError
-    if type(value) != int:
-      raise TypeError
-    robocaller("deref", "void", self.ptr + self.size*key, self.size, value)
+    pass
   """
   
   def append(self, *cmds):
+    """ Add a command to the script. See myscript.py for examples
+    """
     # check if passed as a list
     if len(cmds) == 1:
       cmds = cmds[0]
@@ -47,11 +48,19 @@ class Script(object):
       for j in range(2, len(cmds)):
         args += " " + str(cmds[j])
     self.length += 1
+    
+    # store functions locally
     self.cmd_list.append(cmds[0])
     robocaller("scriptAdd", "void", self.ptr, fcn, args)
     
   def run(self):
+    """ Run the script
+    
+    TODO: Handle returns
+    """
     robocaller("scriptRun", "void", self.ptr)
+    
+    # Polls the serial port for returns.
     script_return = getReturn()
     while ("script_done" not in script_return) and ("script_fail" not in script_return):
       print script_return
