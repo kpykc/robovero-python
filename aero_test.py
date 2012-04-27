@@ -34,8 +34,8 @@ D2 = 0
 
 SCALE_LEVEL_PID = 30 
 SCALE_LEVEL_GYRO_PID = 15
-INIT_THROTTLE = 1400 
-TAKE_OFF_LIMIT=1550
+INIT_THROTTLE = 1400 # us initial PPM signal to ESC
+TAKE_OFF_LIMIT=1550 # us for ESC control
 
 def setPID():
   setLevelRollPID ( P1 , I1, D1)  # 3.5, 0, 0 
@@ -44,6 +44,7 @@ def setPID():
   setLevelGyroPitchPID(-P2, -I2, D2)
   setAltitudePID(.1, 0.02, 0) #0.4, 0.02, 0
 
+# Not used!
 def dontCrash():
   angles = getFlightAngles()
   accel = getAccelReadings()
@@ -170,17 +171,13 @@ try:
     maintainConnection()
     if c=='s':
       throttle += 3
-      #~ count = 50
     
       if (throttle > TAKE_OFF_LIMIT):
         throttle = TAKE_OFF_LIMIT
         
       setThrottle(throttle)
     elif c=='a':
-      #count -= 1
       throttle -=3
-      #~ if count<=0:
-        #~ throttle -= 1
     
       if (throttle < INIT_THROTTLE):
         throttle = INIT_THROTTLE
@@ -195,12 +192,6 @@ try:
           
     maintainConnection()
     
-    """for i in range((throttle/500)*(throttle/500)):
-      dontCrash()
-      logData(0)
-      #sleep(0.02)
-      maintainConnection()"""
-
 except:
   print "killed due to exception"
   aeroLoopOff()
