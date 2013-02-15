@@ -2,6 +2,7 @@
 """
 
 from robovero.extras import Array, roboveroConfig
+from robovero.arduino import pinMode, digitalWrite, P1_0, OUTPUT
 from robovero.lpc17xx_i2c import I2C_M_SETUP_Type, I2C_MasterTransferData, \
                             I2C_TRANSFER_OPT_Type
 from robovero.lpc17xx_gpio import GPIO_ReadValue
@@ -62,11 +63,11 @@ class I2CDevice(object):
     self.tx_data[0] = register
     self.config.tx_length = 1
     self.config.rx_data = self.rx_data.ptr
-    self.config.rx_length = 1 
+    self.config.rx_length = 1
     ret = I2C_MasterTransferData(LPC_I2C0, self.config.ptr,
                                   I2C_TRANSFER_OPT_Type.I2C_TRANSFER_POLLING)
     if ret == Status.ERROR:
-      exit("I2C Read Error")    
+      exit("I2C Read Error")
     return self.rx_data[0]
 
   def read6Reg(self, register):
@@ -77,7 +78,7 @@ class I2CDevice(object):
     ret = I2C_MasterTransferData(LPC_I2C0, self.config.ptr,
                                   I2C_TRANSFER_OPT_Type.I2C_TRANSFER_POLLING)
     if ret == Status.ERROR:
-      exit("I2C Read Error")    
+      exit("I2C Read Error")
     return self.rx_data6
 
   def writeReg(self, register, value):
@@ -97,10 +98,14 @@ class I2CDevice(object):
 # Initialize pin select registers
 roboveroConfig()
 
+# enable IMU_EN
+pinMode(P1_0, OUTPUT)
+digitalWrite(P1_0, 0)
+
 # configure accelerometer
 accelerometer = I2CDevice(0x18)
 accelerometer.writeReg(accel_ctrl_reg1, 0x27)
-accelerometer.writeReg(accel_ctrl_reg4, 0x00) # 
+accelerometer.writeReg(accel_ctrl_reg4, 0x00) #
 
 # configure compass
 compass = I2CDevice(0x1E)
