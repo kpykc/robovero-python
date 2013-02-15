@@ -32,12 +32,12 @@ def getServoAngle():
 	except:
 		print "enter an angle between 0 and 180 degrees"
 		return None
-	match_value = 1250 + (angle*500/180)
+	match_value = 1000 + (angle*1000/180)
 	return match_value
 
 def initPulse(channel, pulse_width):
 	initMatch(channel, pulse_width)
-	
+
 def initPeriod(period):
 	initMatch(0, period)
 
@@ -50,7 +50,7 @@ def initPWM():
 
 	# Set the pulse width to 1.5ms
 	initPulse(1, 1500)
-	
+
 	PWM_ChannelCmd(LPC_PWM1, 1, FunctionalState.ENABLE)
 	PWM_ResetCounter(LPC_PWM1)
 	PWM_CounterCmd(LPC_PWM1, FunctionalState.ENABLE)
@@ -58,12 +58,12 @@ def initPWM():
 
 # Entry Point
 roboveroConfig()
-initPWM()	
+initPWM()
 
 while True:
 	match_value = getServoAngle()
 	if match_value:
 		PWM_MatchUpdate(LPC_PWM1, 1, match_value, PWM_MATCH_UPDATE_OPT.PWM_MATCH_UPDATE_NOW)
-		
+
 
 
