@@ -2,6 +2,7 @@ from IMU2 import IMU, Vector3D
 from os import system
 from PyMouse.pymouse import PyMouse
 
+
 ''' This contains definition of
     mouse actions'''
 class MouseAction(object):
