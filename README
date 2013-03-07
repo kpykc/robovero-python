@@ -7,10 +7,18 @@ Contents
 ./internals.py	Implements core client library functionality
 ./launcher.py	A short script for launching RoboVero examples
 ./examples/	Client library usage examples
-./drivers/	Python wrappers for driver functions 		
+./drivers/	Python wrappers for driver functions
 
 Getting Started
 ===============
-Connect the RoboVero USB and apply power. Run one of the examples in the project root directory. For example,
+Connect the RoboVero USB and apply power. Run one of the examples through launcher.py. For example,
 
- $ python gpio.py
+ $ python launcher.py run IMU
+
+Or you could run examples directly on an Overo COM with wifi through ssh, with USB Console disconnected. For example,
+  Setup COM's Wifi, make sure it automatically start after system booting
+  Fetch code in COM
+  SSH to COM(change the ip address to your COM's ip)
+    $ ssh root@192.168.0.1
+  Run example as above
+    $ python launcher.py run IMU
