@@ -11,21 +11,22 @@ __copyright__ = 	"Copyright 2010, Gumstix Inc"
 __license__ = 		"BSD 2-Clause"
 __version__ =			"0.1"
 
-roboveroConfig()
+def run():
+  roboveroConfig()
 
-try:
-  while True:
-    data = [
-      analogRead(AD0_0),
-      analogRead(AD0_1),
-      analogRead(AD0_2),
-      analogRead(AD0_3),
-      analogRead(AD0_5),
-      analogRead(AD0_6),
-      analogRead(AD0_7)
-    ]
-    print data
+  try:
+    while True:
+      data = [
+        analogRead(AD0_0),
+        analogRead(AD0_1),
+        analogRead(AD0_2),
+        analogRead(AD0_3),
+        analogRead(AD0_5),
+        analogRead(AD0_6),
+        analogRead(AD0_7)
+      ]
+      print data
 
-except KeyboardInterrupt:
-  exit("\nkeyboard interrupt: how rude!")
-  
+  except KeyboardInterrupt:
+    exit("\nkeyboard interrupt: how rude!")
+

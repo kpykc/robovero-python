@@ -224,7 +224,7 @@ class IMU(object):
     self.compass = Compass()
     self.gyrometer = Gyrometer()
 
-def print_IMU():
+def run():
   imu = IMU()
 
   while True:
@@ -255,4 +255,4 @@ def print_IMU():
     sleep(0.1)
 
 if __name__ == '__main__':
-  printIMU()
+  run()
