@@ -248,8 +248,13 @@ class Robovero(object):
   def __del__(self):
     """Send any remaining data and close the serial connection.
     """
-    self.serial.flush()
-    self.serial.close()
+    try:
+      self.serial.flush()
+      self.serial.close()
+      print 'Serial connection closed correctly.'
+    except AttributeError:  
+      pass
+      
 # These functions get called once when a peripheral driver module is
 # imported. A serial connection to the device is established.
 robovero = Robovero()
