@@ -1,11 +1,37 @@
 ''' Use to lauch robovero example, need ttyACM0 to be robovero
 '''
 import sys
-from examples import IMU2, adc
+from examples import \
+  IMU,\
+  adc,\
+  callback,\
+  can_recv,\
+  can_send,\
+  clockout,\
+  DSP,\
+  gpio,\
+  mcpwm,\
+  piezo,\
+  servo,\
+  stepper,\
+  uart_recv,\
+  uart_send
 
 EXAMPLES=[
   'IMU',
-  'ADC',
+  'adc',
+  'callback',
+  'can_recv',
+  'can_send',
+  'clockout',
+  'DSP',
+  'gpio',
+  'mcpwm',
+  'piezo',
+  'servo',
+  'stepper',
+  'uart_recv',
+  'uart_send',
 ]
 
 def parse_argv(argv):
@@ -41,11 +67,34 @@ def run_example(example):
 
   if example_id is 0:
     print 'call IMU'
-    IMU2.run()
+    IMU.run()
   elif example_id is 1:
     print 'call adc'
     adc.run()
-
+  elif example_id is 2:
+    callback.run()
+  elif example_id is 3:
+    can_recv.run()
+  elif example_id is 4:
+    can_send.run()
+  elif example_id is 5:
+    clockout.run()
+  elif example_id is 6:
+    DSP.run()
+  elif example_id is 7:
+    gpio.run()
+  elif example_id is 8:
+    mcpwm.run()
+  elif example_id is 9:
+    piezo.run()
+  elif example_id is 10:
+    servo.run()
+  elif example_id is 11:
+    stepper.run()
+  elif example_id is 12:
+    uart_recv.run()
+  elif example_id is 13:
+    uart_send.run()
 
 def list_examples():
   for i in range(len(EXAMPLES)):
