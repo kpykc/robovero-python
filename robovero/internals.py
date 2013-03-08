@@ -255,8 +255,8 @@ class Robovero(object):
     except AttributeError:  
       pass
       
-# These functions get called once when a peripheral driver module is
-# imported. A serial connection to the device is established.
-robovero = Robovero()
-robovero.startListening()
-atexit.register(resetConfig)
+  # These functions get called once when a peripheral driver module is
+  # imported. A serial connection to the device is established.
+  robovero = Robovero()
+  robovero.startListening()
+  atexit.register(resetConfig)
