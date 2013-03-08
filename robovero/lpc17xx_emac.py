@@ -2,7 +2,7 @@
 CMSIS-Compliant Standard Peripheral Firmware Driver Library documentation.
 """
 
-from internals import robocaller, cstruct
+from internals import RoboCaller, cstruct
 
 __author__ =      "Neil MacMunn"
 __credits__ =     ["Neil MacMunn", "NXP MCU SW Application Team"]
@@ -711,7 +711,7 @@ def EMAC_GetWoLStatus(ulWoLMode):
   return: SET/RESET
   
   '''
-  return robocaller("EMAC_GetWoLStatus", "FlagStatus", ulWoLMode)
+  return RoboCaller().call("EMAC_GetWoLStatus", "FlagStatus", ulWoLMode)
 
 def EMAC_Init(EMAC_ConfigStruct):
   '''Initializes the EMAC peripheral according to the specified parameters in 
@@ -722,7 +722,7 @@ def EMAC_Init(EMAC_ConfigStruct):
                       peripheral.
                       
   '''
-  return robocaller("EMAC_Init", "Status", EMAC_ConfigStruct)
+  return RoboCaller().call("EMAC_Init", "Status", EMAC_ConfigStruct)
 
 def EMAC_CheckReceiveDataStatus(ulRxStatType):
   '''Get current status value of receive data (due to RxConsumeIndex).
@@ -745,7 +745,7 @@ def EMAC_CheckReceiveDataStatus(ulRxStatType):
   return: Current value of receive data (due to RxConsumeIndex)
                 
   '''
-  return robocaller("EMAC_CheckReceiveDataStatus", "FlagStatus", ulRxStatType)
+  return RoboCaller().call("EMAC_CheckReceiveDataStatus", "FlagStatus", ulRxStatType)
 
 def EMAC_CheckTransmitIndex():
   '''Check whether if the current TxProduceIndex is not equal to the current
@@ -754,7 +754,7 @@ def EMAC_CheckTransmitIndex():
   return: TRUE if they're not equal, otherwise return FALSE
   
   '''
-  return robocaller("EMAC_CheckTransmitIndex", "Bool")
+  return RoboCaller().call("EMAC_CheckTransmitIndex", "Bool")
 
 def EMAC_IntCmd(ulIntType, NewState):
   '''Enable/Disable interrupt for each type in EMAC.
@@ -775,7 +775,7 @@ def EMAC_IntCmd(ulIntType, NewState):
             DISABLE
             
   '''
-  return robocaller("EMAC_IntCmd", "void", ulIntType, NewState)
+  return RoboCaller().call("EMAC_IntCmd", "void", ulIntType, NewState)
 
 def EMAC_SetPHYMode(ulPHYMode):
   '''Set specified PHY mode in EMAC peripheral.
@@ -788,7 +788,7 @@ def EMAC_SetPHYMode(ulPHYMode):
               EMAC_MODE_100M_HALF
   return: 0 if no error, otherwise -1
   '''
-  return robocaller("EMAC_SetPHYMode", "int32_t", ulPHYMode)
+  return RoboCaller().call("EMAC_SetPHYMode", "int32_t", ulPHYMode)
 
 def EMAC_IntGetStatus(ulIntType):
   ''' Check whether if specified interrupt flag is set or not for each interrupt
@@ -808,7 +808,7 @@ def EMAC_IntGetStatus(ulIntType):
   return: New state of specified interrupt (SET or RESET)
               
   '''
-  return robocaller("EMAC_IntGetStatus", "IntStatus", ulIntType)
+  return RoboCaller().call("EMAC_IntGetStatus", "IntStatus", ulIntType)
 
 def EMAC_WritePacketBuffer(pDataStruct):
   '''Write data to Tx packet data buffer at current index due to TxProduceIndex.
@@ -817,7 +817,7 @@ def EMAC_WritePacketBuffer(pDataStruct):
                 specified information about Packet data buffer.
                 
   '''
-  return robocaller("EMAC_WritePacketBuffer", "void", pDataStruct)
+  return RoboCaller().call("EMAC_WritePacketBuffer", "void", pDataStruct)
 
 def EMAC_SetHashFilter(dstMAC_addr, NewState):
   '''Enable/Disable hash filter functionality for specified destination MAC 
@@ -829,7 +829,7 @@ def EMAC_SetHashFilter(dstMAC_addr, NewState):
             ENABLE
             DISABLE
   '''
-  return robocaller("EMAC_SetHashFilter", "void", dstMAC_addr, NewState)
+  return RoboCaller().call("EMAC_SetHashFilter", "void", dstMAC_addr, NewState)
 
 def EMAC_CheckReceiveIndex():
   '''Check whether the current RxConsumeIndex is not equal to the current
@@ -837,7 +837,7 @@ def EMAC_CheckReceiveIndex():
   
   return: TRUE if they're not equal, otherwise return FALSE
   '''
-  return robocaller("EMAC_CheckReceiveIndex", "Bool")
+  return RoboCaller().call("EMAC_CheckReceiveIndex", "Bool")
 
 def EMAC_UpdatePHYStatus():
   '''Auto-Configures value for the EMAC configuration register to match with 
@@ -845,7 +845,7 @@ def EMAC_UpdatePHYStatus():
   
   return: 0 if no error, otherwise -1
   '''
-  return robocaller("EMAC_UpdatePHYStatus", "int32_t")
+  return RoboCaller().call("EMAC_UpdatePHYStatus", "int32_t")
 
 def EMAC_CheckPHYStatus(ulPHYState):
   '''Check specified PHY status in EMAC peripheral.
@@ -857,19 +857,19 @@ def EMAC_CheckPHYStatus(ulPHYState):
   return: Status of specified PHY status (0 or 1).
           -1 if error.
   '''
-  return robocaller("EMAC_CheckPHYStatus", "int32_t", ulPHYState)
+  return RoboCaller().call("EMAC_CheckPHYStatus", "int32_t", ulPHYState)
 
 def EMAC_UpdateTxProduceIndex():
   '''Increase the TxProduceIndex (after writting to the Transmit buffer to
   enable the Transmit buffer) and wrap-around the index if it reaches the
   maximum Transmit Number.
   '''
-  return robocaller("EMAC_UpdateTxProduceIndex", "void")
+  return RoboCaller().call("EMAC_UpdateTxProduceIndex", "void")
 
 def EMAC_DeInit():
   '''De-initializes the EMAC peripheral registers to their default reset values.
   '''
-  return robocaller("EMAC_DeInit", "void")
+  return RoboCaller().call("EMAC_DeInit", "void")
 
 def EMAC_GetReceiveDataSize():
   '''Get size of current Received data in received buffer (due to 
@@ -878,14 +878,14 @@ def EMAC_GetReceiveDataSize():
   return: Size of received data
   
   '''
-  return robocaller("EMAC_GetReceiveDataSize", "uint32_t", )
+  return RoboCaller().call("EMAC_GetReceiveDataSize", "uint32_t", )
 
 def EMAC_UpdateRxConsumeIndex():
   '''Increase the RxConsumeIndex (after reading the Receive buffer to release 
   the Receive buffer) and wrap-around the index if it reaches the maximum
   Receive Number.
   '''
-  return robocaller("EMAC_UpdateRxConsumeIndex", "void", )
+  return RoboCaller().call("EMAC_UpdateRxConsumeIndex", "void", )
 
 def EMAC_ReadPacketBuffer(pDataStruct):
   '''Read data from Rx packet data buffer at current index due to 
@@ -895,7 +895,7 @@ def EMAC_ReadPacketBuffer(pDataStruct):
                 specified information about Packet data buffer.
                 
   '''
-  return robocaller("EMAC_ReadPacketBuffer", "void", pDataStruct)
+  return RoboCaller().call("EMAC_ReadPacketBuffer", "void", pDataStruct)
 
 def EMAC_SetFilterMode(ulFilterMode, NewState):
   '''Enable/Disable Filter mode for each specified type EMAC peripheral.
@@ -924,5 +924,5 @@ def EMAC_SetFilterMode(ulFilterMode, NewState):
             DISABLE
             
   '''
-  return robocaller("EMAC_SetFilterMode", "void", ulFilterMode, NewState)
+  return RoboCaller().call("EMAC_SetFilterMode", "void", ulFilterMode, NewState)
 

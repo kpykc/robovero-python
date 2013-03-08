@@ -2,7 +2,7 @@
 Peripheral Firmware Driver Library documentation.
 """
 
-from internals import robocaller, cstruct
+from internals import RoboCaller, cstruct
 
 __author__ =      "Neil MacMunn"
 __credits__ =     ["Neil MacMunn", "NXP MCU SW Application Team"]
@@ -77,7 +77,7 @@ def DAC_SetBias(DACx, bias):
         1 is 350 uA
         
   '''
-  return robocaller("DAC_SetBias", "void", DACx, bias)
+  return RoboCaller().call("DAC_SetBias", "void", DACx, bias)
 
 def DAC_ConfigDAConverterControl(DACx, DAC_ConverterConfigStruct):
   '''To enable the DMA operation and control DMA timer.
@@ -86,7 +86,7 @@ def DAC_ConfigDAConverterControl(DACx, DAC_ConverterConfigStruct):
   DAC_ConverterConfigStruct: pointer to DAC_CONVERTER_CFG_Type
   
   '''
-  return robocaller("DAC_ConfigDAConverterControl", "void", DACx, DAC_ConverterConfigStruct)
+  return RoboCaller().call("DAC_ConfigDAConverterControl", "void", DACx, DAC_ConverterConfigStruct)
 
 def DAC_UpdateValue(DACx, dac_value):
   '''Update value to DAC.
@@ -95,7 +95,7 @@ def DAC_UpdateValue(DACx, dac_value):
   dac_value: value 10 bit to be converted to output
   
   '''
-  return robocaller("DAC_UpdateValue", "void", DACx, dac_value)
+  return RoboCaller().call("DAC_UpdateValue", "void", DACx, dac_value)
 
 def DAC_Init(DACx):
   '''Initial ADC configuration. Maximum  current is 700 uA, Value to AOUT is 0.
@@ -103,7 +103,7 @@ def DAC_Init(DACx):
   DACx: pointer to LPC_DAC_TypeDef, should be: LPC_DAC
   
   '''
-  return robocaller("DAC_Init", "void", DACx)
+  return RoboCaller().call("DAC_Init", "void", DACx)
 
 def DAC_SetDMATimeOut(DACx, time_out):
   '''Set reload value for interrupt/DMA counter.
@@ -112,5 +112,5 @@ def DAC_SetDMATimeOut(DACx, time_out):
   time_out: time out to reload for interrupt/DMA counter
   
   '''
-  return robocaller("DAC_SetDMATimeOut", "void", DACx, time_out)
+  return RoboCaller().call("DAC_SetDMATimeOut", "void", DACx, time_out)
 

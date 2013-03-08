@@ -3,7 +3,7 @@ LPC17xx CMSIS-Compliant Standard Peripheral Firmware Driver Library
 documentation.
 """
 
-from internals import robocaller, cstruct
+from internals import RoboCaller, cstruct
 
 __author__ =      "Neil MacMunn"
 __credits__ =     ["Neil MacMunn", "NXP MCU SW Application Team"]
@@ -361,22 +361,22 @@ def CLKPWR_SetPCLKDiv(ClkType, DivVal):
           CLKPWR_PCLKSEL_CCLK_DIV_2: PCLK_peripheral = CCLK/2
             
   '''
-  return robocaller("CLKPWR_SetPCLKDiv", "void", ClkType, DivVal)
+  return RoboCaller().call("CLKPWR_SetPCLKDiv", "void", ClkType, DivVal)
 
 def CLKPWR_Sleep():
   '''Enter Sleep mode with co-operated instruction by the Cortex-M3.
   '''
-  return robocaller("CLKPWR_Sleep", "void", )
+  return RoboCaller().call("CLKPWR_Sleep", "void", )
 
 def CLKPWR_DeepSleep():
   '''Enter Deep Sleep mode with co-operated instruction by the Cortex-M3.
   '''
-  return robocaller("CLKPWR_DeepSleep", "void", )
+  return RoboCaller().call("CLKPWR_DeepSleep", "void", )
 
 def CLKPWR_PowerDown():
   '''Enter Power Down mode with co-operated instruction by the Cortex-M3.
   '''
-  return robocaller("CLKPWR_PowerDown", "void", )
+  return RoboCaller().call("CLKPWR_PowerDown", "void", )
 
 def CLKPWR_GetPCLK(ClkType):
   '''Get current value of each Peripheral Clock.
@@ -412,7 +412,7 @@ def CLKPWR_GetPCLK(ClkType):
   return: Value of Selected Peripheral Clock
   
   '''
-  return robocaller("CLKPWR_GetPCLK", "uint32_t", ClkType)
+  return RoboCaller().call("CLKPWR_GetPCLK", "uint32_t", ClkType)
 
 def CLKPWR_ConfigPPWR(PPType, NewState):
   '''Configure power supply for each peripheral according to NewState.
@@ -450,7 +450,7 @@ def CLKPWR_ConfigPPWR(PPType, NewState):
             DISABLE: Disable power for this peripheral
             
   '''
-  return robocaller("CLKPWR_ConfigPPWR", "void", PPType, NewState)
+  return RoboCaller().call("CLKPWR_ConfigPPWR", "void", PPType, NewState)
 
 def CLKPWR_GetPCLKSEL(ClkType):
   '''Get current value of each Peripheral Clock Selection.
@@ -486,10 +486,10 @@ def CLKPWR_GetPCLKSEL(ClkType):
   return: Value of Selected Peripheral Clock Selection
   
   '''
-  return robocaller("CLKPWR_GetPCLKSEL", "uint32_t", ClkType)
+  return RoboCaller().call("CLKPWR_GetPCLKSEL", "uint32_t", ClkType)
 
 def CLKPWR_DeepPowerDown():
   '''Enter Deep Power Down mode with co-operated instruction by the Cortex-M3.
   '''
-  return robocaller("CLKPWR_DeepPowerDown", "void", )
+  return RoboCaller().call("CLKPWR_DeepPowerDown", "void", )
 

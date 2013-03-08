@@ -2,7 +2,7 @@
 CMSIS-Compliant Standard Peripheral Firmware Driver Library documentation.
 """
 
-from internals import robocaller, cstruct
+from internals import RoboCaller, cstruct
 
 __author__ =      "Neil MacMunn"
 __credits__ =     ["Neil MacMunn", "NXP MCU SW Application Team"]
@@ -182,7 +182,7 @@ def TIM_GetIntCaptureStatus(TIMx, IntFlag):
           - RESET : no interrupt
   
   '''
-	return robocaller("TIM_GetIntCaptureStatus", "FlagStatus", TIMx, IntFlag)
+	return RoboCaller().call("TIM_GetIntCaptureStatus", "FlagStatus", TIMx, IntFlag)
 
 def TIM_ConfigMatch(TIMx, TIM_MatchConfigStruct):
   '''Configuration for Match register.
@@ -209,7 +209,7 @@ def TIM_ConfigMatch(TIMx, TIM_MatchConfigStruct):
                                         value
   
   '''
-	return robocaller("TIM_ConfigMatch", "void", TIMx, TIM_MatchConfigStruct)
+	return RoboCaller().call("TIM_ConfigMatch", "void", TIMx, TIM_MatchConfigStruct)
 
 def TIM_ClearIntCapturePending(TIMx, IntFlag):
   '''Clear Capture Interrupt pending.
@@ -228,7 +228,7 @@ def TIM_ClearIntCapturePending(TIMx, IntFlag):
             - TIM_CR1_INT: Interrupt for Capture channel 1
   
   '''
-	return robocaller("TIM_ClearIntCapturePending", "void", TIMx, IntFlag)
+	return RoboCaller().call("TIM_ClearIntCapturePending", "void", TIMx, IntFlag)
 
 def TIM_ConfigStructInit(TimerCounterMode, TIM_ConfigStruct):
   '''Configuration for Timer at initial time.
@@ -241,7 +241,7 @@ def TIM_ConfigStructInit(TimerCounterMode, TIM_ConfigStruct):
   TIM_ConfigStruct: pointer to TIM_TIMERCFG_Type or TIM_COUNTERCFG_Type
         
   '''
-	return robocaller("TIM_ConfigStructInit", "void", TimerCounterMode, TIM_ConfigStruct)
+	return RoboCaller().call("TIM_ConfigStructInit", "void", TimerCounterMode, TIM_ConfigStruct)
 
 def TIM_GetIntStatus(TIMx, IntFlag):
   '''Get Interrupt Status.
@@ -263,7 +263,7 @@ def TIM_GetIntStatus(TIMx, IntFlag):
           - RESET : no interrupt
 
   '''
-	return robocaller("TIM_GetIntStatus", "FlagStatus", TIMx, IntFlag)
+	return RoboCaller().call("TIM_GetIntStatus", "FlagStatus", TIMx, IntFlag)
 
 def TIM_Cmd(TIMx, NewState):
   '''Start/Stop Timer/Counter device.
@@ -277,7 +277,7 @@ def TIM_Cmd(TIMx, NewState):
             -	DISABLE : disable timer
   
   '''
-	return robocaller("TIM_Cmd", "void", TIMx, NewState)
+	return RoboCaller().call("TIM_Cmd", "void", TIMx, NewState)
 
 def TIM_DeInit(TIMx):
   '''Close Timer/Counter device.
@@ -289,7 +289,7 @@ def TIM_DeInit(TIMx):
         - LPC_TIM3: TIMER3 peripheral
 
   '''
-	return robocaller("TIM_DeInit", "void", TIMx)
+	return RoboCaller().call("TIM_DeInit", "void", TIMx)
 
 def TIM_ResetCounter(TIMx):
   '''Reset Timer/Counter device.
@@ -303,7 +303,7 @@ def TIM_ResetCounter(TIMx):
         - LPC_TIM3: TIMER3 peripheral
 
   '''
-	return robocaller("TIM_ResetCounter", "void", TIMx)
+	return RoboCaller().call("TIM_ResetCounter", "void", TIMx)
 
 def TIM_ConfigCapture(TIMx, TIM_CaptureConfigStruct):
   '''Configuration for Capture register.
@@ -316,7 +316,7 @@ def TIM_ConfigCapture(TIMx, TIM_CaptureConfigStruct):
   TIM_CaptureConfigStruct:  Pointer to TIM_CAPTURECFG_Type
   
   '''
-	return robocaller("TIM_ConfigCapture", "void", TIMx, TIM_CaptureConfigStruct)
+	return RoboCaller().call("TIM_ConfigCapture", "void", TIMx, TIM_CaptureConfigStruct)
 
 def TIM_GetCaptureValue(TIMx, CaptureChannel):
   '''Read value of capture register in timer/counter device.
@@ -332,7 +332,7 @@ def TIM_GetCaptureValue(TIMx, CaptureChannel):
   return: Value of capture register
   
   '''
-	return robocaller("TIM_GetCaptureValue", "uint32_t", TIMx, CaptureChannel)
+	return RoboCaller().call("TIM_GetCaptureValue", "uint32_t", TIMx, CaptureChannel)
 
 def TIM_ClearIntPending(TIMx, IntFlag):
   '''Clear Interrupt pending.
@@ -351,7 +351,7 @@ def TIM_ClearIntPending(TIMx, IntFlag):
             - TIM_CR1_INT: Interrupt for Capture channel 1
   
   '''
-	return robocaller("TIM_ClearIntPending", "void", TIMx, IntFlag)
+	return RoboCaller().call("TIM_ClearIntPending", "void", TIMx, IntFlag)
 
 def TIM_UpdateMatchValue(TIMx, MatchChannel, MatchValue):
   '''Update Match value.
@@ -365,7 +365,7 @@ def TIM_UpdateMatchValue(TIMx, MatchChannel, MatchValue):
   MatchValue: updated match value
   
   '''
-	return robocaller("TIM_UpdateMatchValue", "void", TIMx, MatchChannel, MatchValue)
+	return RoboCaller().call("TIM_UpdateMatchValue", "void", TIMx, MatchChannel, MatchValue)
 
 def TIM_Init(TIMx, TimerCounterMode, TIM_ConfigStruct):
   '''Initialize Timer/Counter device.
@@ -384,4 +384,4 @@ def TIM_Init(TIMx, TimerCounterMode, TIM_ConfigStruct):
                     information for the specified Timer peripheral.
         
   '''
-	return robocaller("TIM_Init", "void", TIMx, TimerCounterMode, TIM_ConfigStruct)
+	return RoboCaller().call("TIM_Init", "void", TIMx, TimerCounterMode, TIM_ConfigStruct)

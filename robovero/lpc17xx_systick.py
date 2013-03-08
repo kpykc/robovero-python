@@ -3,7 +3,7 @@ LPC17xx CMSIS-Compliant Standard Peripheral Firmware Driver Library
 documentation.
 """
 
-from internals import robocaller
+from internals import RoboCaller
 
 __author__ =      "Neil MacMunn"
 __credits__ =     ["Neil MacMunn", "NXP MCU SW Application Team"]
@@ -21,7 +21,7 @@ def SYSTICK_IntCmd(NewState):
             - DISABLE
   
   '''
-  return robocaller("SYSTICK_IntCmd", "void", NewState)
+  return RoboCaller().call("SYSTICK_IntCmd", "void", NewState)
 
 def SYSTICK_GetCurrentValue():
   '''Get current value of System Tick counter.
@@ -29,12 +29,12 @@ def SYSTICK_GetCurrentValue():
   return: current value of System Tick counter
   
   '''
-  return robocaller("SYSTICK_GetCurrentValue", "uint32_t")
+  return RoboCaller().call("SYSTICK_GetCurrentValue", "uint32_t")
 
 def SYSTICK_ClearCounterFlag():
   '''Clear Counter flag.
   '''
-  return robocaller("SYSTICK_ClearCounterFlag", "void")
+  return RoboCaller().call("SYSTICK_ClearCounterFlag", "void")
 
 def SYSTICK_InternalInit(time):
   '''Initialize System Tick using internal CPU clock source.
@@ -42,7 +42,7 @@ def SYSTICK_InternalInit(time):
   time: time interval(ms)
   
   '''
-  return robocaller("SYSTICK_InternalInit", "void", time)
+  return RoboCaller().call("SYSTICK_InternalInit", "void", time)
 
 def SYSTICK_ExternalInit(freq, time):
   '''Initialize System Tick using external clock source.
@@ -51,7 +51,7 @@ def SYSTICK_ExternalInit(freq, time):
   time: time interval(ms)
   
   '''
-  return robocaller("SYSTICK_ExternalInit", "void", freq, time)
+  return RoboCaller().call("SYSTICK_ExternalInit", "void", freq, time)
 
 def SYSTICK_Cmd(NewState):
   '''Enable/disable System Tick counter.
@@ -61,4 +61,4 @@ def SYSTICK_Cmd(NewState):
             - DISABLE
   
   '''
-  return robocaller("SYSTICK_Cmd", "void", NewState)
+  return RoboCaller().call("SYSTICK_Cmd", "void", NewState)

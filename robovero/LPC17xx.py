@@ -2,7 +2,7 @@
 Firmware Driver Library documentation.
 """
 
-from internals import robocaller, cstruct
+from internals import RoboCaller, cstruct
 
 __author__ =			"Neil MacMunn"
 __email__ =				"neil@gumstix.com"

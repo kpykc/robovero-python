@@ -2,7 +2,7 @@
 CMSIS-Compliant Standard Peripheral Firmware Driver Library documentation.
 """
 
-from internals import robocaller, cstruct
+from internals import RoboCaller, cstruct
 
 __author__ =      "Neil MacMunn"
 __credits__ =     ["Neil MacMunn", "NXP MCU SW Application Team"]
@@ -143,7 +143,7 @@ def SPI_SetClock(SPIx, target_clock):
   target_clock:  clock of SPI (Hz)
   
   '''
-  return robocaller("SPI_SetClock", "void", SPIx, target_clock)
+  return RoboCaller().call("SPI_SetClock", "void", SPIx, target_clock)
 
 def SPI_CheckStatus(inputSPIStatus, SPIStatus):
   '''Checks whether the specified SPI Status flag is set or not via
@@ -160,7 +160,7 @@ def SPI_CheckStatus(inputSPIStatus, SPIStatus):
   return: The new state of SPIStatus (SET or RESET)
   
   '''
-  return robocaller("SPI_CheckStatus", "FlagStatus", inputSPIStatus, SPIStatus)
+  return RoboCaller().call("SPI_CheckStatus", "FlagStatus", inputSPIStatus, SPIStatus)
 
 def SPI_SendData(SPIx, Data):
   '''Transmit a single data through SPIx peripheral.
@@ -170,7 +170,7 @@ def SPI_SendData(SPIx, Data):
         number configured)
    
   '''
-  return robocaller("SPI_SendData", "void", SPIx, Data)
+  return RoboCaller().call("SPI_SendData", "void", SPIx, Data)
 
 def SPI_GetStatus(SPIx):
   '''Get current value of SPI Status register in SPIx peripheral.
@@ -186,7 +186,7 @@ def SPI_GetStatus(SPIx):
   return: Current value of SPI Status register in SPI peripheral.
   
   '''
-  return robocaller("SPI_GetStatus", "uint32_t", SPIx)
+  return RoboCaller().call("SPI_GetStatus", "uint32_t", SPIx)
 
 def SPI_GetDataSize(SPIx):
   '''Get data bit size per transfer.
@@ -195,7 +195,7 @@ def SPI_GetDataSize(SPIx):
   return: number of bit per transfer, could be 8-16
   
   '''
-  return robocaller("SPI_GetDataSize", "uint8_t", SPIx)
+  return RoboCaller().call("SPI_GetDataSize", "uint8_t", SPIx)
 
 def SPI_ReceiveData(SPIx):
   '''Receive a single data from SPIx peripheral.
@@ -204,7 +204,7 @@ def SPI_ReceiveData(SPIx):
   return: Data received (16-bit long)
   
   '''
-  return robocaller("SPI_ReceiveData", "uint16_t", SPIx)
+  return RoboCaller().call("SPI_ReceiveData", "uint16_t", SPIx)
 
 def SPI_ConfigStructInit(SPI_InitStruct):
   '''Fills each SPI_InitStruct member with its default value.
@@ -220,7 +220,7 @@ def SPI_ConfigStructInit(SPI_InitStruct):
   
   
   '''
-  return robocaller("SPI_ConfigStructInit", "void", SPI_InitStruct)
+  return RoboCaller().call("SPI_ConfigStructInit", "void", SPI_InitStruct)
 
 def SPI_GetIntStatus(SPIx):
   '''Checks whether the SPI interrupt flag is set or not.
@@ -229,7 +229,7 @@ def SPI_GetIntStatus(SPIx):
   return: The new state of SPI Interrupt Flag (SET or RESET)
   
   '''
-  return robocaller("SPI_GetIntStatus", "IntStatus", SPIx)
+  return RoboCaller().call("SPI_GetIntStatus", "IntStatus", SPIx)
 
 def SPI_DeInit(SPIx):
   '''De-initializes the SPIx peripheral registers to their reset values.
@@ -238,7 +238,7 @@ def SPI_DeInit(SPIx):
   
   
   '''
-  return robocaller("SPI_DeInit", "void", SPIx)
+  return RoboCaller().call("SPI_DeInit", "void", SPIx)
 
 def SPI_IntCmd(SPIx, NewState):
   '''Enable or disable SPIx interrupt.
@@ -249,7 +249,7 @@ def SPI_IntCmd(SPIx, NewState):
             - DISABLE: Disable this SPI interrupt. 
             
   '''
-  return robocaller("SPI_IntCmd", "void", SPIx, NewState)
+  return RoboCaller().call("SPI_IntCmd", "void", SPIx, NewState)
 
 def SPI_ReadWrite(SPIx, dataCfg, xfType):
   '''Read write data function.
@@ -266,7 +266,7 @@ def SPI_ReadWrite(SPIx, dataCfg, xfType):
           In interrupt mode, always return (0). Return (-1) if error.
   
   '''
-  return robocaller("SPI_ReadWrite", "int32_t", SPIx, dataCfg, xfType)
+  return RoboCaller().call("SPI_ReadWrite", "int32_t", SPIx, dataCfg, xfType)
 
 def SPI_Init(SPIx, SPI_ConfigStruct):
   '''Initializes the SPIx peripheral according to the specified parameters in 
@@ -277,7 +277,7 @@ def SPI_Init(SPIx, SPI_ConfigStruct):
                     configuration information for the specified SPI peripheral.
   
   '''
-  return robocaller("SPI_Init", "void", SPIx, SPI_ConfigStruct)
+  return RoboCaller().call("SPI_Init", "void", SPIx, SPI_ConfigStruct)
 
 def SPI_ClearIntPending(SPIx):
   '''Clear SPI interrupt flag.
@@ -285,4 +285,4 @@ def SPI_ClearIntPending(SPIx):
   SPIx: SPI peripheral definition, should be LPC_SPI
   
   '''
-  return robocaller("SPI_ClearIntPending", "void", SPIx)
+  return RoboCaller().call("SPI_ClearIntPending", "void", SPIx)

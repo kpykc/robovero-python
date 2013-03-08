@@ -2,7 +2,7 @@
 CMSIS-Compliant Standard Peripheral Firmware Driver Library documentation.
 """
 
-from internals import robocaller, cstruct
+from internals import RoboCaller, cstruct
 
 __author__ =      "Neil MacMunn"
 __credits__ =     ["Neil MacMunn", "NXP MCU SW Application Team"]
@@ -186,7 +186,7 @@ def PWM_DeInit(PWMx):
   PWMx: PWM peripheral, should be LPC_PWM1 
   
   '''
-  return robocaller("PWM_DeInit", "void", PWMx)
+  return RoboCaller().call("PWM_DeInit", "void", PWMx)
 
 def PWM_GetCaptureValue(PWMx, CaptureChannel):
   '''Read value of capture register PWM peripheral.
@@ -196,7 +196,7 @@ def PWM_GetCaptureValue(PWMx, CaptureChannel):
   return: Value of capture register
   
   '''
-  return robocaller("PWM_GetCaptureValue", "uint32_t", PWMx, CaptureChannel)
+  return RoboCaller().call("PWM_GetCaptureValue", "uint32_t", PWMx, CaptureChannel)
 
 def PWM_ConfigStructInit(PWMTimerCounterMode, PWM_InitStruct):
   '''Fills each PWM_InitStruct member with its default value.
@@ -217,7 +217,7 @@ def PWM_ConfigStructInit(PWMTimerCounterMode, PWM_InitStruct):
                   PWM_COUNTERCFG_Type) which will be initialized.
   
   '''
-  return robocaller("PWM_ConfigStructInit", "void", PWMTimerCounterMode, PWM_InitStruct)
+  return RoboCaller().call("PWM_ConfigStructInit", "void", PWMTimerCounterMode, PWM_InitStruct)
 
 def PWM_ChannelCmd(PWMx, PWMChannel, NewState):
   '''Enable/Disable PWM channel output.
@@ -229,7 +229,7 @@ def PWM_ChannelCmd(PWMx, PWMChannel, NewState):
             - DISABLE: Disable this PWM channel output            
   
   '''
-  return robocaller("PWM_ChannelCmd", "void", PWMx, PWMChannel, NewState)
+  return RoboCaller().call("PWM_ChannelCmd", "void", PWMx, PWMChannel, NewState)
 
 def PWM_ConfigCapture(PWMx, PWM_CaptureConfigStruct):
   '''Configures capture input for PWM peripheral.
@@ -240,7 +240,7 @@ def PWM_ConfigCapture(PWMx, PWM_CaptureConfigStruct):
                             specified PWM capture input function.
   
   '''
-  return robocaller("PWM_ConfigCapture", "void", PWMx, PWM_CaptureConfigStruct)
+  return RoboCaller().call("PWM_ConfigCapture", "void", PWMx, PWM_CaptureConfigStruct)
 
 def PWM_GetIntStatus(PWMx, IntFlag):
   '''Check whether specified interrupt flag in PWM is set or not.
@@ -259,7 +259,7 @@ def PWM_GetIntStatus(PWMx, IntFlag):
   return: New State of PWM interrupt flag (SET or RESET)
   
   '''
-  return robocaller("PWM_GetIntStatus", "IntStatus", PWMx, IntFlag)
+  return RoboCaller().call("PWM_GetIntStatus", "IntStatus", PWMx, IntFlag)
 
 def PWM_ChannelConfig(PWMx, PWMChannel, ModeOption):
   '''Configure Edge mode for each PWM channel.
@@ -271,7 +271,7 @@ def PWM_ChannelConfig(PWMx, PWMChannel, ModeOption):
               - PWM_CHANNEL_DUAL_EDGE: Dual Edge mode
   
   '''
-  return robocaller("PWM_ChannelConfig", "void", PWMx, PWMChannel, ModeOption)
+  return RoboCaller().call("PWM_ChannelConfig", "void", PWMx, PWMChannel, ModeOption)
 
 def PWM_Init(PWMx, PWMTimerCounterMode, PWM_ConfigStruct):
   '''Initializes the PWMx peripheral corresponding to the specified parameters
@@ -287,7 +287,7 @@ def PWM_Init(PWMx, PWMTimerCounterMode, PWM_ConfigStruct):
                     PWM_COUNTERCFG_Type) which will be initialized.
   
   '''
-  return robocaller("PWM_Init", "void", PWMx, PWMTimerCounterMode, PWM_ConfigStruct)
+  return RoboCaller().call("PWM_Init", "void", PWMx, PWMTimerCounterMode, PWM_ConfigStruct)
 
 def PWM_MatchUpdate(PWMx, MatchChannel, MatchValue, UpdateType):
   '''Update value for each PWM channel with update type option.
@@ -302,7 +302,7 @@ def PWM_MatchUpdate(PWMx, MatchChannel, MatchValue, UpdateType):
                 this channel on next reset by a PWM Match event.
   
   '''
-  return robocaller("PWM_MatchUpdate", "void", PWMx, MatchChannel, MatchValue, UpdateType)
+  return RoboCaller().call("PWM_MatchUpdate", "void", PWMx, MatchChannel, MatchValue, UpdateType)
 
 def PWM_ConfigMatch(PWMx, PWM_MatchConfigStruct):
   '''Configures match for PWM peripheral.
@@ -313,7 +313,7 @@ def PWM_ConfigMatch(PWMx, PWM_MatchConfigStruct):
                           match function.
   
   '''
-  return robocaller("PWM_ConfigMatch", "void", PWMx, PWM_MatchConfigStruct)
+  return RoboCaller().call("PWM_ConfigMatch", "void", PWMx, PWM_MatchConfigStruct)
 
 def PWM_ResetCounter(PWMx):
   '''Reset Counter in PWM peripheral.
@@ -321,7 +321,7 @@ def PWM_ResetCounter(PWMx):
   PWMx: PWM peripheral, should be LPC_PWM1
   
   '''
-  return robocaller("PWM_ResetCounter", "void", PWMx)
+  return RoboCaller().call("PWM_ResetCounter", "void", PWMx)
 
 def PWM_CounterCmd(PWMx, NewState):
   '''Enable/Disable Counter in PWM peripheral.
@@ -332,7 +332,7 @@ def PWM_CounterCmd(PWMx, NewState):
             - DISABLE: Disable Counter in PWM peripheral
             
   '''
-  return robocaller("PWM_CounterCmd", "void", PWMx, NewState)
+  return RoboCaller().call("PWM_CounterCmd", "void", PWMx, NewState)
 
 def PWM_Cmd(PWMx, NewState):
   '''Enable/Disable PWM peripheral.
@@ -343,7 +343,7 @@ def PWM_Cmd(PWMx, NewState):
             - DISABLE: Disable Counter in PWM peripheral
             
   '''
-  return robocaller("PWM_Cmd", "void", PWMx, NewState)
+  return RoboCaller().call("PWM_Cmd", "void", PWMx, NewState)
 
 def PWM_ClearIntPending(PWMx, IntFlag):
   '''Clear specified PWM Interrupt pending.
@@ -361,5 +361,5 @@ def PWM_ClearIntPending(PWMx, IntFlag):
             - PWM_INTSTAT_CAP1: Interrupt flag for capture input 1
 
   '''
-  return robocaller("PWM_ClearIntPending", "void", PWMx, IntFlag)
+  return RoboCaller().call("PWM_ClearIntPending", "void", PWMx, IntFlag)
 

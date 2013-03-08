@@ -2,7 +2,7 @@
 Firmware Driver Library documentation.
 """
 
-from internals import robocaller
+from internals import RoboCaller
 
 __author__ =			"Neil MacMunn"
 __email__ =				"neil@gumstix.com"
@@ -14,7 +14,7 @@ __version__ =			"0.1"
 def NVIC_EnableIRQ(IRQn):
 	"""Enable an interrupt.
 	"""
-	return robocaller("NVIC_EnableIRQ", "void", IRQn)
+	return RoboCaller().call("NVIC_EnableIRQ", "void", IRQn)
 
 def NVIC_ClearPendingIRQ(IRQn):
 	"""Clear a pending interrupt.
@@ -22,4 +22,4 @@ def NVIC_ClearPendingIRQ(IRQn):
 	Note that this is automatically done for you after your ISR is called,
 	before 
 	"""
-	return robocaller("NVIC_ClearPendingIRQ", "void", IRQn)
+	return RoboCaller().call("NVIC_ClearPendingIRQ", "void", IRQn)

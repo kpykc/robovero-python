@@ -2,7 +2,7 @@
 CMSIS-Compliant Standard Peripheral Firmware Driver Library documentation.
 """
 
-from internals import robocaller, cstruct
+from internals import RoboCaller, cstruct
 
 __author__ =      "Neil MacMunn"
 __credits__ =     ["Neil MacMunn", "NXP MCU SW Application Team"]
@@ -899,7 +899,7 @@ def CAN_SetCommand(CANx, CMRType):
             CAN_CMR_STB3: Select Tx Buffer 3 request
   return: CANICR (CAN interrupt and Capture register) value
   '''
-  return robocaller("CAN_SetCommand", "void", CANx, CMRType)
+  return RoboCaller().call("CAN_SetCommand", "void", CANx, CMRType)
 
 def CAN_IRQCmd(CANx, arg, NewState):
   '''Enable/Disable CAN Interrupt.
@@ -923,7 +923,7 @@ def CAN_IRQCmd(CANx, arg, NewState):
   NewState: New state of this function, should be: ENABLE or DISABLE
   
   '''
-  return robocaller("CAN_IRQCmd", "void", CANx, arg, NewState)
+  return RoboCaller().call("CAN_IRQCmd", "void", CANx, arg, NewState)
 
 def FCAN_ReadObj(CANAFx, CAN_Msg):
   '''Receive FullCAN Object.
@@ -935,7 +935,7 @@ def FCAN_ReadObj(CANAFx, CAN_Msg):
           CAN_FULL_OBJ_NOT_RCV: FullCAN Object is not be received
           CAN_OK: Received FullCAN Object successful
   '''
-  return robocaller("FCAN_ReadObj", "CAN_ERROR", CANAFx, CAN_Msg)
+  return RoboCaller().call("FCAN_ReadObj", "CAN_ERROR", CANAFx, CAN_Msg)
 
 def CAN_Init(CANx, baudrate):
   '''Initialize CAN peripheral with given baudrate.
@@ -946,7 +946,7 @@ def CAN_Init(CANx, baudrate):
   baudrate: the value of CAN baudrate will be set (bps)
   
   '''
-  return robocaller("CAN_Init", "void", CANx, baudrate)
+  return RoboCaller().call("CAN_Init", "void", CANx, baudrate)
 
 def CAN_ModeConfig(CANx, mode, NewState):
   '''Enable/Disable CAN Mode.
@@ -967,7 +967,7 @@ def CAN_ModeConfig(CANx, mode, NewState):
   NewState: New State of this function, should be: ENABLE or DISABLE
 
   '''
-  return robocaller("CAN_ModeConfig", "void", CANx, mode, NewState)
+  return RoboCaller().call("CAN_ModeConfig", "void", CANx, mode, NewState)
 
 def CAN_LoadExplicitEntry(CANx, ID, format):
   '''Add Explicit ID into AF Look-Up Table dynamically.
@@ -985,7 +985,7 @@ def CAN_LoadExplicitEntry(CANx, ID, format):
           CAN_OK: ID is added into table successfully
           
   '''
-  return robocaller("CAN_LoadExplicitEntry", "CAN_ERROR", CANx, ID, format)
+  return RoboCaller().call("CAN_LoadExplicitEntry", "CAN_ERROR", CANx, ID, format)
 
 def CAN_LoadFullCANEntry(CANx, ID):
   '''Load FullCAN entry into AFLUT.
@@ -999,7 +999,7 @@ def CAN_LoadFullCANEntry(CANx, ID):
           CAN_ID_EXIT_ERROR: ID exited in FullCAN Section
           CAN_OBJECTS_FULL_ERROR: no more space available
   '''
-  return robocaller("CAN_LoadFullCANEntry", "CAN_ERROR", CANx, ID)
+  return RoboCaller().call("CAN_LoadFullCANEntry", "CAN_ERROR", CANx, ID)
 
 def CAN_IntGetStatus(CANx):
   '''Get CAN interrupt status.
@@ -1010,7 +1010,7 @@ def CAN_IntGetStatus(CANx):
   return: CANICR (CAN interrupt and Capture register) value
   
   '''
-  return robocaller("CAN_IntGetStatus", "uint32_t", CANx)
+  return RoboCaller().call("CAN_IntGetStatus", "uint32_t", CANx)
 
 def CAN_SetAFMode(CANAFx, AFmode):
   '''Check if FullCAN interrupt enable or not.
@@ -1021,7 +1021,7 @@ def CAN_SetAFMode(CANAFx, AFmode):
           RESET: if FullCAN interrupt is disable
   
   '''
-  return robocaller("CAN_SetAFMode", "void", CANAFx, AFmode)
+  return RoboCaller().call("CAN_SetAFMode", "void", CANAFx, AFmode)
 
 def CAN_SendMsg(CANx, CAN_Msg):
   '''Send message data.
@@ -1036,7 +1036,7 @@ def CAN_SendMsg(CANx, CAN_Msg):
           ERROR: send message unsuccessfully
           
   '''
-  return robocaller("CAN_SendMsg", "Status", CANx, CAN_Msg)
+  return RoboCaller().call("CAN_SendMsg", "Status", CANx, CAN_Msg)
 
 def CAN_LoadGroupEntry(CANx, lowerID, upperID, format):
   '''Load Group entry into AFLUT.
@@ -1055,7 +1055,7 @@ def CAN_LoadGroupEntry(CANx, lowerID, upperID, format):
           CAN_OBJECTS_FULL_ERROR: no more space available
   
   '''
-  return robocaller("CAN_LoadGroupEntry", "CAN_ERROR", CANx, lowerID, upperID, format)
+  return RoboCaller().call("CAN_LoadGroupEntry", "CAN_ERROR", CANx, lowerID, upperID, format)
 
 def CAN_SetupAFLUT(CANAFx, AFSection):
   '''Setup Acceptance Filter Look-Up Table.
@@ -1068,7 +1068,7 @@ def CAN_SetupAFLUT(CANAFx, AFSection):
           CAN_AF_ENTRY_ERROR: table error-violation of ascending numerical order
           CAN_OK: ID is added into table successfully
   '''
-  return robocaller("CAN_SetupAFLUT", "CAN_ERROR", CANAFx, AFSection)
+  return RoboCaller().call("CAN_SetupAFLUT", "CAN_ERROR", CANAFx, AFSection)
 
 def CAN_GetCTRLStatus(CANx, arg):
   '''Get CAN Control Status.
@@ -1083,7 +1083,7 @@ def CAN_GetCTRLStatus(CANx, arg):
   return: Current Control Status that you want to get value
   
   '''
-  return robocaller("CAN_GetCTRLStatus", "uint32_t", CANx, arg)
+  return RoboCaller().call("CAN_GetCTRLStatus", "uint32_t", CANx, arg)
 
 def CAN_DeInit(CANx):
   '''Deinitialize CAN module.
@@ -1093,7 +1093,7 @@ def CAN_DeInit(CANx):
         LPC_CAN2: CAN2 peripheral
   '''
   
-  return robocaller("CAN_DeInit", "void", CANx)
+  return RoboCaller().call("CAN_DeInit", "void", CANx)
 
 def CAN_ReceiveMsg(CANx, CAN_Msg):
   '''Receive message data.
@@ -1108,7 +1108,7 @@ def CAN_ReceiveMsg(CANx, CAN_Msg):
           ERROR: receive message unsuccessfully
           
   '''
-  return robocaller("CAN_ReceiveMsg", "Status", CANx, CAN_Msg)
+  return RoboCaller().call("CAN_ReceiveMsg", "Status", CANx, CAN_Msg)
 
 def CAN_FullCANPendGetStatus(CANAFx, ic_type):
   '''Get value of FullCAN interrupt and capture register.
@@ -1120,7 +1120,7 @@ def CAN_FullCANPendGetStatus(CANAFx, ic_type):
   return: FCANIC0 or FCANIC1 (FullCAN interrupt and Capture register) value
   
   '''
-  return robocaller("CAN_FullCANPendGetStatus", "uint32_t", CANAFx, ic_type)
+  return RoboCaller().call("CAN_FullCANPendGetStatus", "uint32_t", CANAFx, ic_type)
 
 def CAN_GetCRStatus(CANCRx, arg):
   '''Get CAN Central Status.
@@ -1133,7 +1133,7 @@ def CAN_GetCRStatus(CANCRx, arg):
   return: Current Central Status that you want to get value
   
   '''
-  return robocaller("CAN_GetCRStatus", "uint32_t", CANCRx, arg)
+  return RoboCaller().call("CAN_GetCRStatus", "uint32_t", CANCRx, arg)
 
 def CAN_RemoveEntry(EntryType, position):
   '''Remove AFLUT entry (FullCAN entry and Explicit Standard entry).
@@ -1150,7 +1150,7 @@ def CAN_RemoveEntry(EntryType, position):
           CAN_ENTRY_NOT_EXIT_ERROR: removal failed
           
   '''
-  return robocaller("CAN_RemoveEntry", "CAN_ERROR", EntryType, position)
+  return RoboCaller().call("CAN_RemoveEntry", "CAN_ERROR", EntryType, position)
 
 def CAN_FullCANIntGetStatus(CANAFx):
   '''Check if FullCAN interrupt enable or not.
@@ -1161,5 +1161,5 @@ def CAN_FullCANIntGetStatus(CANAFx):
           RESET: if FullCAN interrupt is disable
   
   '''
-  return robocaller("CAN_FullCANIntGetStatus", "IntStatus", CANAFx)
+  return RoboCaller().call("CAN_FullCANIntGetStatus", "IntStatus", CANAFx)
 

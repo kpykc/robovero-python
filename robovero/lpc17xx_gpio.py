@@ -2,7 +2,7 @@
 LPC17xx CMSIS-Compliant Standard Peripheral Firmware Driver Library 
 documentation."""
 
-from internals import robocaller, cstruct
+from internals import RoboCaller, cstruct
 from LPC17xx import LPC_GPIO0_BASE, LPC_GPIO1_BASE, LPC_GPIO2_BASE, \
                     LPC_GPIO3_BASE, LPC_GPIO4_BASE
 
@@ -70,7 +70,7 @@ def FIO_IntCmd(portNum, bitValue, edgeState):
               1: Falling edge
               
   '''
-  return robocaller("FIO_IntCmd", "void", portNum, bitValue, edgeState)
+  return RoboCaller().call("FIO_IntCmd", "void", portNum, bitValue, edgeState)
 
 def GPIO_ClearInt(portNum, bitValue):
   '''Clear GPIO interrupt (just used for P0.0-P0.30, P2.0-P2.13).
@@ -80,7 +80,7 @@ def GPIO_ClearInt(portNum, bitValue):
             0xFFFFFFFF.
   
   '''
-  return robocaller("GPIO_ClearInt", "void", portNum, bitValue)
+  return RoboCaller().call("GPIO_ClearInt", "void", portNum, bitValue)
 
 def GPIO_GetIntStatus(portNum, pinNum, edgeState):
   '''Get GPIO Interrupt Status (just used for P0.0-P0.30, P2.0-P2.13).
@@ -94,7 +94,7 @@ def GPIO_GetIntStatus(portNum, pinNum, edgeState):
           DISABLE: A rising edge has not been detected on P0.0
   
   '''
-  return robocaller("GPIO_GetIntStatus", "FunctionalState", portNum, pinNum, edgeState)
+  return RoboCaller().call("GPIO_GetIntStatus", "FunctionalState", portNum, pinNum, edgeState)
 
 def FIO_HalfWordClearValue(portNum, halfwordNum, bitValue):
   '''Clear bits for FIO port in halfword accessible style.
@@ -104,7 +104,7 @@ def FIO_HalfWordClearValue(portNum, halfwordNum, bitValue):
   bitValue: Value that contains all bits in to clear, in range from 0 to 0xFFFF.
   
   '''
-  return robocaller("FIO_HalfWordClearValue", "void", portNum, halfwordNum, bitValue)
+  return RoboCaller().call("FIO_HalfWordClearValue", "void", portNum, halfwordNum, bitValue)
 
 def GPIO_IntCmd(portNum, bitValue, edgeState):
   '''Enable GPIO interrupt (just used for P0.0-P0.30, P2.0-P2.13).
@@ -117,7 +117,7 @@ def GPIO_IntCmd(portNum, bitValue, edgeState):
               1: Falling edge
               
   '''
-  return robocaller("GPIO_IntCmd", "void", portNum, bitValue, edgeState)
+  return RoboCaller().call("GPIO_IntCmd", "void", portNum, bitValue, edgeState)
 
 def FIO_ClearInt(portNum, pinNum):
   '''Clear GPIO interrupt (just used for P0.0-P0.30, P2.0-P2.13).
@@ -127,7 +127,7 @@ def FIO_ClearInt(portNum, pinNum):
             0xFFFFFFFF.
   
   '''
-  return robocaller("FIO_ClearInt", "void", portNum, pinNum)
+  return RoboCaller().call("FIO_ClearInt", "void", portNum, pinNum)
 
 def FIO_ByteSetValue(portNum, byteNum, bitValue):
   '''Set bits for FIO port in byte accessible style.
@@ -137,7 +137,7 @@ def FIO_ByteSetValue(portNum, byteNum, bitValue):
   bitValue: Value that contains all bits in to set, in range from 0 to 0xFF.
   
   '''
-  return robocaller("FIO_ByteSetValue", "void", portNum, byteNum, bitValue)
+  return RoboCaller().call("FIO_ByteSetValue", "void", portNum, byteNum, bitValue)
 
 def GPIO_ReadValue(portNum):
   '''Read Current state on port pin that have input direction of GPIO.
@@ -146,7 +146,7 @@ def GPIO_ReadValue(portNum):
   return: Current value of GPIO port.
   
   '''
-  return robocaller("GPIO_ReadValue", "uint32_t", portNum)
+  return RoboCaller().call("GPIO_ReadValue", "uint32_t", portNum)
 
 def FIO_ByteSetDir(portNum, byteNum, bitValue, direction):
   '''Set direction for FIO port in byte accessible style.
@@ -160,7 +160,7 @@ def FIO_ByteSetDir(portNum, byteNum, bitValue, direction):
               1: Output
   
   '''
-  return robocaller("FIO_ByteSetDir", "void", portNum, byteNum, bitValue, direction)
+  return RoboCaller().call("FIO_ByteSetDir", "void", portNum, byteNum, bitValue, direction)
 
 def FIO_HalfWordSetDir(portNum, halfwordNum, bitValue, direction):
   '''Set direction for FIO port in halfword accessible style.
@@ -174,7 +174,7 @@ def FIO_HalfWordSetDir(portNum, halfwordNum, bitValue, direction):
               1: Output
   
   '''
-  return robocaller("FIO_HalfWordSetDir", "void", portNum, halfwordNum, bitValue, direction)
+  return RoboCaller().call("FIO_HalfWordSetDir", "void", portNum, halfwordNum, bitValue, direction)
 
 def FIO_SetValue(portNum, bitValue):
   '''Set Value for bits that have output direction on GPIO port.
@@ -184,7 +184,7 @@ def FIO_SetValue(portNum, bitValue):
             0xFFFFFFFF
   
   '''
-  return robocaller("FIO_SetValue", "void", portNum, bitValue)
+  return RoboCaller().call("FIO_SetValue", "void", portNum, bitValue)
 
 def FIO_GetIntStatus(portNum, pinNum, edgeState):
   '''Get GPIO Interrupt Status (just used for P0.0-P0.30, P2.0-P2.13).
@@ -198,7 +198,7 @@ def FIO_GetIntStatus(portNum, pinNum, edgeState):
           DISABLE: A rising edge has not been detected on P0.0
   
   '''
-  return robocaller("FIO_GetIntStatus", "FunctionalState", portNum, pinNum, edgeState)
+  return RoboCaller().call("FIO_GetIntStatus", "FunctionalState", portNum, pinNum, edgeState)
 
 def FIO_HalfWordSetValue(portNum, halfwordNum, bitValue):
   '''Set bits for FIO port in halfword accessible style.
@@ -208,7 +208,7 @@ def FIO_HalfWordSetValue(portNum, halfwordNum, bitValue):
   bitValue: Value that contains all bits in to set, in range from 0 to 0xFFFF.
   
   '''
-  return robocaller("FIO_HalfWordSetValue", "void", portNum, halfwordNum, bitValue)
+  return RoboCaller().call("FIO_HalfWordSetValue", "void", portNum, halfwordNum, bitValue)
 
 def FIO_ByteClearValue(portNum, byteNum, bitValue):
   '''Clear bits for FIO port in byte accessible style.
@@ -218,7 +218,7 @@ def FIO_ByteClearValue(portNum, byteNum, bitValue):
   bitValue: Value that contains all bits in to clear, in range from 0 to 0xFF.
   
   '''
-  return robocaller("FIO_ByteClearValue", "void", portNum, byteNum, bitValue)
+  return RoboCaller().call("FIO_ByteClearValue", "void", portNum, byteNum, bitValue)
 
 def FIO_ByteReadValue(portNum, byteNum):
   '''Read Current state on port pin that have input direction of GPIO in byte 
@@ -229,7 +229,7 @@ def FIO_ByteReadValue(portNum, byteNum):
   return: Current value of FIO port pin of specified byte part.
   
   '''
-  return robocaller("FIO_ByteReadValue", "uint8_t", portNum, byteNum)
+  return RoboCaller().call("FIO_ByteReadValue", "uint8_t", portNum, byteNum)
 
 def GPIO_ClearValue(portNum, bitValue):
   '''Clear Value for bits that have output direction on GPIO port..
@@ -239,7 +239,7 @@ def GPIO_ClearValue(portNum, bitValue):
             0xFFFFFFFF.
   
   '''
-  return robocaller("GPIO_ClearValue", "void", portNum, bitValue)
+  return RoboCaller().call("GPIO_ClearValue", "void", portNum, bitValue)
 
 def FIO_ClearValue(portNum, bitValue):
   '''Clear Value for bits that have output direction on GPIO port..
@@ -249,7 +249,7 @@ def FIO_ClearValue(portNum, bitValue):
             0xFFFFFFFF.
   
   '''
-  return robocaller("FIO_ClearValue", "void", portNum, bitValue)
+  return RoboCaller().call("FIO_ClearValue", "void", portNum, bitValue)
 
 def FIO_SetDir(portNum, bitValue, direction):
   '''Set Direction for GPIO port.
@@ -262,7 +262,7 @@ def FIO_SetDir(portNum, bitValue, direction):
               1: Output
   
   '''
-  return robocaller("FIO_SetDir", "void", portNum, bitValue, direction)
+  return RoboCaller().call("FIO_SetDir", "void", portNum, bitValue, direction)
 
 def FIO_SetMask(portNum, bitValue, maskValue):
   '''Set mask value for bits in FIO port.
@@ -275,7 +275,7 @@ def FIO_SetMask(portNum, bitValue, maskValue):
               1: mask
   
   '''
-  return robocaller("FIO_SetMask", "void", portNum, bitValue, maskValue)
+  return RoboCaller().call("FIO_SetMask", "void", portNum, bitValue, maskValue)
 
 def FIO_HalfWordReadValue(portNum, halfwordNum):
   '''Read Current state on port pin that have input direction of GPIO in 
@@ -286,7 +286,7 @@ def FIO_HalfWordReadValue(portNum, halfwordNum):
   return: Current value of FIO port pin of specified halfword.
   
   '''
-  return robocaller("FIO_HalfWordReadValue", "uint16_t", portNum, halfwordNum)
+  return RoboCaller().call("FIO_HalfWordReadValue", "uint16_t", portNum, halfwordNum)
 
 def FIO_ByteSetMask(portNum, byteNum, bitValue, maskValue):
   '''Set mask value for bits in FIO port in byte accessible style.
@@ -299,7 +299,7 @@ def FIO_ByteSetMask(portNum, byteNum, bitValue, maskValue):
               1: mask
   
   '''
-  return robocaller("FIO_ByteSetMask", "void", portNum, byteNum, bitValue, maskValue)
+  return RoboCaller().call("FIO_ByteSetMask", "void", portNum, byteNum, bitValue, maskValue)
 
 def FIO_ReadValue(portNum):
   '''Read Current state on port pin that have input direction of GPIO.
@@ -308,7 +308,7 @@ def FIO_ReadValue(portNum):
   return: Current value of GPIO port.
   
   '''
-  return robocaller("FIO_ReadValue", "uint32_t", portNum)
+  return RoboCaller().call("FIO_ReadValue", "uint32_t", portNum)
 
 def GPIO_SetValue(portNum, bitValue):
   '''Set Value for bits that have output direction on GPIO port.
@@ -318,7 +318,7 @@ def GPIO_SetValue(portNum, bitValue):
             0xFFFFFFFF
   
   '''
-  return robocaller("GPIO_SetValue", "void", portNum, bitValue)
+  return RoboCaller().call("GPIO_SetValue", "void", portNum, bitValue)
 
 def FIO_HalfWordSetMask(portNum, halfwordNum, bitValue, maskValue):
   '''Set mask value for bits in FIO port in halfword accessible style.
@@ -331,7 +331,7 @@ def FIO_HalfWordSetMask(portNum, halfwordNum, bitValue, maskValue):
               1: mask
   
   '''
-  return robocaller("FIO_HalfWordSetMask", "void", portNum, halfwordNum, bitValue, maskValue)
+  return RoboCaller().call("FIO_HalfWordSetMask", "void", portNum, halfwordNum, bitValue, maskValue)
 
 def GPIO_SetDir(portNum, bitValue, direction):
   '''Set Direction for GPIO port.
@@ -344,4 +344,4 @@ def GPIO_SetDir(portNum, bitValue, direction):
               1: Output
   
   '''
-  return robocaller("GPIO_SetDir", "void", portNum, bitValue, direction)
+  return RoboCaller().call("GPIO_SetDir", "void", portNum, bitValue, direction)

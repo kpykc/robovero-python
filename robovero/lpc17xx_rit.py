@@ -2,7 +2,7 @@
 details in LPC17xx CMSIS-Compliant Standard Peripheral Firmware Driver Library 
 documentation."""
 
-from internals import robocaller, cstruct
+from internals import RoboCaller, cstruct
 from lpc_types import _BIT
 
 __author__ =      "Neil MacMunn"
@@ -22,7 +22,7 @@ def RIT_DeInit(RITx):
   RITx: peripheral selected, should be: LPC_RIT
   
   '''
-  return robocaller("RIT_DeInit", "void", RITx)
+  return RoboCaller().call("RIT_DeInit", "void", RITx)
 
 def RIT_Init(RITx):
   '''Initialize RIT.
@@ -33,7 +33,7 @@ def RIT_Init(RITx):
   RITx: peripheral selected, should be: LPC_RIT
   
   '''
-  return robocaller("RIT_Init", "void", RITx)
+  return RoboCaller().call("RIT_Init", "void", RITx)
 
 def RIT_Cmd(RITx, NewState):
   '''Enable/Disable Timer.
@@ -44,7 +44,7 @@ def RIT_Cmd(RITx, NewState):
             - DISABLE: Disable Timer
             
   '''
-  return robocaller("RIT_Cmd", "void", RITx, NewState)
+  return RoboCaller().call("RIT_Cmd", "void", RITx, NewState)
 
 def RIT_GetIntStatus(RITx):
   '''Check whether interrupt flag is set or not.
@@ -53,7 +53,7 @@ def RIT_GetIntStatus(RITx):
   return: Current interrupt status, could be: SET/RESET
   
   '''
-  return robocaller("RIT_GetIntStatus", "IntStatus", RITx)
+  return RoboCaller().call("RIT_GetIntStatus", "IntStatus", RITx)
 
 def RIT_TimerConfig(RITx, time_interval):
   '''Set compare value, mask value and time counter value.
@@ -62,7 +62,7 @@ def RIT_TimerConfig(RITx, time_interval):
   time_interval:  timer interval value (ms)
   
   '''
-  return robocaller("RIT_TimerConfig", "void", RITx, time_interval)
+  return RoboCaller().call("RIT_TimerConfig", "void", RITx, time_interval)
 
 def RIT_TimerDebugCmd(RITx, NewState):
   '''Timer Enable/Disable on debug.
@@ -73,4 +73,4 @@ def RIT_TimerDebugCmd(RITx, NewState):
             -DISABLE: Hardware break has no effect on the timer operation
   
   '''
-  return robocaller("RIT_TimerDebugCmd", "void", RITx, NewState)
+  return RoboCaller().call("RIT_TimerDebugCmd", "void", RITx, NewState)

@@ -2,7 +2,7 @@
 CMSIS-Compliant Standard Peripheral Firmware Driver Library documentation.
 """
 
-from internals import robocaller, cstruct
+from internals import RoboCaller, cstruct
 
 __author__ =      "Neil MacMunn"
 __credits__ =     ["Neil MacMunn", "NXP MCU SW Application Team"]
@@ -267,7 +267,7 @@ def I2C_MonitorModeCmd(I2Cx, NewState):
             DISABLE: Disable monitor mode.
             
   '''
-  return robocaller("I2C_MonitorModeCmd", "void", I2Cx, NewState)
+  return RoboCaller().call("I2C_MonitorModeCmd", "void", I2Cx, NewState)
 
 def I2C_IntCmd(I2Cx, NewState):
   '''Enable/Disable interrupt for I2C peripheral.
@@ -281,7 +281,7 @@ def I2C_IntCmd(I2Cx, NewState):
             DISABLE: disable interrupt for this I2C peripheral
 
   '''
-  return robocaller("I2C_IntCmd", "void", I2Cx, NewState)
+  return RoboCaller().call("I2C_IntCmd", "void", I2Cx, NewState)
 
 def I2C_DeInit(I2Cx):
   '''De-initializes the I2C peripheral registers to their default reset values.
@@ -292,7 +292,7 @@ def I2C_DeInit(I2Cx):
         LPC_I2C2
         
   '''
-  return robocaller("I2C_DeInit", "void", I2Cx)
+  return RoboCaller().call("I2C_DeInit", "void", I2Cx)
 
 def I2C_SlaveHandler(I2Cx):
   '''General Slave Interrupt handler for I2C peripheral.
@@ -303,7 +303,7 @@ def I2C_SlaveHandler(I2Cx):
         LPC_I2C2
         
   '''
-  return robocaller("I2C_SlaveHandler", "void", I2Cx)
+  return RoboCaller().call("I2C_SlaveHandler", "void", I2Cx)
 
 def I2C_MonitorModeConfig(I2Cx, MonitorCfgType, NewState):
   '''Configures functionality in I2C monitor mode.
@@ -324,7 +324,7 @@ def I2C_MonitorModeConfig(I2Cx, MonitorCfgType, NewState):
             DISABLE: Disable this function.
             
   '''
-  return robocaller("I2C_MonitorModeConfig", "void", I2Cx, MonitorCfgType, NewState)
+  return RoboCaller().call("I2C_MonitorModeConfig", "void", I2Cx, MonitorCfgType, NewState)
 
 def I2C_MasterTransferData(I2Cx, TransferCfg, Opt):
   '''Transmit and Receive data in master mode.
@@ -340,7 +340,7 @@ def I2C_MasterTransferData(I2Cx, TransferCfg, Opt):
   return: SUCCESS or ERROR
   
    '''
-  return robocaller("I2C_MasterTransferData", "Status", I2Cx, TransferCfg, Opt)
+  return RoboCaller().call("I2C_MasterTransferData", "Status", I2Cx, TransferCfg, Opt)
 
 def I2C_SlaveTransferComplete(I2Cx):
   '''Get status of Slave Transfer.
@@ -352,7 +352,7 @@ def I2C_SlaveTransferComplete(I2Cx):
   return: Complete status, could be: TRUE/FALSE
   
   '''
-  return robocaller("I2C_SlaveTransferComplete", "uint32_t", I2Cx)
+  return RoboCaller().call("I2C_SlaveTransferComplete", "uint32_t", I2Cx)
 
 def I2C_SlaveTransferData(I2Cx, TransferCfg, Opt):
   '''Get status of Slave Transfer.
@@ -364,7 +364,7 @@ def I2C_SlaveTransferData(I2Cx, TransferCfg, Opt):
   return: Complete status, could be: TRUE/FALSE
   
   '''
-  return robocaller("I2C_SlaveTransferData", "Status", I2Cx, TransferCfg, Opt)
+  return RoboCaller().call("I2C_SlaveTransferData", "Status", I2Cx, TransferCfg, Opt)
 
 def I2C_SetOwnSlaveAddr(I2Cx, OwnSlaveAddrConfigStruct):
   '''Set Own slave address in I2C peripheral corresponding to parameter 
@@ -379,7 +379,7 @@ def I2C_SetOwnSlaveAddr(I2Cx, OwnSlaveAddrConfigStruct):
                             specified I2C slave address.
                             
   '''
-  return robocaller("I2C_SetOwnSlaveAddr", "void", I2Cx, OwnSlaveAddrConfigStruct)
+  return RoboCaller().call("I2C_SetOwnSlaveAddr", "void", I2Cx, OwnSlaveAddrConfigStruct)
 
 def I2C_MasterTransferComplete(I2Cx):
   '''Get status of Master Transfer.
@@ -393,7 +393,7 @@ def I2C_MasterTransferComplete(I2Cx):
           FALSE: master transfer have not completed yet
           
   '''
-  return robocaller("I2C_MasterTransferComplete", "uint32_t", I2Cx)
+  return RoboCaller().call("I2C_MasterTransferComplete", "uint32_t", I2Cx)
 
 def I2C_MasterHandler(I2Cx):
   '''General Master Interrupt handler for I2C peripheral.
@@ -404,7 +404,7 @@ def I2C_MasterHandler(I2Cx):
         LPC_I2C2
         
   '''
-  return robocaller("I2C_MasterHandler", "void", I2Cx)
+  return RoboCaller().call("I2C_MasterHandler", "void", I2Cx)
 
 def I2C_MonitorHandler(I2Cx, buffer, size):
   '''.
@@ -414,7 +414,7 @@ def I2C_MonitorHandler(I2Cx, buffer, size):
         LPC_I2C1
         LPC_I2C2
   '''
-  return robocaller("I2C_MonitorHandler", "BOOL_8", I2Cx, buffer, size)
+  return RoboCaller().call("I2C_MonitorHandler", "BOOL_8", I2Cx, buffer, size)
 
 def I2C_Init(I2Cx, clockrate):
   '''Initializes the I2Cx peripheral with specified parameter.
@@ -426,7 +426,7 @@ def I2C_Init(I2Cx, clockrate):
   clockrate: Target clock rate value to initialized I2C peripheral (Hz)
   
   '''
-  return robocaller("I2C_Init", "void", I2Cx, clockrate)
+  return RoboCaller().call("I2C_Init", "void", I2Cx, clockrate)
 
 def I2C_MonitorGetDatabuffer(I2Cx):
   '''Get data from I2C data buffer in monitor mode.
@@ -445,7 +445,7 @@ def I2C_MonitorGetDatabuffer(I2Cx):
   return: uint8_t
   
   '''
-  return robocaller("I2C_MonitorGetDatabuffer", "uint8_t", I2Cx)
+  return RoboCaller().call("I2C_MonitorGetDatabuffer", "uint8_t", I2Cx)
 
 def I2C_Cmd(I2Cx, NewState):
   '''Enable or disable I2C peripheral's operation.
@@ -457,4 +457,4 @@ def I2C_Cmd(I2Cx, NewState):
   NewState: New State of I2Cx peripheral's operation
   
   '''
-  return robocaller("I2C_Cmd", "void", I2Cx, NewState)
+  return RoboCaller().call("I2C_Cmd", "void", I2Cx, NewState)

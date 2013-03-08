@@ -2,7 +2,7 @@
 CMSIS-Compliant Standard Peripheral Firmware Driver Library documentation.
 """
 
-from internals import robocaller
+from internals import RoboCaller
 
 __author__ =      "Neil MacMunn"
 __credits__ =     ["Neil MacMunn", "NXP MCU SW Application Team"]
@@ -40,12 +40,12 @@ def WDT_Start(TimeOut):
   TimeOut:  WDT reset after timeout if it is not feed
   
   '''
-  return robocaller("WDT_Start", "void", TimeOut)
+  return RoboCaller().call("WDT_Start", "void", TimeOut)
 
 def WDT_ClrTimeOutFlag():
   '''Clear WDT timeout flag.
   '''
-  return robocaller("WDT_ClrTimeOutFlag", "void")
+  return RoboCaller().call("WDT_ClrTimeOutFlag", "void")
 
 def WDT_ReadTimeOutFlag():
   '''Read WDT timeout flag.
@@ -53,7 +53,7 @@ def WDT_ReadTimeOutFlag():
   return: timeout flag status of WDT
   
   '''
-  return robocaller("WDT_ReadTimeOutFlag", "FlagStatus")
+  return RoboCaller().call("WDT_ReadTimeOutFlag", "FlagStatus")
 
 def WDT_UpdateTimeOut(TimeOut):
   '''Update WDT timeout value and feed.
@@ -61,7 +61,7 @@ def WDT_UpdateTimeOut(TimeOut):
   TimeOut:  timeout value to be updated
   
   '''
-  return robocaller("WDT_UpdateTimeOut", "void", TimeOut)
+  return RoboCaller().call("WDT_UpdateTimeOut", "void", TimeOut)
 
 def WDT_Init(ClkSrc, WDTMode):
   '''Initialize the Watchdog timer function.
@@ -75,13 +75,13 @@ def WDT_Init(ClkSrc, WDTMode):
             - WDT_MODE_RESET: Use WDT to generate interrupt and reset MCU
   
   '''
-  return robocaller("WDT_Init", "void", ClkSrc, WDTMode)
+  return RoboCaller().call("WDT_Init", "void", ClkSrc, WDTMode)
 
 def WDT_Feed():
   '''After setting WDTEN, call this function to start Watchdog or reload the 
   Watchdog timer.
   '''
-  return robocaller("WDT_Feed", "void")
+  return RoboCaller().call("WDT_Feed", "void")
 
 def WDT_GetCurrentCount():
   '''Get the current value of WDT.
@@ -89,4 +89,4 @@ def WDT_GetCurrentCount():
   return: current value of WDT
   
   '''
-  return robocaller("WDT_GetCurrentCount", "uint32_t")
+  return RoboCaller().call("WDT_GetCurrentCount", "uint32_t")

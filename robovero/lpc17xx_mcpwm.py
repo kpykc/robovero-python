@@ -3,7 +3,7 @@ LPC17xx CMSIS-Compliant Standard Peripheral Firmware Driver Library
 documentation.
 """
 
-from internals import robocaller, cstruct
+from internals import RoboCaller, cstruct
 
 __author__ =      "Neil MacMunn"
 __credits__ =     ["Neil MacMunn", "NXP MCU SW Application Team"]
@@ -149,7 +149,7 @@ def MCPWM_ConfigCapture(MCPWMx, channelNum, captureConfig):
                   the configuration information for the specified MCPWM capture.
   
   '''
-  return robocaller("MCPWM_ConfigCapture", "void", MCPWMx, channelNum, captureConfig)
+  return RoboCaller().call("MCPWM_ConfigCapture", "void", MCPWMx, channelNum, captureConfig)
 
 def MCPWM_IntConfig(MCPWMx, ulIntType, NewState):
   '''Configures the specified interrupt in MCPWM peripheral.
@@ -169,7 +169,7 @@ def MCPWM_IntConfig(MCPWMx, ulIntType, NewState):
   NewState: New State of this command, should be: ENABLE or DISABLE.
   
   '''
-  return robocaller("MCPWM_IntConfig", "void", MCPWMx, ulIntType, NewState)
+  return RoboCaller().call("MCPWM_IntConfig", "void", MCPWMx, ulIntType, NewState)
 
 def MCPWM_ACMode(MCPWMx, acMode):
   '''Enables/Disables 3-phase AC motor mode on MCPWM peripheral.
@@ -178,7 +178,7 @@ def MCPWM_ACMode(MCPWMx, acMode):
   acMode: State of this command, should be: ENABLE or DISABLE.
   
   '''
-  return robocaller("MCPWM_ACMode", "void", MCPWMx, acMode)
+  return RoboCaller().call("MCPWM_ACMode", "void", MCPWMx, acMode)
 
 def MCPWM_Init(MCPWMx):
   '''Initializes the MCPWM peripheral.
@@ -186,7 +186,7 @@ def MCPWM_Init(MCPWMx):
   MCPWMx: Motor Control PWM peripheral selected. Should be: LPC_MCPWM
   
   '''
-  return robocaller("MCPWM_Init", "void", MCPWMx)
+  return RoboCaller().call("MCPWM_Init", "void", MCPWMx)
 
 def MCPWM_GetIntStatus(MCPWMx, ulIntType):
   '''Check whether if the specified interrupt in MCPWM is set or not.
@@ -206,7 +206,7 @@ def MCPWM_GetIntStatus(MCPWMx, ulIntType):
   return: SET or RESET
   
   '''
-  return robocaller("MCPWM_GetIntStatus", "FlagStatus", MCPWMx, ulIntType)
+  return RoboCaller().call("MCPWM_GetIntStatus", "FlagStatus", MCPWMx, ulIntType)
 
 def MCPWM_Stop(MCPWMx, channel0, channel1, channel2):
   '''Stop MCPWM activity for each MCPWM channel.
@@ -223,7 +223,7 @@ def MCPWM_Stop(MCPWMx, channel0, channel1, channel2):
             DISABLE: 'Stop' command will not effect on channel 2
   
   '''
-  return robocaller("MCPWM_Stop", "void", MCPWMx, channel0, channel1, channel2)
+  return RoboCaller().call("MCPWM_Stop", "void", MCPWMx, channel0, channel1, channel2)
 
 def MCPWM_Start(MCPWMx, channel0, channel1, channel2):
   '''Start MCPWM activity for each MCPWM channel.
@@ -240,7 +240,7 @@ def MCPWM_Start(MCPWMx, channel0, channel1, channel2):
             DISABLE: 'Start' command will not effect on channel 2 
   
   '''
-  return robocaller("MCPWM_Start", "void", MCPWMx, channel0, channel1, channel2)
+  return RoboCaller().call("MCPWM_Start", "void", MCPWMx, channel0, channel1, channel2)
 
 def MCPWM_GetCapture(MCPWMx, captureChannel):
   '''Get current captured value in specified capture channel.
@@ -250,7 +250,7 @@ def MCPWM_GetCapture(MCPWMx, captureChannel):
   return: Captured value in channel 0, 1, or 2
     
   '''
-  return robocaller("MCPWM_GetCapture", "uint32_t", MCPWMx, captureChannel)
+  return RoboCaller().call("MCPWM_GetCapture", "uint32_t", MCPWMx, captureChannel)
 
 def MCPWM_IntSet(MCPWMx, ulIntType):
   '''Sets/Forces the specified interrupt for MCPWM peripheral.
@@ -269,7 +269,7 @@ def MCPWM_IntSet(MCPWMx, ulIntType):
               MCPWM_INTFLAG_ABORT: Fast abort interrupt  
   
   '''
-  return robocaller("MCPWM_IntSet", "void", MCPWMx, ulIntType)
+  return RoboCaller().call("MCPWM_IntSet", "void", MCPWMx, ulIntType)
 
 def MCPWM_ConfigChannel(MCPWMx, channelNum, channelSetup):
   '''Configures each channel in MCPWM peripheral according to the specified
@@ -281,7 +281,7 @@ def MCPWM_ConfigChannel(MCPWMx, channelNum, channelSetup):
                 configuration information for the specified MCPWM channel.
   
   '''
-  return robocaller("MCPWM_ConfigChannel", "void", MCPWMx, channelNum, channelSetup)
+  return RoboCaller().call("MCPWM_ConfigChannel", "void", MCPWMx, channelNum, channelSetup)
 
 def MCPWM_ClearCapture(MCPWMx, captureChannel):
   '''Clears current captured value in specified capture channel.
@@ -290,7 +290,7 @@ def MCPWM_ClearCapture(MCPWMx, captureChannel):
   captureChannel: Capture channel number, should be: 0..2
   
   '''
-  return robocaller("MCPWM_ClearCapture", "void", MCPWMx, captureChannel)
+  return RoboCaller().call("MCPWM_ClearCapture", "void", MCPWMx, captureChannel)
 
 def MCPWM_DCMode(MCPWMx, dcMode, outputInvered, outputPattern):
   '''Enables/Disables 3-phase DC motor mode on MCPWM peripheral.
@@ -312,7 +312,7 @@ def MCPWM_DCMode(MCPWMx, dcMode, outputInvered, outputPattern):
                   MCPWM_PATENT_B2:    MCOB2 tracks internal MCOA0
   
   '''
-  return robocaller("MCPWM_DCMode", "void", MCPWMx, dcMode, outputInvered, outputPattern)
+  return RoboCaller().call("MCPWM_DCMode", "void", MCPWMx, dcMode, outputInvered, outputPattern)
 
 def MCPWM_CountConfig(MCPWMx, channelNum, countMode, countConfig):
   '''Configures Count control in MCPWM peripheral.
@@ -326,7 +326,7 @@ def MCPWM_CountConfig(MCPWMx, channelNum, countMode, countConfig):
                 configuration information for the specified MCPWM count control.
   
   '''
-  return robocaller("MCPWM_CountConfig", "void", MCPWMx, channelNum, countMode, countConfig)
+  return RoboCaller().call("MCPWM_CountConfig", "void", MCPWMx, channelNum, countMode, countConfig)
 
 def MCPWM_WriteToShadow(MCPWMx, channelNum, channelSetup):
   '''Write to MCPWM shadow registers - Update the value for period and pulse
@@ -338,7 +338,7 @@ def MCPWM_WriteToShadow(MCPWMx, channelNum, channelSetup):
                 configuration information for the specified MCPWM channel.
   
   '''
-  return robocaller("MCPWM_WriteToShadow", "void", MCPWMx, channelNum, channelSetup)
+  return RoboCaller().call("MCPWM_WriteToShadow", "void", MCPWMx, channelNum, channelSetup)
 
 def MCPWM_IntClear(MCPWMx, ulIntType):
   '''Clear the specified interrupt pending for MCPWM peripheral.
@@ -357,5 +357,5 @@ def MCPWM_IntClear(MCPWMx, ulIntType):
               MCPWM_INTFLAG_ABORT: Fast abort interrupt   
   
   '''
-  return robocaller("MCPWM_IntClear", "void", MCPWMx, ulIntType)
+  return RoboCaller().call("MCPWM_IntClear", "void", MCPWMx, ulIntType)
 

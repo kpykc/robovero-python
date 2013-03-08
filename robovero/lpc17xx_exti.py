@@ -2,7 +2,7 @@
 CMSIS-Compliant Standard Peripheral Firmware Driver Library documentation.
 """
 
-from internals import robocaller, cstruct
+from internals import RoboCaller, cstruct
 
 __author__ =      "Neil MacMunn"
 __credits__ =     ["Neil MacMunn", "NXP MCU SW Application Team"]
@@ -64,7 +64,7 @@ class EXTI_LINE_ENUM:
 def EXTI_Init():
   '''Set EXTINT, EXTMODE, EXTPOLAR registers to default value.
   '''
-  return robocaller("EXTI_Init", "void", )
+  return RoboCaller().call("EXTI_Init", "void", )
 
 def EXTI_ClearEXTIFlag(EXTILine):
   '''Clear External interrupt flag.
@@ -76,7 +76,7 @@ def EXTI_ClearEXTIFlag(EXTILine):
             EXTI_EINT3: external interrupt line 3
   
   '''
-  return robocaller("EXTI_ClearEXTIFlag", "void", EXTILine)
+  return RoboCaller().call("EXTI_ClearEXTIFlag", "void", EXTILine)
 
 def EXTI_Config(EXTICfg):
   '''Configuration for EXT. Set EXTINT, EXTMODE, EXTPOLAR register.
@@ -85,7 +85,7 @@ def EXTI_Config(EXTICfg):
             configuration information for the specified external interrupt
             
   '''
-  return robocaller("EXTI_Config", "void", EXTICfg)
+  return RoboCaller().call("EXTI_Config", "void", EXTICfg)
 
 def EXTI_SetMode(EXTILine, mode):
   '''Set mode for EXTI pin.
@@ -100,12 +100,12 @@ def EXTI_SetMode(EXTILine, mode):
         EXTI_MODE_EDGE_SENSITIVE
   
   '''
-  return robocaller("EXTI_SetMode", "void", EXTILine, mode)
+  return RoboCaller().call("EXTI_SetMode", "void", EXTILine, mode)
 
 def EXTI_DeInit():
   '''Close EXT.
   '''
-  return robocaller("EXTI_DeInit", "void", )
+  return RoboCaller().call("EXTI_DeInit", "void", )
 
 def EXTI_SetPolarity(EXTILine, polarity):
   '''Set polarity for EXTI pin.
@@ -120,5 +120,5 @@ def EXTI_SetPolarity(EXTILine, polarity):
             EXTI_POLARITY_LOW_ACTIVE_OR_FALLING_EDGE
             
   '''
-  return robocaller("EXTI_SetPolarity", "void", EXTILine, polarity)
+  return RoboCaller().call("EXTI_SetPolarity", "void", EXTILine, polarity)
 

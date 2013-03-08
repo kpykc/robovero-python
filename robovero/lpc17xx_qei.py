@@ -2,7 +2,7 @@
 details in LPC17xx CMSIS-Compliant Standard Peripheral Firmware Driver Library
 documentation."""
 
-from internals import robocaller, cstruct
+from internals import RoboCaller, cstruct
 
 __author__ =      "Neil MacMunn"
 __credits__ =     ["Neil MacMunn", "NXP MCU SW Application Team"]
@@ -136,7 +136,7 @@ def QEI_GetTimer(QEIx):
   return: Current timer counter in QEI peripheral
   
   '''
-  return robocaller("QEI_GetTimer", "uint32_t", QEIx)
+  return RoboCaller().call("QEI_GetTimer", "uint32_t", QEIx)
 
 def QEI_DeInit(QEIx):
   '''De-initializes the QEI peripheral registers to their default reset values.
@@ -144,7 +144,7 @@ def QEI_DeInit(QEIx):
   QEIx: QEI peripheral, should be LPC_QEI
   
   '''
-  return robocaller("QEI_DeInit", "void", QEIx)
+  return RoboCaller().call("QEI_DeInit", "void", QEIx)
 
 def QEI_GetPosition(QEIx):
   '''Get current position value in QEI peripheral.
@@ -153,7 +153,7 @@ def QEI_GetPosition(QEIx):
   return: Current position value of QEI peripheral
   
   '''
-  return robocaller("QEI_GetPosition", "uint32_t", QEIx)
+  return RoboCaller().call("QEI_GetPosition", "uint32_t", QEIx)
 
 def QEI_GetStatus(QEIx, ulFlagType):
   '''Check whether if specified flag status is set or not.
@@ -164,7 +164,7 @@ def QEI_GetStatus(QEIx, ulFlagType):
   return: New Status of this status flag (SET or RESET)
   
   '''
-  return robocaller("QEI_GetStatus", "FlagStatus", QEIx, ulFlagType)
+  return RoboCaller().call("QEI_GetStatus", "FlagStatus", QEIx, ulFlagType)
 
 def QEI_Reset(QEIx, ulResetType):
   '''Resets value for each type of QEI value, such as velocity, counter, 
@@ -178,7 +178,7 @@ def QEI_Reset(QEIx, ulResetType):
               - QEI_RESET_IDX: Reset Index Counter
   
   '''
-  return robocaller("QEI_Reset", "void", QEIx, ulResetType)
+  return RoboCaller().call("QEI_Reset", "void", QEIx, ulResetType)
 
 def QEI_SetMaxPosition(QEIx, ulMaxPos):
   '''Set max position value for QEI peripheral.
@@ -187,7 +187,7 @@ def QEI_SetMaxPosition(QEIx, ulMaxPos):
   ulMaxPos: Max position value to set
   
   '''
-  return robocaller("QEI_SetMaxPosition", "void", QEIx, ulMaxPos)
+  return RoboCaller().call("QEI_SetMaxPosition", "void", QEIx, ulMaxPos)
 
 def QEI_GetVelocity(QEIx):
   '''Get current velocity pulse counter in current time period.
@@ -196,7 +196,7 @@ def QEI_GetVelocity(QEIx):
   return: Current velocity pulse counter value
   
   '''
-  return robocaller("QEI_GetVelocity", "uint32_t", QEIx)
+  return RoboCaller().call("QEI_GetVelocity", "uint32_t", QEIx)
 
 def QEI_GetVelocityCap(QEIx):
   '''Get the most recently measured velocity of the QEI. When the Velocity timer
@@ -207,7 +207,7 @@ def QEI_GetVelocityCap(QEIx):
   return: The most recently measured velocity value
   
   '''
-  return robocaller("QEI_GetVelocityCap", "uint32_t", QEIx)
+  return RoboCaller().call("QEI_GetVelocityCap", "uint32_t", QEIx)
 
 def QEI_SetPositionComp(QEIx, bPosCompCh, ulPosComp):
   '''Set position compare value for QEI peripheral.
@@ -220,7 +220,7 @@ def QEI_SetPositionComp(QEIx, bPosCompCh, ulPosComp):
   ulPosComp:  Compare Position value to set
     
   '''
-  return robocaller("QEI_SetPositionComp", "void", QEIx, bPosCompCh, ulPosComp)
+  return RoboCaller().call("QEI_SetPositionComp", "void", QEIx, bPosCompCh, ulPosComp)
 
 def QEI_SetDigiFilter(QEIx, ulSamplingPulse):
   '''Set value of sampling count for the digital filter in QEI peripheral.
@@ -229,7 +229,7 @@ def QEI_SetDigiFilter(QEIx, ulSamplingPulse):
   ulSamplingPulse: Value of sampling count to set
   
   '''
-  return robocaller("QEI_SetDigiFilter", "void", QEIx, ulSamplingPulse)
+  return RoboCaller().call("QEI_SetDigiFilter", "void", QEIx, ulSamplingPulse)
 
 def QEI_IntSet(QEIx, ulIntType):
   '''Sets (forces) specified interrupt in QEI peripheral.
@@ -260,7 +260,7 @@ def QEI_IntSet(QEIx, ulIntType):
                 count interrupt
   
   '''
-  return robocaller("QEI_IntSet", "void", QEIx, ulIntType)
+  return RoboCaller().call("QEI_IntSet", "void", QEIx, ulIntType)
 
 def QEI_GetIndex(QEIx):
   '''Get current index counter of QEI peripheral.
@@ -269,7 +269,7 @@ def QEI_GetIndex(QEIx):
   return: Current value of QEI index counter
   
   '''
-  return robocaller("QEI_GetIndex", "uint32_t", QEIx)
+  return RoboCaller().call("QEI_GetIndex", "uint32_t", QEIx)
 
 def QEI_SetTimerReload(QEIx, QEIReloadStruct):
   '''Set timer reload value for QEI peripheral. When the velocity timer is
@@ -281,7 +281,7 @@ def QEI_SetTimerReload(QEIx, QEIReloadStruct):
   QEIReloadStruct: QEI reload structure
   
   '''
-  return robocaller("QEI_SetTimerReload", "void", QEIx, QEIReloadStruct)
+  return RoboCaller().call("QEI_SetTimerReload", "void", QEIx, QEIReloadStruct)
 
 def QEI_ConfigStructInit(QIE_InitStruct):
   '''Fills each QIE_InitStruct member with its default value.
@@ -295,7 +295,7 @@ def QEI_ConfigStructInit(QIE_InitStruct):
                   initialized.
   
   '''
-  return robocaller("QEI_ConfigStructInit", "void", QIE_InitStruct)
+  return RoboCaller().call("QEI_ConfigStructInit", "void", QIE_InitStruct)
 
 def QEI_SetVelocityComp(QEIx, ulVelComp):
   '''Set Velocity Compare value for QEI peripheral.
@@ -304,7 +304,7 @@ def QEI_SetVelocityComp(QEIx, ulVelComp):
   ulVelComp:  Compare Velocity value to set
     
   '''
-  return robocaller("QEI_SetVelocityComp", "void", QEIx, ulVelComp)
+  return RoboCaller().call("QEI_SetVelocityComp", "void", QEIx, ulVelComp)
 
 def QEI_Init(QEIx, QEI_ConfigStruct):
   '''Initializes the QEI peripheral according to the specified parameters in the
@@ -315,7 +315,7 @@ def QEI_Init(QEIx, QEI_ConfigStruct):
                     configuration information for the specified QEI peripheral
     
   '''
-  return robocaller("QEI_Init", "void", QEIx, QEI_ConfigStruct)
+  return RoboCaller().call("QEI_Init", "void", QEIx, QEI_ConfigStruct)
 
 def QEI_IntCmd(QEIx, ulIntType, NewState):
   '''Enable/Disable specified interrupt in QEI peripheral.
@@ -349,7 +349,7 @@ def QEI_IntCmd(QEIx, ulIntType, NewState):
             - ENABLE
   
   '''
-  return robocaller("QEI_IntCmd", "void", QEIx, ulIntType, NewState)
+  return RoboCaller().call("QEI_IntCmd", "void", QEIx, ulIntType, NewState)
 
 def QEI_IntClear(QEIx, ulIntType):
   '''Clear (force) specified interrupt (pending) in QEI peripheral.
@@ -380,7 +380,7 @@ def QEI_IntClear(QEIx, ulIntType):
                 count interrupt
   
   '''
-  return robocaller("QEI_IntClear", "void", QEIx, ulIntType)
+  return RoboCaller().call("QEI_IntClear", "void", QEIx, ulIntType)
 
 def QEI_GetIntStatus(QEIx, ulIntType):
   '''Check whether if specified interrupt flag status in QEI peripheral
@@ -413,7 +413,7 @@ def QEI_GetIntStatus(QEIx, ulIntType):
   return: New State of specified interrupt flag status (SET or RESET)
   
   '''
-  return robocaller("QEI_GetIntStatus", "FlagStatus", QEIx, ulIntType)
+  return RoboCaller().call("QEI_GetIntStatus", "FlagStatus", QEIx, ulIntType)
 
 def QEI_CalculateRPM(QEIx, ulVelCapValue, ulPPR):
   '''Calculates the actual velocity in RPM passed via velocity capture value and
@@ -426,7 +426,7 @@ def QEI_CalculateRPM(QEIx, ulVelCapValue, ulPPR):
   return: The actual value of velocity in RPM (revolutions per minute)
   
   '''
-  return robocaller("QEI_CalculateRPM", "uint32_t", QEIx, ulVelCapValue, ulPPR)
+  return RoboCaller().call("QEI_CalculateRPM", "uint32_t", QEIx, ulVelCapValue, ulPPR)
 
 def QEI_SetIndexComp(QEIx, ulIndexComp):
   '''Set value for index compare in QEI peripheral.
@@ -435,4 +435,4 @@ def QEI_SetIndexComp(QEIx, ulIndexComp):
   ulIndexComp:  Compare Index Value to set
   
   '''
-  return robocaller("QEI_SetIndexComp", "void", QEIx, ulIndexComp)
+  return RoboCaller().call("QEI_SetIndexComp", "void", QEIx, ulIndexComp)

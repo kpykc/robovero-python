@@ -2,7 +2,7 @@
 CMSIS-Compliant Standard Peripheral Firmware Driver Library documentation.
 """
 
-from internals import robocaller, cstruct
+from internals import RoboCaller, cstruct
 
 __author__ =      "Neil MacMunn"
 __credits__ =     ["Neil MacMunn", "NXP MCU SW Application Team"]
@@ -361,7 +361,7 @@ def UART_RS485SendSlvAddr(UARTx, SlvAddr):
   SlvAddr:  Slave Address.
 
   '''
-  return robocaller("UART_RS485SendSlvAddr", "void", UARTx, SlvAddr)
+  return RoboCaller().call("UART_RS485SendSlvAddr", "void", UARTx, SlvAddr)
 
 def UART_ABClearIntPending(UARTx, ABIntType):
   '''Clear Autobaud Interrupt Pending.
@@ -376,7 +376,7 @@ def UART_ABClearIntPending(UARTx, ABIntType):
               - UART_AUTOBAUD_INTSTAT_ABTO: Auto-baud time out interrupt
   
   '''
-  return robocaller("UART_ABClearIntPending", "void", UARTx, ABIntType)
+  return RoboCaller().call("UART_ABClearIntPending", "void", UARTx, ABIntType)
 
 def UART_IrDAPulseDivConfig(UARTx, PulseDiv):
   '''Configure Pulse divider for IrDA function on UART peripheral.
@@ -394,7 +394,7 @@ def UART_IrDAPulseDivConfig(UARTx, PulseDiv):
             - UART_IrDA_PULSEDIV256 : Pulse width = 256 * Tpclk
             
   '''
-  return robocaller("UART_IrDAPulseDivConfig", "void", UARTx, PulseDiv)
+  return RoboCaller().call("UART_IrDAPulseDivConfig", "void", UARTx, PulseDiv)
 
 def UART_RS485Config(UARTx, RS485ConfigStruct):
   '''Configure UART peripheral in RS485 mode according to the specified 
@@ -406,7 +406,7 @@ def UART_RS485Config(UARTx, RS485ConfigStruct):
                       in RS485 mode.
   
   '''
-  return robocaller("UART_RS485Config", "void", UARTx, RS485ConfigStruct)
+  return RoboCaller().call("UART_RS485Config", "void", UARTx, RS485ConfigStruct)
 
 def UART_Receive(UARTx, rxbuf, buflen, flag):
   '''Receive a block of data via UART peripheral.
@@ -423,7 +423,7 @@ def UART_Receive(UARTx, rxbuf, buflen, flag):
   return: Number of bytes received
   
   '''
-  return robocaller("UART_Receive", "uint32_t", UARTx, rxbuf, buflen, flag)
+  return RoboCaller().call("UART_Receive", "uint32_t", UARTx, rxbuf, buflen, flag)
 
 def UART_ReceiveByte(UARTx):
   '''Receive a single data from UART peripheral.
@@ -436,7 +436,7 @@ def UART_ReceiveByte(UARTx):
   return: Data received
   
   '''
-  return robocaller("UART_ReceiveByte", "uint8_t", UARTx)
+  return RoboCaller().call("UART_ReceiveByte", "uint8_t", UARTx)
 
 def UART_GetIntId(UARTx):
   '''Get Interrupt Identification value.
@@ -449,7 +449,7 @@ def UART_GetIntId(UARTx):
   return: Current value of UART UIIR register in UART peripheral.
   
   '''
-  return robocaller("UART_GetIntId", "uint32_t", UARTx)
+  return RoboCaller().call("UART_GetIntId", "uint32_t", UARTx)
 
 def UART_ForceBreak(UARTx):
   '''Force BREAK character on UART line, output pin UARTx TXD is forced to logic
@@ -462,7 +462,7 @@ def UART_ForceBreak(UARTx):
           - LPC_UART3: UART3 peripheral
 
   '''
-  return robocaller("UART_ForceBreak", "void", UARTx)
+  return RoboCaller().call("UART_ForceBreak", "void", UARTx)
 
 def UART_FIFOConfig(UARTx, FIFOCfg):
   '''Configure FIFO function on selected UART peripheral.
@@ -476,7 +476,7 @@ def UART_FIFOConfig(UARTx, FIFOCfg):
             information about FIFO configuration
   
   '''
-  return robocaller("UART_FIFOConfig", "void", UARTx, FIFOCfg)
+  return RoboCaller().call("UART_FIFOConfig", "void", UARTx, FIFOCfg)
 
 def UART_DeInit(UARTx):
   '''De-initializes the UARTx peripheral registers to their default reset 
@@ -489,7 +489,7 @@ def UART_DeInit(UARTx):
           - LPC_UART3: UART3 peripheral
   
   '''
-  return robocaller("UART_DeInit", "void", UARTx)
+  return RoboCaller().call("UART_DeInit", "void", UARTx)
 
 def UART_Send(UARTx, txbuf, buflen, flag):
   '''Send a block of data via UART peripheral.
@@ -505,7 +505,7 @@ def UART_Send(UARTx, txbuf, buflen, flag):
   return: Number of bytes sent.
   
   '''
-  return robocaller("UART_Send", "uint32_t", UARTx, txbuf, buflen, flag)
+  return RoboCaller().call("UART_Send", "uint32_t", UARTx, txbuf, buflen, flag)
 
 def UART_FIFOConfigStructInit(UART_FIFOInitStruct):
   '''Fills each UART_FIFOInitStruct member with its default value.
@@ -520,7 +520,7 @@ def UART_FIFOConfigStructInit(UART_FIFOInitStruct):
                         initialized.
                         
   '''
-  return robocaller("UART_FIFOConfigStructInit", "void", UART_FIFOInitStruct)
+  return RoboCaller().call("UART_FIFOConfigStructInit", "void", UART_FIFOInitStruct)
 
 def UART_FullModemForcePinState(UARTx, Pin, NewState):
   '''Force pin DTR/RTS corresponding to given state (Full modem mode).
@@ -534,7 +534,7 @@ def UART_FullModemForcePinState(UARTx, Pin, NewState):
             - ACTIVE: Force the pin to active signal.
 
   '''
-  return robocaller("UART_FullModemForcePinState", "void", UARTx, Pin, NewState)
+  return RoboCaller().call("UART_FullModemForcePinState", "void", UARTx, Pin, NewState)
 
 def UART_RS485ReceiverCmd(UARTx, NewState):
   '''Enable/Disable receiver in RS485 module in UART1.
@@ -545,7 +545,7 @@ def UART_RS485ReceiverCmd(UARTx, NewState):
             - DISABLE: Disable this function.
             
   '''
-  return robocaller("UART_RS485ReceiverCmd", "void", UARTx, NewState)
+  return RoboCaller().call("UART_RS485ReceiverCmd", "void", UARTx, NewState)
 
 def UART_CheckBusy(UARTx):
   '''Check whether UART is busy or not.
@@ -558,7 +558,7 @@ def UART_CheckBusy(UARTx):
   return: RESET if UART is not busy, otherwise return SET.
   
   '''
-  return robocaller("UART_CheckBusy", "FlagStatus", UARTx)
+  return RoboCaller().call("UART_CheckBusy", "FlagStatus", UARTx)
 
 def UART_SendByte(UARTx, Data):
   '''Transmit a single data through UART peripheral.
@@ -571,7 +571,7 @@ def UART_SendByte(UARTx, Data):
   Data: Data to transmit (must be 8-bit long)
   
   '''
-  return robocaller("UART_SendByte", "void", UARTx, Data)
+  return RoboCaller().call("UART_SendByte", "void", UARTx, Data)
 
 def UART_ABCmd(UARTx, ABConfigStruct, NewState):
   '''Start/Stop Auto Baudrate activity.
@@ -590,7 +590,7 @@ def UART_ABCmd(UARTx, ABConfigStruct, NewState):
             - DISABLE: Stop this activity
   
   '''
-  return robocaller("UART_ABCmd", "void", UARTx, ABConfigStruct, NewState)
+  return RoboCaller().call("UART_ABCmd", "void", UARTx, ABConfigStruct, NewState)
 
 def UART_GetLineStatus(UARTx):
   '''Get current value of Line Status register in UART peripheral.
@@ -610,7 +610,7 @@ def UART_GetLineStatus(UARTx):
   return: Current value of Line Status register in UART peripheral
   
   '''
-  return robocaller("UART_GetLineStatus", "uint8_t", UARTx)
+  return RoboCaller().call("UART_GetLineStatus", "uint8_t", UARTx)
 
 def UART_FullModemConfigMode(UARTx, Mode, NewState):
   '''Configure Full Modem mode for UART peripheral.
@@ -625,7 +625,7 @@ def UART_FullModemConfigMode(UARTx, Mode, NewState):
             - DISABLE: Disable this mode.
   
   '''
-  return robocaller("UART_FullModemConfigMode", "void", UARTx, Mode, NewState)
+  return RoboCaller().call("UART_FullModemConfigMode", "void", UARTx, Mode, NewState)
 
 def UART_FullModemGetStatus(UARTx):
   '''Get current status of modem status register.
@@ -634,7 +634,7 @@ def UART_FullModemGetStatus(UARTx):
   return: Current value of modem status register
   
   '''
-  return robocaller("UART_FullModemGetStatus", "uint8_t", UARTx)
+  return RoboCaller().call("UART_FullModemGetStatus", "uint8_t", UARTx)
 
 def UART_Init(UARTx, UART_ConfigStruct):
   '''Initializes the UARTx peripheral according to the specified parameters in 
@@ -650,7 +650,7 @@ def UART_Init(UARTx, UART_ConfigStruct):
                       peripheral.
                       
   '''
-  return robocaller("UART_Init", "void", UARTx, UART_ConfigStruct)
+  return RoboCaller().call("UART_Init", "void", UARTx, UART_ConfigStruct)
 
 def UART_IrDACmd(UARTx, NewState):
   '''Enable or disable IrDA function on UART peripheral.
@@ -661,7 +661,7 @@ def UART_IrDACmd(UARTx, NewState):
             - DISABLE: Disable this function.
 
   '''
-  return robocaller("UART_IrDACmd", "void", UARTx, NewState)
+  return RoboCaller().call("UART_IrDACmd", "void", UARTx, NewState)
 
 def UART_TxCmd(UARTx, NewState):
   '''Enable/Disable transmission on UART TxD pin.
@@ -676,7 +676,7 @@ def UART_TxCmd(UARTx, NewState):
             - DISABLE: Disable this function.
 
   '''
-  return robocaller("UART_TxCmd", "void", UARTx, NewState)
+  return RoboCaller().call("UART_TxCmd", "void", UARTx, NewState)
 
 def UART_ConfigStructInit(UART_InitStruct):
   '''Fills each UART_InitStruct member with its default value.
@@ -690,7 +690,7 @@ def UART_ConfigStructInit(UART_InitStruct):
   initialized.
   
   '''
-  return robocaller("UART_ConfigStructInit", "void", UART_InitStruct)
+  return RoboCaller().call("UART_ConfigStructInit", "void", UART_InitStruct)
 
 def UART_IntConfig(UARTx, UARTIntCfg, NewState):
   '''Enable or disable specified UART interrupt.
@@ -713,7 +713,7 @@ def UART_IntConfig(UARTx, UARTIntCfg, NewState):
             - DISABLE: Disable this UART interrupt type.
 
   '''
-  return robocaller("UART_IntConfig", "void", UARTx, UARTIntCfg, NewState)
+  return RoboCaller().call("UART_IntConfig", "void", UARTx, UARTIntCfg, NewState)
 
 def UART_IrDAInvtInputCmd(UARTx, NewState):
   '''Enable or disable inverting serial input function of IrDA on UART
@@ -725,7 +725,7 @@ def UART_IrDAInvtInputCmd(UARTx, NewState):
             - DISABLE: Disable this function.
   
   '''
-  return robocaller("UART_IrDAInvtInputCmd", "void", UARTx, NewState)
+  return RoboCaller().call("UART_IrDAInvtInputCmd", "void", UARTx, NewState)
 
 def UART_RS485SendData(UARTx, pData, size):
   '''Send Data frames on RS485 bus.
@@ -736,5 +736,5 @@ def UART_RS485SendData(UARTx, pData, size):
   return: 
   
   '''
-  return robocaller("UART_RS485SendData", "uint32_t", UARTx, pData, size)
+  return RoboCaller().call("UART_RS485SendData", "uint32_t", UARTx, pData, size)
 

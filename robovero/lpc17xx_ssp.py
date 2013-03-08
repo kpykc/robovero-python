@@ -3,7 +3,7 @@ in LPC17xx CMSIS-Compliant Standard Peripheral Firmware Driver Library
 documentation.
 """
 
-from internals import robocaller, cstruct
+from internals import RoboCaller, cstruct
 
 __author__ =      "Neil MacMunn"
 __credits__ =     ["Neil MacMunn", "NXP MCU SW Application Team"]
@@ -253,7 +253,7 @@ def SSP_LoopBackCmd(SSPx, NewState):
             - DISABLE: Disable this function
   
   '''
-  return robocaller("SSP_LoopBackCmd", "void", SSPx, NewState)
+  return RoboCaller().call("SSP_LoopBackCmd", "void", SSPx, NewState)
 
 def SSP_GetRawIntStatus(SSPx, RawIntType):
   '''Check whether the specified Raw interrupt status flag is set or not.
@@ -272,7 +272,7 @@ def SSP_GetRawIntStatus(SSPx, RawIntType):
   return: New State of specified Raw interrupt status flag in SSP peripheral
   
   '''
-  return robocaller("SSP_GetRawIntStatus", "IntStatus", SSPx, RawIntType)
+  return RoboCaller().call("SSP_GetRawIntStatus", "IntStatus", SSPx, RawIntType)
 
 def SSP_Init(SSPx, SSP_ConfigStruct):
   '''Initializes the SSPx peripheral according to the specified parameters in 
@@ -285,7 +285,7 @@ def SSP_Init(SSPx, SSP_ConfigStruct):
                     configuration information for the specified SSP peripheral.
         
   '''
-  return robocaller("SSP_Init", "void", SSPx, SSP_ConfigStruct)
+  return RoboCaller().call("SSP_Init", "void", SSPx, SSP_ConfigStruct)
 
 def SSP_DMACmd(SSPx, DMAMode, NewState):
   '''Enable/Disable DMA function for SSP peripheral.
@@ -301,7 +301,7 @@ def SSP_DMACmd(SSPx, DMAMode, NewState):
             - DISABLE: Disable this function
         
   '''
-  return robocaller("SSP_DMACmd", "void", SSPx, DMAMode, NewState)
+  return RoboCaller().call("SSP_DMACmd", "void", SSPx, DMAMode, NewState)
 
 def SSP_GetDataSize(SSPx):
   '''Get data size bit selected.
@@ -316,7 +316,7 @@ def SSP_GetDataSize(SSPx):
           - SSP_DATABIT_16: 16 bit transfer
   
   '''
-  return robocaller("SSP_GetDataSize", "uint8_t", SSPx)
+  return RoboCaller().call("SSP_GetDataSize", "uint8_t", SSPx)
 
 def SSP_Cmd(SSPx, NewState):
   '''Enable or disable SSP peripheral's operation.
@@ -327,7 +327,7 @@ def SSP_Cmd(SSPx, NewState):
   NewState: New State of SSPx peripheral's operation
         
   '''
-  return robocaller("SSP_Cmd", "void", SSPx, NewState)
+  return RoboCaller().call("SSP_Cmd", "void", SSPx, NewState)
 
 def SSP_IntConfig(SSPx, IntType, NewState):
   '''Enable or disable specified interrupt type in SSP peripheral.
@@ -345,7 +345,7 @@ def SSP_IntConfig(SSPx, IntType, NewState):
             - DISABLE: Disable this interrupt type
   
   '''
-  return robocaller("SSP_IntConfig", "void", SSPx, IntType, NewState)
+  return RoboCaller().call("SSP_IntConfig", "void", SSPx, IntType, NewState)
 
 def SSP_SlaveOutputCmd(SSPx, NewState):
   '''Enable or disable Slave Output function in SSP peripheral.
@@ -361,7 +361,7 @@ def SSP_SlaveOutputCmd(SSPx, NewState):
               driving the transmit data line (MISO)
         
   '''
-  return robocaller("SSP_SlaveOutputCmd", "void", SSPx, NewState)
+  return RoboCaller().call("SSP_SlaveOutputCmd", "void", SSPx, NewState)
 
 def SSP_ClearIntPending(SSPx, IntType):
   '''Clear specified interrupt pending in SSP peripheral.
@@ -376,7 +376,7 @@ def SSP_ClearIntPending(SSPx, IntType):
               read for a timeout period" interrupt.
         
   '''
-  return robocaller("SSP_ClearIntPending", "void", SSPx, IntType)
+  return RoboCaller().call("SSP_ClearIntPending", "void", SSPx, IntType)
 
 def SSP_ReadWrite(SSPx, dataCfg, xfType):
   '''SSP Read write data function.
@@ -395,7 +395,7 @@ def SSP_ReadWrite(SSPx, dataCfg, xfType):
           mode, always return (0). Return (-1) if error.
   
   '''
-  return robocaller("SSP_ReadWrite", "int32_t", SSPx, dataCfg, xfType)
+  return RoboCaller().call("SSP_ReadWrite", "int32_t", SSPx, dataCfg, xfType)
 
 def SSP_DeInit(SSPx):
   '''De-initializes the SSPx peripheral registers to their default reset values.
@@ -405,7 +405,7 @@ def SSP_DeInit(SSPx):
         - LPC_SSP1: SSP1 peripheral
         
   '''
-  return robocaller("SSP_DeInit", "void", SSPx)
+  return RoboCaller().call("SSP_DeInit", "void", SSPx)
 
 def SSP_GetStatus(SSPx, FlagType):
   '''Checks whether the specified SSP status flag is set or not.
@@ -422,7 +422,7 @@ def SSP_GetStatus(SSPx, FlagType):
   return: New State of specified SSP status flag
         
   '''
-  return robocaller("SSP_GetStatus", "FlagStatus", SSPx, FlagType)
+  return RoboCaller().call("SSP_GetStatus", "FlagStatus", SSPx, FlagType)
 
 def SSP_GetRawIntStatusReg(SSPx):
   '''Get Raw Interrupt Status register.
@@ -433,7 +433,7 @@ def SSP_GetRawIntStatusReg(SSPx):
   return: Raw Interrupt Status (RIS) register value
         
   '''
-  return robocaller("SSP_GetRawIntStatusReg", "uint32_t", SSPx)
+  return RoboCaller().call("SSP_GetRawIntStatusReg", "uint32_t", SSPx)
 
 def SSP_ConfigStructInit(SSP_InitStruct):
   '''Fills each SSP_InitStruct member with its default value.
@@ -448,7 +448,7 @@ def SSP_ConfigStructInit(SSP_InitStruct):
   SSP_InitStruct:  Pointer to a SSP_CFG_Type structure which will be initialized
   
   '''
-  return robocaller("SSP_ConfigStructInit", "void", SSP_InitStruct)
+  return RoboCaller().call("SSP_ConfigStructInit", "void", SSP_InitStruct)
 
 def SSP_ReceiveData(SSPx):
   '''Receive a single word from SSPx peripheral.
@@ -459,7 +459,7 @@ def SSP_ReceiveData(SSPx):
   return: Data received (16-bit long)
         
   '''
-  return robocaller("SSP_ReceiveData", "uint16_t", SSPx)
+  return RoboCaller().call("SSP_ReceiveData", "uint16_t", SSPx)
 
 def SSP_GetIntStatus(SSPx, IntType):
   '''Check whether the specified interrupt status flag is set or not.
@@ -477,7 +477,7 @@ def SSP_GetIntStatus(SSPx, IntType):
   return: New State of specified interrupt status flag in SSP peripheral
         
   '''
-  return robocaller("SSP_GetIntStatus", "IntStatus", SSPx, IntType)
+  return RoboCaller().call("SSP_GetIntStatus", "IntStatus", SSPx, IntType)
 
 def SSP_SendData(SSPx, Data):
   '''Transmit a single word or byte through SSPx peripheral.
@@ -489,4 +489,4 @@ def SSP_SendData(SSPx, Data):
         number configuration)
   
   '''
-  return robocaller("SSP_SendData", "void", SSPx, Data)
+  return RoboCaller().call("SSP_SendData", "void", SSPx, Data)

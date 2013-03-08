@@ -2,7 +2,7 @@
 CMSIS-Compliant Standard Peripheral Firmware Driver Library documentation.
 """
 
-from internals import robocaller, cstruct
+from internals import RoboCaller, cstruct
 
 __author__ =      "Neil MacMunn"
 __credits__ =     ["Neil MacMunn", "NXP MCU SW Application Team"]
@@ -151,7 +151,7 @@ def PINSEL_SetI2C0Pins(i2cPinMode, filterSlewRateEnable):
                         DISABLE: Disable filter and slew rate.
     
   '''
-  return robocaller("PINSEL_SetI2C0Pins", "void", i2cPinMode, filterSlewRateEnable)
+  return RoboCaller().call("PINSEL_SetI2C0Pins", "void", i2cPinMode, filterSlewRateEnable)
 
 def PINSEL_ConfigPin(PinCfg):
   '''Configure Pin corresponding to specified parameters passed in the PinCfg.
@@ -160,7 +160,7 @@ def PINSEL_ConfigPin(PinCfg):
           information for the specified pin.
   
   '''
-  return robocaller("PINSEL_ConfigPin", "void", PinCfg)
+  return RoboCaller().call("PINSEL_ConfigPin", "void", PinCfg)
 
 def PINSEL_ConfigTraceFunc(NewState):
   '''Configure trace function.
@@ -170,4 +170,4 @@ def PINSEL_ConfigTraceFunc(NewState):
             DISABLE : Disable Trace Function
   
   '''
-  return robocaller("PINSEL_ConfigTraceFunc", "void", NewState)
+  return RoboCaller().call("PINSEL_ConfigTraceFunc", "void", NewState)

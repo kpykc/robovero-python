@@ -2,7 +2,7 @@
 CMSIS-Compliant Standard Peripheral Firmware Driver Library documentation.
 """
 
-from internals import robocaller, cstruct
+from internals import RoboCaller, cstruct
 
 __author__ =      "Neil MacMunn"
 __credits__ =     ["Neil MacMunn", "NXP MCU SW Application Team"]
@@ -200,7 +200,7 @@ def ADC_ChannelGetStatus(ADCx, channel, StatusType):
   return: SET / RESET
   
   '''
-  return robocaller("ADC_ChannelGetStatus", "FlagStatus", ADCx, channel, StatusType)
+  return RoboCaller().call("ADC_ChannelGetStatus", "FlagStatus", ADCx, channel, StatusType)
 
 def ADC_GlobalGetData(ADCx):
   '''Get ADC Data from AD Global register.
@@ -209,7 +209,7 @@ def ADC_GlobalGetData(ADCx):
   return: Result of conversion
   
   '''
-  return robocaller("ADC_GlobalGetData", "uint32_t", ADCx)
+  return RoboCaller().call("ADC_GlobalGetData", "uint32_t", ADCx)
 
 def ADC_Init(ADCx, rate):
   '''Initialize ADC.
@@ -218,7 +218,7 @@ def ADC_Init(ADCx, rate):
   rate: ADC conversion rate, should be <=200KHz
   
   '''
-  return robocaller("ADC_Init", "void", ADCx, rate)
+  return RoboCaller().call("ADC_Init", "void", ADCx, rate)
 
 def ADC_ChannelCmd(ADCx, Channel, NewState):
   '''Enable/Disable ADC channel number.
@@ -228,7 +228,7 @@ def ADC_ChannelCmd(ADCx, Channel, NewState):
   NewState: Enable or Disable
   
   '''
-  return robocaller("ADC_ChannelCmd", "void", ADCx, Channel, NewState)
+  return RoboCaller().call("ADC_ChannelCmd", "void", ADCx, Channel, NewState)
 
 def ADC_GlobalGetStatus(ADCx, StatusType):
   '''Get ADC Chanel status from AD global data register.
@@ -238,7 +238,7 @@ def ADC_GlobalGetStatus(ADCx, StatusType):
   return: SET / RESET
   
   '''
-  return robocaller("ADC_GlobalGetStatus", "FlagStatus", ADCx, StatusType)
+  return RoboCaller().call("ADC_GlobalGetStatus", "FlagStatus", ADCx, StatusType)
 
 def ADC_EdgeStartConfig(ADCx, EdgeOption):
   ''' Set Edge start configuration.
@@ -247,7 +247,7 @@ def ADC_EdgeStartConfig(ADCx, EdgeOption):
   EdgeOption: ADC_START_ON_RISING and ADC_START_ON_FALLING
   
   '''
-  return robocaller("ADC_EdgeStartConfig", "void", ADCx, EdgeOption)
+  return RoboCaller().call("ADC_EdgeStartConfig", "void", ADCx, EdgeOption)
 
 def ADC_ChannelGetData(ADCx, channel):
   '''Get ADC result.
@@ -257,7 +257,7 @@ def ADC_ChannelGetData(ADCx, channel):
   return: Data conversion
   
   '''
-  return robocaller("ADC_ChannelGetData", "uint16_t", ADCx, channel)
+  return RoboCaller().call("ADC_ChannelGetData", "uint16_t", ADCx, channel)
 
 def ADC_DeInit(ADCx):
   '''Close ADC.
@@ -265,7 +265,7 @@ def ADC_DeInit(ADCx):
   ADCx: pointer to LPC_ADC_TypeDef, should be: LPC_ADC
   
   '''
-  return robocaller("ADC_DeInit", "void", ADCx)
+  return RoboCaller().call("ADC_DeInit", "void", ADCx)
 
 def ADC_BurstCmd(ADCx, NewState):
   '''ADC Burst mode setting.
@@ -274,7 +274,7 @@ def ADC_BurstCmd(ADCx, NewState):
   NewState:  0:Reset Burst mode, 1:Set Burst mode
   
   '''
-  return robocaller("ADC_BurstCmd", "void", ADCx, NewState)
+  return RoboCaller().call("ADC_BurstCmd", "void", ADCx, NewState)
 
 def ADC_PowerdownCmd(ADCx, NewState):
   '''Set AD conversion in power mode.
@@ -283,7 +283,7 @@ def ADC_PowerdownCmd(ADCx, NewState):
   NewState: 1: AD converter is optional, 0: AD Converter is in power down mode
   
   '''
-  return robocaller("ADC_PowerdownCmd", "void", ADCx, NewState)
+  return RoboCaller().call("ADC_PowerdownCmd", "void", ADCx, NewState)
 
 def ADC_StartCmd(ADCx, start_mode):
   '''Set start mode for ADC
@@ -292,7 +292,7 @@ def ADC_StartCmd(ADCx, start_mode):
   start_mode: one of modes in 'ADC_START_OPT' class
   
   '''
-  return robocaller("ADC_StartCmd", "void", ADCx, start_mode)
+  return RoboCaller().call("ADC_StartCmd", "void", ADCx, start_mode)
 
 def ADC_IntConfig(ADCx, IntType, NewState):
   '''ADC interrupt configuration.
@@ -302,5 +302,5 @@ def ADC_IntConfig(ADCx, IntType, NewState):
   NewState: SET : enable ADC interrupt, RESET: disable ADC interrupt
   
   '''
-  return robocaller("ADC_IntConfig", "void", ADCx, IntType, NewState)
+  return RoboCaller().call("ADC_IntConfig", "void", ADCx, IntType, NewState)
 

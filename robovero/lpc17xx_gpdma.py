@@ -2,7 +2,7 @@
 CMSIS-Compliant Standard Peripheral Firmware Driver Library documentation.
 """
 
-from internals import robocaller, cstruct
+from internals import RoboCaller, cstruct
 
 __author__ =      "Neil MacMunn"
 __credits__ =     ["Neil MacMunn", "NXP MCU SW Application Team"]
@@ -432,7 +432,7 @@ class GPDMA_Status_Type:
 def GPDMA_Init():
   '''Initialize GPDMA controller.
   '''
-  return robocaller("GPDMA_Init", "void", )
+  return RoboCaller().call("GPDMA_Init", "void", )
 
 def GPDMA_ChannelCmd(channelNum, NewState):
   '''Enable/Disable DMA channel.
@@ -443,7 +443,7 @@ def GPDMA_ChannelCmd(channelNum, NewState):
             DISABLE
             
   '''
-  return robocaller("GPDMA_ChannelCmd", "void", channelNum, NewState)
+  return RoboCaller().call("GPDMA_ChannelCmd", "void", channelNum, NewState)
 
 def GPDMA_Setup(GPDMAChannelConfig):
   '''Setup GPDMA channel peripheral according to the specified parameters in the
@@ -456,7 +456,7 @@ def GPDMA_Setup(GPDMAChannelConfig):
           SUCCESS if channel is configured successfully
           
   '''
-  return robocaller("GPDMA_Setup", "Status", GPDMAChannelConfig)
+  return RoboCaller().call("GPDMA_Setup", "Status", GPDMAChannelConfig)
 
 def GPDMA_IntGetStatus(stat_type, channel):
   '''Check if corresponding channel does have an active interrupt request or
@@ -475,7 +475,7 @@ def GPDMA_IntGetStatus(stat_type, channel):
           RESET: the corresponding channel does have an active interrupt request
           
   '''
-  return robocaller("GPDMA_IntGetStatus", "IntStatus", stat_type, channel)
+  return RoboCaller().call("GPDMA_IntGetStatus", "IntStatus", stat_type, channel)
 
 def GPDMA_ClearIntPending(int_type, channel):
   '''Clear one or more interrupt requests on DMA channels.
@@ -485,4 +485,4 @@ def GPDMA_ClearIntPending(int_type, channel):
   channel:  GPDMA channel, should be in range from 0 to 7
   
   '''
-  return robocaller("GPDMA_ClearIntPending", "void", int_type, channel)
+  return RoboCaller().call("GPDMA_ClearIntPending", "void", int_type, channel)

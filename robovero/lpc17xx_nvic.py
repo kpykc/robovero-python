@@ -3,7 +3,7 @@ implementation details in LPC17xx CMSIS-Compliant Standard Peripheral Firmware
 Driver Library documentation.
 """
 
-from internals import robocaller, cstruct
+from internals import RoboCaller, cstruct
 
 __author__ =      "Neil MacMunn"
 __credits__ =     ["Neil MacMunn", "NXP MCU SW Application Team"]
@@ -19,7 +19,7 @@ def NVIC_SetVTOR(offset):
   offset: Offset value
   
   '''
-  return robocaller("NVIC_SetVTOR", "void", offset)
+  return RoboCaller().call("NVIC_SetVTOR", "void", offset)
 
 def NVIC_SCBDeInit():
   '''De-initializes the SCB peripheral registers to their default reset values.
@@ -37,7 +37,7 @@ def NVIC_SCBDeInit():
   - Debug Fault Status Register
   
   '''
-  return robocaller("NVIC_SCBDeInit", "void")
+  return RoboCaller().call("NVIC_SCBDeInit", "void")
 
 def NVIC_DeInit():
   '''De-initializes the NVIC peripheral registers to their default reset values.
@@ -48,4 +48,4 @@ def NVIC_DeInit():
   - Clear all Interrupt Priorities (32 IRQ interrupt source that matched with LPC17xx)
   
   '''
-  return robocaller("NVIC_DeInit", "void")
+  return RoboCaller().call("NVIC_DeInit", "void")

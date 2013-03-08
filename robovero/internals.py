@@ -47,48 +47,59 @@ def isr(IRQn):
     else:
       robovero.debug.write("[%f] INTERRUPT: unhandled!" % (time.time() - robovero.start_time))
       return
-    robocaller("NVIC_ClearPendingIRQ", "void", IRQn)
-    robocaller("NVIC_EnableIRQ", "void", IRQn)
+    RoboCaller().call("NVIC_ClearPendingIRQ", "void", IRQn)
+    RoboCaller().call("NVIC_EnableIRQ", "void", IRQn)
 
-def robocaller(function, ret_type, *args):
+
+class RoboCaller:
   """Serialize a function and it's arguments and send to device.
   """
-
-  global robovero
-  with robovero.lock:
-
-    # Check if index is in dictionary, if not, add it to dictionary
-    # Debugging log will only contain indices and not the function name
-    # Comment out to restore to normal debug log
-
-    if function not in robovero.indices:
-      search_string = "search " + function + "\r\n"
-      robovero.debug.write("[%f] ADD TO DICTIONARY: %s\r\n" % (time.time() - robovero.start_time, function))
-      robovero.serial.write(search_string)
-      ret = getReturn()
-      robovero.debug.write("[%f] INDEX: %s\r\n" % (time.time() - robovero.start_time, ret))
-      robovero.indices[function] = ret
-    function = robovero.indices[function]
-
-    for arg in args:
-      if type(arg) == list:
-        for sub_arg in arg:
-          function += " %X" % (sub_arg)
+  _init_already = False
+  def __init__(self):
+    if not RoboCaller._init_already:
+      # These functions get called once when a peripheral driver module is
+      # imported. A serial connection to the device is established.
+      global robovero 
+      robovero = Robovero()
+      robovero.startListening()
+      atexit.register(resetConfig)
+      RoboCaller._init_already = True
+  
+  def call(self, function, ret_type, *args):
+    global robovero
+    with robovero.lock:
+      # Check if index is in dictionary, if not, add it to dictionary
+      # Debugging log will only contain indices and not the function name
+      # Comment out to restore to normal debug log
+  
+      if function not in robovero.indices:
+        search_string = "search " + function + "\r\n"
+        robovero.debug.write("[%f] ADD TO DICTIONARY: %s\r\n" % (time.time() - robovero.start_time, function))
+        robovero.serial.write(search_string)
+        ret = getReturn()
+        robovero.debug.write("[%f] INDEX: %s\r\n" % (time.time() - robovero.start_time, ret))
+        robovero.indices[function] = ret
+      function = robovero.indices[function]
+  
+      for arg in args:
+        if type(arg) == list:
+          for sub_arg in arg:
+            function += " %X" % (sub_arg)
+        else:
+          function += " %X" % (arg)
+      function += "\r\n"
+      robovero.debug.write("[%f] REQUEST: %s" % (time.time() - robovero.start_time, function))
+      robovero.serial.write(function)
+      if ret_type != "void":
+        ret = getReturn()
+        robovero.debug.write("[%f] RESPONSE: %s\r\n" % (time.time() - robovero.start_time, ret))
+        if " " in ret:
+          ret = [int(x, 16) for x in ret.split()]
+        else:
+          ret = int(ret, 16)
+        return ret
       else:
-        function += " %X" % (arg)
-    function += "\r\n"
-    robovero.debug.write("[%f] REQUEST: %s" % (time.time() - robovero.start_time, function))
-    robovero.serial.write(function)
-    if ret_type != "void":
-      ret = getReturn()
-      robovero.debug.write("[%f] RESPONSE: %s\r\n" % (time.time() - robovero.start_time, ret))
-      if " " in ret:
-        ret = [int(x, 16) for x in ret.split()]
-      else:
-        ret = int(ret, 16)
-      return ret
-    else:
-      return None
+        return None
 
 ########################################################################
 # These functions are for internal use and not part of the NXP
@@ -98,34 +109,34 @@ def robocaller(function, ret_type, *args):
 def getIndex(fcn):
   """Get the table index of a function.
   """
-  return robocaller("search %s" % (fcn), "int")
+  return RoboCaller().call("search %s" % (fcn), "int")
 
 def getStatus():
   """Get the error status of the previous function call.
   """
-  return robocaller("return", "int")
+  return RoboCaller().call("return", "int")
 
 def malloc(size):
   """Allocate memory from the heap.
   """
-  return robocaller("malloc", "int", size)
+  return RoboCaller().call("malloc", "int", size)
 
 def free(ptr):
   """Free previously allocated memory.
   """
-  return robocaller("free", "void", ptr)
+  return RoboCaller().call("free", "void", ptr)
 
 def deref(ptr, size, val=None):
   """Dereference a pointer.
   """
   if val:
-    return robocaller("deref", "void", ptr, size, val)
+    return RoboCaller().call("deref", "void", ptr, size, val)
   else:
-    return robocaller("deref", "int", ptr, size)
+    return RoboCaller().call("deref", "int", ptr, size)
 
 def resetConfig():
   """Simulate a reset condition without losing the usb connection."""
-  return robocaller("resetConfig", "void")
+  return RoboCaller().call("resetConfig", "void")
 
 class cstruct(object):
   """A parent class for all structs used by the peripheral library.
@@ -133,7 +144,7 @@ class cstruct(object):
   def __init__(self, **kwargs):
     """Allocate some memory on the device for the struct.
     """
-    ptr = robocaller("%s_malloc" % self.__class__.__name__, "int")
+    ptr = RoboCaller().call("%s_malloc" % self.__class__.__name__, "int")
     if ptr == 0:
       self.__del__()
       return
@@ -144,7 +155,7 @@ class cstruct(object):
   def __getattr__(self, member):
     """Get the value of a struct member.
     """
-    ret = robocaller("%s_%s" % (self.__class__.__name__, member), "int",
+    ret = RoboCaller().call("%s_%s" % (self.__class__.__name__, member), "int",
                       self.__dict__["ptr"])
     if getStatus():
       print "ERROR: %s not a member of %s" % (member, self.__class__.__name__)
@@ -154,7 +165,7 @@ class cstruct(object):
   def __setattr__(self, member, value):
     """Set the value of a struct member.
     """
-    robocaller("%s_%s" % (self.__class__.__name__, member), "void",
+    RoboCaller().call("%s_%s" % (self.__class__.__name__, member), "void",
                 self.__dict__["ptr"], value)
     if getStatus():
       print "ERROR: %s not a member of %s" % (member, self.__class__.__name__)
@@ -255,8 +266,3 @@ class Robovero(object):
     except AttributeError:  
       pass
       
-  # These functions get called once when a peripheral driver module is
-  # imported. A serial connection to the device is established.
-  robovero = Robovero()
-  robovero.startListening()
-  atexit.register(resetConfig)

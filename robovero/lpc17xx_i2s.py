@@ -2,7 +2,7 @@
 CMSIS-Compliant Standard Peripheral Firmware Driver Library documentation.
 """
 
-from internals import robocaller, cstruct
+from internals import RoboCaller, cstruct
 
 __author__ =      "Neil MacMunn"
 __credits__ =     ["Neil MacMunn", "NXP MCU SW Application Team"]
@@ -372,7 +372,7 @@ def I2S_GetLevel(I2Sx, TRMode):
   return: current level of Transmit/Receive Buffer
   
   '''
-  return robocaller("I2S_GetLevel", "uint8_t", I2Sx, TRMode)
+  return RoboCaller().call("I2S_GetLevel", "uint8_t", I2Sx, TRMode)
 
 def I2S_GetIRQDepth(I2Sx, TRMode):
   '''Get I2S interrupt depth.
@@ -384,7 +384,7 @@ def I2S_GetIRQDepth(I2Sx, TRMode):
   return: depth of FIFO level on which to create an irq request
   
   '''
-  return robocaller("I2S_GetIRQDepth", "uint8_t", I2Sx, TRMode)
+  return RoboCaller().call("I2S_GetIRQDepth", "uint8_t", I2Sx, TRMode)
 
 def I2S_Mute(I2Sx, TRMode):
   '''I2S Mute.
@@ -395,7 +395,7 @@ def I2S_Mute(I2Sx, TRMode):
           I2S_RX_MODE = 1: receive mode 
   
   '''
-  return robocaller("I2S_Mute", "void", I2Sx, TRMode)
+  return RoboCaller().call("I2S_Mute", "void", I2Sx, TRMode)
 
 def I2S_Start(I2Sx):
   '''Clear all STOP,RESET and MUTE bit, ready to operate.
@@ -403,7 +403,7 @@ def I2S_Start(I2Sx):
   I2Sx: I2S peripheral selected, should be: LPC_I2S
   
   '''
-  return robocaller("I2S_Start", "void", I2Sx)
+  return RoboCaller().call("I2S_Start", "void", I2Sx)
 
 def I2S_Pause(I2Sx, TRMode):
   '''I2S Pause.
@@ -414,7 +414,7 @@ def I2S_Pause(I2Sx, TRMode):
           I2S_RX_MODE = 1: receive mode 
   
   '''
-  return robocaller("I2S_Pause", "void", I2Sx, TRMode)
+  return RoboCaller().call("I2S_Pause", "void", I2Sx, TRMode)
 
 def I2S_Init(I2Sx):
   '''Initialize I2S.
@@ -422,7 +422,7 @@ def I2S_Init(I2Sx):
   I2Sx: I2S peripheral selected, should be: LPC_I2S
 
   '''
-  return robocaller("I2S_Init", "void", I2Sx)
+  return RoboCaller().call("I2S_Init", "void", I2Sx)
 
 def I2S_SetBitRate(I2Sx, bitrate, TRMode):
   '''I2S set bitrate.
@@ -434,7 +434,7 @@ def I2S_SetBitRate(I2Sx, bitrate, TRMode):
           I2S_RX_MODE = 1: receive mode 
   
   '''
-  return robocaller("I2S_SetBitRate", "void", I2Sx, bitrate, TRMode)
+  return RoboCaller().call("I2S_SetBitRate", "void", I2Sx, bitrate, TRMode)
 
 def I2S_FreqConfig(I2Sx, Freq, TRMode):
   '''Set frequency for I2S.
@@ -448,7 +448,7 @@ def I2S_FreqConfig(I2Sx, Freq, TRMode):
   return: Status: ERROR or SUCCESS
   
   '''
-  return robocaller("I2S_FreqConfig", "Status", I2Sx, Freq, TRMode)
+  return RoboCaller().call("I2S_FreqConfig", "Status", I2Sx, Freq, TRMode)
 
 def I2S_DMACmd(I2Sx, DMAIndex, TRMode, NewState):
   '''Enable/Disable DMA operation for I2S.
@@ -465,7 +465,7 @@ def I2S_DMACmd(I2Sx, DMAIndex, TRMode, NewState):
             DISABLE
   
   '''
-  return robocaller("I2S_DMACmd", "void", I2Sx, DMAIndex, TRMode, NewState)
+  return RoboCaller().call("I2S_DMACmd", "void", I2Sx, DMAIndex, TRMode, NewState)
 
 def I2S_Send(I2Sx, BufferData):
   '''I2S Send data.
@@ -474,7 +474,7 @@ def I2S_Send(I2Sx, BufferData):
   BufferData: pointer to uint32_t is the data will be send
   
   '''
-  return robocaller("I2S_Send", "void", I2Sx, BufferData)
+  return RoboCaller().call("I2S_Send", "void", I2Sx, BufferData)
 
 def I2S_Receive(I2Sx):
   '''I2S Receive Data.
@@ -483,7 +483,7 @@ def I2S_Receive(I2Sx):
   return: received value
   
   '''
-  return robocaller("I2S_Receive", "uint32_t", I2Sx)
+  return RoboCaller().call("I2S_Receive", "uint32_t", I2Sx)
 
 def I2S_DeInit(I2Sx):
   '''Deinitialize I2S transmit or receive.
@@ -491,7 +491,7 @@ def I2S_DeInit(I2Sx):
   I2Sx: I2S peripheral selected, should be: LPC_I2S
 
   '''
-  return robocaller("I2S_DeInit", "void", I2Sx)
+  return RoboCaller().call("I2S_DeInit", "void", I2Sx)
 
 def I2S_Config(I2Sx, TRMode, ConfigStruct):
   '''Configure I2S.
@@ -503,7 +503,7 @@ def I2S_Config(I2Sx, TRMode, ConfigStruct):
   ConfigStruct: pointer to I2S_CFG_Type structure which will be initialized
   
   '''
-  return robocaller("I2S_Config", "void", I2Sx, TRMode, ConfigStruct)
+  return RoboCaller().call("I2S_Config", "void", I2Sx, TRMode, ConfigStruct)
 
 def I2S_IRQCmd(I2Sx, TRMode, NewState):
   '''Enable/Disable IRQ for I2S.
@@ -515,7 +515,7 @@ def I2S_IRQCmd(I2Sx, TRMode, NewState):
   NewState: ENABLE or DISABLE
   
   '''
-  return robocaller("I2S_IRQCmd", "void", I2Sx, TRMode, NewState)
+  return RoboCaller().call("I2S_IRQCmd", "void", I2Sx, TRMode, NewState)
 
 def I2S_IRQConfig(I2Sx, TRMode, level):
   '''Configure IRQ for I2S.
@@ -527,7 +527,7 @@ def I2S_IRQConfig(I2Sx, TRMode, level):
   level:  the FIFO level that triggers IRQ request
   
   '''
-  return robocaller("I2S_IRQConfig", "void", I2Sx, TRMode, level)
+  return RoboCaller().call("I2S_IRQConfig", "void", I2Sx, TRMode, level)
 
 def I2S_Stop(I2Sx, TRMode):
   '''I2S Stop.
@@ -538,7 +538,7 @@ def I2S_Stop(I2Sx, TRMode):
           I2S_RX_MODE = 1: receive mode 
   
   '''
-  return robocaller("I2S_Stop", "void", I2Sx, TRMode)
+  return RoboCaller().call("I2S_Stop", "void", I2Sx, TRMode)
 
 def I2S_DMAConfig(I2Sx, DMAConfig, TRMode):
   '''Configure DMA operation for I2S.
@@ -550,7 +550,7 @@ def I2S_DMAConfig(I2Sx, DMAConfig, TRMode):
           I2S_RX_MODE = 1: receive mode 
   
   '''
-  return robocaller("I2S_DMAConfig", "void", I2Sx, DMAConfig, TRMode)
+  return RoboCaller().call("I2S_DMAConfig", "void", I2Sx, DMAConfig, TRMode)
 
 def I2S_ModeConfig(I2Sx, ModeConfig, TRMode):
   '''Configuration operating mode for I2S.
@@ -562,7 +562,7 @@ def I2S_ModeConfig(I2Sx, ModeConfig, TRMode):
           I2S_RX_MODE = 1: receive mode 
   
   '''
-  return robocaller("I2S_ModeConfig", "void", I2Sx, ModeConfig, TRMode)
+  return RoboCaller().call("I2S_ModeConfig", "void", I2Sx, ModeConfig, TRMode)
 
 def I2S_GetIRQStatus(I2Sx, TRMode):
   '''Get I2S interrupt status.
@@ -574,4 +574,4 @@ def I2S_GetIRQStatus(I2Sx, TRMode):
   return: FunctionalState should be: ENABLE or DISABLE
   
   '''
-  return robocaller("I2S_GetIRQStatus", "FunctionalState", I2Sx, TRMode)
+  return RoboCaller().call("I2S_GetIRQStatus", "FunctionalState", I2Sx, TRMode)
