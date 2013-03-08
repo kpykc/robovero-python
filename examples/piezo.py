@@ -22,25 +22,26 @@ def playSelection(event):
   else:
     noTone(PWM1)
 
-roboveroConfig()
-
-# draw a listbox
-root = Tk()
-root.title("Tone Generator")
-
-# populate the list with available frequencies
-tone_listbox = Listbox(root)
-
-tone_listbox.insert(END, "OFF")
-for freq in range(100, 1000, 100):
-   tone_listbox.insert(END, "%d Hz" % freq)
-tone_listbox.pack()
-
-# set the callback function for left button clicks
-tone_listbox.bind('<ButtonRelease-1>', playSelection)
-
-root.mainloop()
-
-
-
-
+def run():
+  roboveroConfig()
+  
+  # draw a listbox
+  root = Tk()
+  root.title("Tone Generator")
+  
+  # populate the list with available frequencies
+  tone_listbox = Listbox(root)
+  
+  tone_listbox.insert(END, "OFF")
+  for freq in range(100, 1000, 100):
+     tone_listbox.insert(END, "%d Hz" % freq)
+  tone_listbox.pack()
+  
+  # set the callback function for left button clicks
+  tone_listbox.bind('<ButtonRelease-1>', playSelection)
+  
+  root.mainloop()
+  
+  
+  
+  

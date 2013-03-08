@@ -14,19 +14,20 @@ __license__ = 		"BSD 2-Clause"
 __version__ =			"0.1"
 
 
-roboveroConfig()
-
-RXMsg = CAN_MSG_Type()
-RXMsg.format = 0x00
-RXMsg.id = 0x00
-RXMsg.len = 0x00
-RXMsg.type = 0x00
-
-CAN_Init(LPC_CAN1, 100000)
-CAN_SetAFMode(LPC_CANAF, CAN_AFMODE_Type.CAN_AccBP)
-
-
-while True:
-  if CAN_ReceiveMsg(LPC_CAN1, RXMsg.ptr):
-		print RXMsg.dataA, RXMsg.dataB
-  time.sleep(0.1)
+def run():
+	roboveroConfig()
+	
+	RXMsg = CAN_MSG_Type()
+	RXMsg.format = 0x00
+	RXMsg.id = 0x00
+	RXMsg.len = 0x00
+	RXMsg.type = 0x00
+	
+	CAN_Init(LPC_CAN1, 100000)
+	CAN_SetAFMode(LPC_CANAF, CAN_AFMODE_Type.CAN_AccBP)
+	
+	
+	while True:
+	  if CAN_ReceiveMsg(LPC_CAN1, RXMsg.ptr):
+			print RXMsg.dataA, RXMsg.dataB
+	  time.sleep(0.1)

@@ -56,14 +56,15 @@ def initPWM():
 	PWM_CounterCmd(LPC_PWM1, FunctionalState.ENABLE)
 	PWM_Cmd(LPC_PWM1, FunctionalState.ENABLE)
 
-# Entry Point
-roboveroConfig()
-initPWM()
-
-while True:
-	match_value = getServoAngle()
-	if match_value:
-		PWM_MatchUpdate(LPC_PWM1, 1, match_value, PWM_MATCH_UPDATE_OPT.PWM_MATCH_UPDATE_NOW)
-
+def run():
+	# Entry Point
+	roboveroConfig()
+	initPWM()
+	
+	while True:
+		match_value = getServoAngle()
+		if match_value:
+			PWM_MatchUpdate(LPC_PWM1, 1, match_value, PWM_MATCH_UPDATE_OPT.PWM_MATCH_UPDATE_NOW)
+	
 
 

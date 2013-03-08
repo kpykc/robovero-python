@@ -107,27 +107,28 @@ for j in range(NPOINTS):
   print j, ((psi_Input[2*j] + 2**15) % 2**16 - 2**15)/2.**14, ((psi_Input[2*j+1] + 2**15) % 2**16 - 2**15)/2.**14, ((psi_Output[2*j] + 2**15) % 2**16 - 2**15)/2.**14, ((psi_Output[(2*j)+1] + 2**15) % 2**16 - 2**15)/2.**14
 """
 
-# PID
-print '\nPID:'
-# Be sure to avoid overflow. All values are short int (-32768 to 32768)
-pS_Coeff=tS_pid_Coeff()
-
-pS_Coeff.Kp = 10
-pS_Coeff.Ki = 1
-pS_Coeff.Kd = 2
-pS_Coeff.IntegratedError = 0
-pS_Coeff.LastError = 0
-
-target = 1000
-current = 2000
-
-print 'Target Current Speed'
-print target, current
-
-for i in range(50):
-  si_Error = current-target
-  newSpeed = ((vF_dspl_pid(si_Error,pS_Coeff.ptr) + 2**15) % 2**16 - 2**15) #Convert to signed
-  print target, current, newSpeed
-  current = (newSpeed * -0.05) + current
+def run():
+  # PID
+  print '\nPID:'
+  # Be sure to avoid overflow. All values are short int (-32768 to 32768)
+  pS_Coeff=tS_pid_Coeff()
   
-exit()
+  pS_Coeff.Kp = 10
+  pS_Coeff.Ki = 1
+  pS_Coeff.Kd = 2
+  pS_Coeff.IntegratedError = 0
+  pS_Coeff.LastError = 0
+  
+  target = 1000
+  current = 2000
+  
+  print 'Target Current Speed'
+  print target, current
+  
+  for i in range(50):
+    si_Error = current-target
+    newSpeed = ((vF_dspl_pid(si_Error,pS_Coeff.ptr) + 2**15) % 2**16 - 2**15) #Convert to signed
+    print target, current, newSpeed
+    current = (newSpeed * -0.05) + current
+    
+  exit()

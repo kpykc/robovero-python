@@ -94,71 +94,73 @@ class I2CDevice(object):
     if self.readReg(register) != value:
       exit("I2C Verification Error")
     return None
-
-# Initialize pin select registers
-roboveroConfig()
-
-# enable IMU_EN
-pinMode(P1_0, OUTPUT)
-digitalWrite(P1_0, 0)
-
-# configure accelerometer
-accelerometer = I2CDevice(0x18)
-accelerometer.writeReg(accel_ctrl_reg1, 0x27)
-accelerometer.writeReg(accel_ctrl_reg4, 0x00) #
-
-# configure compass
-compass = I2CDevice(0x1E)
-compass.writeReg(compass_cra_reg, 0x18) # 75 Hz
-compass.writeReg(compass_crb_reg, 0x20) # +/- 1.3 gauss
-compass.writeReg(compass_mr_reg, 0) # continuous measurement mode
-
-# configure the gyro
-# from the L3G4200D Application Note:
-# 1. Write CTRL_REG2
-# 2. Write CTRL_REG3
-# 3. Write CTRL_REG4
-# 4. Write CTRL_REG6
-# 5. Write Reference
-# 6. Write INT1_THS
-# 7. Write INT1_DUR
-# 8. Write INT1_CFG
-# 9. Write CTRL_REG
-# 10. Write CTRL_REG
-gyro = I2CDevice(0x68)
-gyro.writeReg(gyro_ctrl_reg3, 0x08) # enable DRDY
-gyro.writeReg(gyro_ctrl_reg4, 0x80) # enable block data read mode
-gyro.writeReg(gyro_ctrl_reg1, 0x0F) # normal mode, enable all axes, 250dps
-
+  
 def twosComplement(low_byte, high_byte):
   """Unpack 16-bit twos complement representation of the result.
   """
   return (((low_byte + (high_byte << 8)) + 2**15) % 2**16 - 2**15)
 
-while True:
-  print "time: ",
-  print time.time()
-  acceldata = accelerometer.read6Reg(accel_x_low)
-  compassdata = compass.read6Reg(compass_x_high)
-  gyrodata = gyro.read6Reg(gyro_x_low)
-
-  print "a [x, y, z]: ",
-  print [
-    twosComplement(acceldata[0], acceldata[1]), #/16384.0,
-    twosComplement(acceldata[2], acceldata[3]), #/16384.0,
-    twosComplement(acceldata[4], acceldata[5]) #/16384.0
-  ]
-
-  print "c [x, y, z]: ",
-  print [
-    twosComplement(compassdata[1], compassdata[0]), #/1055.0,
-    twosComplement(compassdata[3], compassdata[2]), #/1055.0,
-    twosComplement(compassdata[5], compassdata[4]) #/950.0
-  ]
-
-  print "g [x, y, z]: ",
-  print [
-    twosComplement(gyrodata[0], gyrodata[1]),
-    twosComplement(gyrodata[2], gyrodata[3]),
-    twosComplement(gyrodata[4], gyrodata[5])
-  ]
+def run():
+  # Initialize pin select registers
+  roboveroConfig()
+  
+  # enable IMU_EN
+  pinMode(P1_0, OUTPUT)
+  digitalWrite(P1_0, 0)
+  
+  # configure accelerometer
+  accelerometer = I2CDevice(0x18)
+  accelerometer.writeReg(accel_ctrl_reg1, 0x27)
+  accelerometer.writeReg(accel_ctrl_reg4, 0x00) #
+  
+  # configure compass
+  compass = I2CDevice(0x1E)
+  compass.writeReg(compass_cra_reg, 0x18) # 75 Hz
+  compass.writeReg(compass_crb_reg, 0x20) # +/- 1.3 gauss
+  compass.writeReg(compass_mr_reg, 0) # continuous measurement mode
+  
+  # configure the gyro
+  # from the L3G4200D Application Note:
+  # 1. Write CTRL_REG2
+  # 2. Write CTRL_REG3
+  # 3. Write CTRL_REG4
+  # 4. Write CTRL_REG6
+  # 5. Write Reference
+  # 6. Write INT1_THS
+  # 7. Write INT1_DUR
+  # 8. Write INT1_CFG
+  # 9. Write CTRL_REG
+  # 10. Write CTRL_REG
+  gyro = I2CDevice(0x68)
+  gyro.writeReg(gyro_ctrl_reg3, 0x08) # enable DRDY
+  gyro.writeReg(gyro_ctrl_reg4, 0x80) # enable block data read mode
+  gyro.writeReg(gyro_ctrl_reg1, 0x0F) # normal mode, enable all axes, 250dps
+  
+  
+  while True:
+    print "time: ",
+    print time.time()
+    acceldata = accelerometer.read6Reg(accel_x_low)
+    compassdata = compass.read6Reg(compass_x_high)
+    gyrodata = gyro.read6Reg(gyro_x_low)
+  
+    print "a [x, y, z]: ",
+    print [
+      twosComplement(acceldata[0], acceldata[1]), #/16384.0,
+      twosComplement(acceldata[2], acceldata[3]), #/16384.0,
+      twosComplement(acceldata[4], acceldata[5]) #/16384.0
+    ]
+  
+    print "c [x, y, z]: ",
+    print [
+      twosComplement(compassdata[1], compassdata[0]), #/1055.0,
+      twosComplement(compassdata[3], compassdata[2]), #/1055.0,
+      twosComplement(compassdata[5], compassdata[4]) #/950.0
+    ]
+  
+    print "g [x, y, z]: ",
+    print [
+      twosComplement(gyrodata[0], gyrodata[1]),
+      twosComplement(gyrodata[2], gyrodata[3]),
+      twosComplement(gyrodata[4], gyrodata[5])
+    ]

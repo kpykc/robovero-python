@@ -34,36 +34,38 @@ def getMotorSpeed():
   match_value = speed * periodValue / 100
   return match_value
   
-roboveroConfig()
-
-MCPWM_Init(LPC_MCPWM)
-
-channelsetup = MCPWM_CHANNEL_CFG_Type()
   
-channelsetup.channelType = MCPWM_CHANNEL_EDGE_MODE
-channelsetup.channelPolarity = MCPWM_CHANNEL_PASSIVE_HI
-channelsetup.channelDeadtimeEnable = DISABLE
-channelsetup.channelDeadtimeValue = 0
-channelsetup.channelUpdateEnable = ENABLE
-channelsetup.channelTimercounterValue = 0
-channelsetup.channelPeriodValue = periodValue
-channelsetup.channelPulsewidthValue = 0
-
-MCPWM_ConfigChannel(LPC_MCPWM, 0, channelsetup.ptr)
-
-# Disable DC Mode
-MCPWM_DCMode(LPC_MCPWM, DISABLE, ENABLE, (0))
-
-# Disable AC Mode
-MCPWM_ACMode(LPC_MCPWM, DISABLE)
-
-MCPWM_Start(LPC_MCPWM, ENABLE, DISABLE, DISABLE)
-
-try:
-  while True:
-    channelsetup.channelPulsewidthValue = getMotorSpeed()
-    MCPWM_WriteToShadow(LPC_MCPWM, 0, channelsetup.ptr)
-except:
-  MCPWM_Stop(LPC_MCPWM, ENABLE, DISABLE, DISABLE)
-  print "you broke it"
-
+def run():  
+  roboveroConfig()
+  
+  MCPWM_Init(LPC_MCPWM)
+  
+  channelsetup = MCPWM_CHANNEL_CFG_Type()
+    
+  channelsetup.channelType = MCPWM_CHANNEL_EDGE_MODE
+  channelsetup.channelPolarity = MCPWM_CHANNEL_PASSIVE_HI
+  channelsetup.channelDeadtimeEnable = DISABLE
+  channelsetup.channelDeadtimeValue = 0
+  channelsetup.channelUpdateEnable = ENABLE
+  channelsetup.channelTimercounterValue = 0
+  channelsetup.channelPeriodValue = periodValue
+  channelsetup.channelPulsewidthValue = 0
+  
+  MCPWM_ConfigChannel(LPC_MCPWM, 0, channelsetup.ptr)
+  
+  # Disable DC Mode
+  MCPWM_DCMode(LPC_MCPWM, DISABLE, ENABLE, (0))
+  
+  # Disable AC Mode
+  MCPWM_ACMode(LPC_MCPWM, DISABLE)
+  
+  MCPWM_Start(LPC_MCPWM, ENABLE, DISABLE, DISABLE)
+  
+  try:
+    while True:
+      channelsetup.channelPulsewidthValue = getMotorSpeed()
+      MCPWM_WriteToShadow(LPC_MCPWM, 0, channelsetup.ptr)
+  except:
+    MCPWM_Stop(LPC_MCPWM, ENABLE, DISABLE, DISABLE)
+    print "you broke it"
+  

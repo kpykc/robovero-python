@@ -15,45 +15,47 @@ __copyright__ = 	"Copyright 2012, Gumstix Inc."
 __license__ = 		"BSD 2-Clause"
 __version__ =			"0.1"
 
-# no need for roboveroConfig()
 
-pinMode(P1_27, OUTPUT)
-pinMode(P3_25, OUTPUT)
-pinMode(P4_29, OUTPUT)
-pinMode(P4_28, OUTPUT)
-delay=0.00001
-
-try:
-  while True:
-    digitalWrite(P4_28, HIGH)    
+def run():
+  # no need for roboveroConfig()
+  
+  pinMode(P1_27, OUTPUT)
+  pinMode(P3_25, OUTPUT)
+  pinMode(P4_29, OUTPUT)
+  pinMode(P4_28, OUTPUT)
+  delay=0.00001
+  
+  try:
+    while True:
+      digitalWrite(P4_28, HIGH)    
+      digitalWrite(P1_27, LOW)
+      digitalWrite(P3_25, LOW)
+      digitalWrite(P4_29, LOW)
+      time.sleep(delay)
+      
+      digitalWrite(P1_27, HIGH)    
+      digitalWrite(P3_25, LOW)
+      digitalWrite(P4_29, LOW)
+      digitalWrite(P4_28, LOW)
+      time.sleep(delay)
+      
+      digitalWrite(P3_25, HIGH)
+      digitalWrite(P1_27, LOW)
+      digitalWrite(P4_29, LOW)
+      digitalWrite(P4_28, LOW)
+      time.sleep(delay)
+  
+      digitalWrite(P4_29, HIGH)    
+      digitalWrite(P1_27, LOW)
+      digitalWrite(P3_25, LOW)
+      digitalWrite(P4_28, LOW)
+      time.sleep(delay)
+      
+      print("ticktickticktick")
+  
+  except:
     digitalWrite(P1_27, LOW)
     digitalWrite(P3_25, LOW)
     digitalWrite(P4_29, LOW)
-    time.sleep(delay)
-    
-    digitalWrite(P1_27, HIGH)    
-    digitalWrite(P3_25, LOW)
-    digitalWrite(P4_29, LOW)
     digitalWrite(P4_28, LOW)
-    time.sleep(delay)
-    
-    digitalWrite(P3_25, HIGH)
-    digitalWrite(P1_27, LOW)
-    digitalWrite(P4_29, LOW)
-    digitalWrite(P4_28, LOW)
-    time.sleep(delay)
-
-    digitalWrite(P4_29, HIGH)    
-    digitalWrite(P1_27, LOW)
-    digitalWrite(P3_25, LOW)
-    digitalWrite(P4_28, LOW)
-    time.sleep(delay)
-    
-    print("ticktickticktick")
-
-except:
-  digitalWrite(P1_27, LOW)
-  digitalWrite(P3_25, LOW)
-  digitalWrite(P4_29, LOW)
-  digitalWrite(P4_28, LOW)
-  exit("goodbye")
+    exit("goodbye")

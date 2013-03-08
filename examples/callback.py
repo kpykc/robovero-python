@@ -33,27 +33,28 @@ def EINT0Callback():
 	digitalWrite(LED, state ^ 1)
 	EXTI_ClearEXTIFlag(0)
 
-# control the LED manually
-heartbeatOff()
-pinMode(LED, OUTPUT)
-
-# setup EINT0 on pin 2.10
-PinCfg = PINSEL_CFG_Type()
-PinCfg.Funcnum = 1
-PinCfg.OpenDrain = 0
-PinCfg.Pinmode = 0
-PinCfg.Pinnum = 10
-PinCfg.Portnum = 2
-PINSEL_ConfigPin(PinCfg.ptr)
-EXTI_Init()
-
-# register the callback
-registerCallback(IRQn_Type.EINT0_IRQn, EINT0Callback)
-
-# enable EINT0
-NVIC_EnableIRQ(IRQn_Type.EINT0_IRQn)
-
-# the callback does everything from here
-while True:
-	sleep(1)
-
+def run():
+  # control the LED manually
+  heartbeatOff()
+  pinMode(LED, OUTPUT)
+  
+  # setup EINT0 on pin 2.10
+  PinCfg = PINSEL_CFG_Type()
+  PinCfg.Funcnum = 1
+  PinCfg.OpenDrain = 0
+  PinCfg.Pinmode = 0
+  PinCfg.Pinnum = 10
+  PinCfg.Portnum = 2
+  PINSEL_ConfigPin(PinCfg.ptr)
+  EXTI_Init()
+  
+  # register the callback
+  registerCallback(IRQn_Type.EINT0_IRQn, EINT0Callback)
+  
+  # enable EINT0
+  NVIC_EnableIRQ(IRQn_Type.EINT0_IRQn)
+  
+  # the callback does everything from here
+  while True:
+  	sleep(1)
+  
