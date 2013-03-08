@@ -7,9 +7,6 @@ setup(
   author='Neil MacMunn',
   author_email='neil@gumstix.com',
   url='http://www.robovero.org/',
-  packages=[
-    'robovero',
-  ],
   requires=[
     'pyserial',
   ],
