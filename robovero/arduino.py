@@ -1,17 +1,17 @@
 """Defines an API similar to the Arduino standard library.
 """
 
-from lpc17xx_gpio import GPIO_SetDir, GPIO_SetValue, GPIO_ClearValue, \
+from robovero.lpc17xx_gpio import GPIO_SetDir, GPIO_SetValue, GPIO_ClearValue, \
                          GPIO_ReadValue
-from lpc17xx_adc import ADC_CHANNEL_SELECTION, ADC_TYPE_INT_OPT, \
+from robovero.lpc17xx_adc import ADC_CHANNEL_SELECTION, ADC_TYPE_INT_OPT, \
                         ADC_START_OPT, ADC_DATA_STATUS, ADC_Init, \
                         ADC_StartCmd, ADC_ChannelCmd, \
                         ADC_ChannelGetData, ADC_ChannelGetStatus
-from lpc17xx_pwm import PWM_ChannelCmd, PWM_ResetCounter, PWM_Cmd, \
+from robovero.lpc17xx_pwm import PWM_ChannelCmd, PWM_ResetCounter, PWM_Cmd, \
                         PWM_CounterCmd
-from LPC17xx import LPC_ADC, LPC_PWM1
-from extras import initMatch
-from lpc_types import FunctionalState
+from robovero.LPC17xx import LPC_ADC, LPC_PWM1
+from robovero.extras import initMatch
+from robovero.lpc_types import FunctionalState
 from time import sleep
 import threading
 

@@ -3,7 +3,7 @@
 
 import threading, serial, time, atexit, os, sys
 import Queue
-import windows
+import robovero.windows
 
 __author__ =      ["Neil MacMunn", "Danny Chan"]
 __email__ =       "neil@gumstix.com"
@@ -15,17 +15,17 @@ def listen():
   """Listen for responses and unsolicited messages (interrupts).
   """
   global robovero
-  
+
   while robovero:
     message = robovero.readline("\r\n")
-          
+
     if message == "":
       robovero.debug.write("[%f] INTERRUPT: " % (time.time() - robovero.start_time))
       IRQn = int(robovero.readline("\r\n"), 16)
       robovero.debug.write("%x\r\n" % IRQn)
       isrthread = threading.Thread(target=isr, args=[IRQn], name="isr")
       isrthread.start()
-      
+
     else:
       robovero.response.put(message)
 
@@ -49,7 +49,7 @@ def isr(IRQn):
       return
     robocaller("NVIC_ClearPendingIRQ", "void", IRQn)
     robocaller("NVIC_EnableIRQ", "void", IRQn)
-  
+
 def robocaller(function, ret_type, *args):
   """Serialize a function and it's arguments and send to device.
   """
@@ -60,7 +60,7 @@ def robocaller(function, ret_type, *args):
     # Check if index is in dictionary, if not, add it to dictionary
     # Debugging log will only contain indices and not the function name
     # Comment out to restore to normal debug log
-    
+
     if function not in robovero.indices:
       search_string = "search " + function + "\r\n"
       robovero.debug.write("[%f] ADD TO DICTIONARY: %s\r\n" % (time.time() - robovero.start_time, function))
@@ -99,17 +99,17 @@ def getIndex(fcn):
   """Get the table index of a function.
   """
   return robocaller("search %s" % (fcn), "int")
-    
+
 def getStatus():
   """Get the error status of the previous function call.
   """
   return robocaller("return", "int")
-  
+
 def malloc(size):
   """Allocate memory from the heap.
   """
   return robocaller("malloc", "int", size)
-  
+
 def free(ptr):
   """Free previously allocated memory.
   """
@@ -168,7 +168,7 @@ class cstruct(object):
 
 class Robovero(object):
   """Store information about the USB connection to the device.
-  """  
+  """
   def __init__(self):
     """Open a serial connection to the robovero hardware.
     """
@@ -230,7 +230,7 @@ class Robovero(object):
     self.listener = threading.Thread(target=listen, name="listener")
     self.listener.daemon = True
     self.listener.start()
-    
+
   def readline(self, delim):
     """Get one character at a time until the specified delimiter is found.
     """
@@ -244,14 +244,13 @@ class Robovero(object):
         self.debug.write("[%f] ERROR: USB connection lost\r\n"  % (time.time() - self.start_time))
         exit("error: USB connection lost")
     return message.strip(delim)
-        
+
   def __del__(self):
     """Send any remaining data and close the serial connection.
     """
     self.serial.flush()
     self.serial.close()
-
-# These functions get called once when a peripheral driver module is 
+# These functions get called once when a peripheral driver module is
 # imported. A serial connection to the device is established.
 robovero = Robovero()
 robovero.startListening()

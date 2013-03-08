@@ -1,7 +1,7 @@
 """Defines public functions and classes not part of the CMSIS driver library.
 """
 
-from internals import robocaller, cstruct, malloc, free, isr_list
+from robovero.internals import robocaller, cstruct, malloc, free, isr_list
 
 __author__ =      "Neil MacMunn"
 __email__ =        "neil@gumstix.com"
