@@ -10,7 +10,8 @@ Contents:
 
 .. toctree::
    :maxdepth: 2
-   
+   :numbered:   
+
    robovero
 
 Indices and tables
