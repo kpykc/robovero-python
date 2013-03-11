@@ -54,9 +54,16 @@ LED =       "LED"
 P1_0 =      "!IMU_EN"
 
 class DigitalPin(object):
-  """Need the port and pin numbers to configure digital IO.
-  """
+  """This is a digital pin class"""
   def __init__(self, portnum, pinnum):
+    """
+    Args:
+    
+    - portnum(int): The port number of the pin
+    - pinnum(int): Thin pin number of the pin
+    
+    Example: Pin 2_10 has port number 2 and pin number 10
+    """
     self.portnum = portnum
     self.pinnum = pinnum
 
@@ -82,6 +89,12 @@ digital_pins = {
 
 def pinMode(pin, mode):
   """Configures the specified pin to behave either as an input or an output.
+  
+  Args:
+  
+  - pin(DigitalPin): A DigitalPin Object
+  - mode(OUTPUT/INPUT):The direction of the pin
+  
   """
   global digital_pins, modes
 
@@ -103,6 +116,12 @@ def pinMode(pin, mode):
 
 def digitalWrite(pin, value):
   """Write a HIGH or a LOW value to a digital pin.
+
+  Args:
+  
+  - pin(DigitalPin): A DigitalPin Object
+  - value(HIGH/LOW): The value of the pin
+  
   """
   global digital_pins, values
 
@@ -126,6 +145,11 @@ def digitalWrite(pin, value):
 
 def digitalRead(pin):
   """Reads the value from a specified digital pin, either HIGH or LOW.
+
+  Args:
+  
+  - pin(DigitalPin): A DigitalPin Object
+  
   """
   global digital_pins
 
@@ -154,7 +178,15 @@ AD0_6 =  "AD0_6"
 AD0_7 =  "AD0_7"
 
 class AnalogPin(object):
+  """This is an analog pin class, for ADC"""
   def __init__(self, channel, interrupt):
+    """
+    Args:
+    
+    - channel(int): The channel of the pin, choose from class ADC_CHANNEL_SELECTION
+    - interrupt(int): Thin interrupt of the pin, choose from class ADC_TYPE_INT_OPT
+    
+    """
     self.channel = channel
     self.interrupt = interrupt
 
@@ -170,8 +202,13 @@ analog_pins = {
 
 def analogRead(pin):
   """Reads the value from the specified analog pin.
+  
+    Args:
+    
+    - pin(int): An ADC AnalogPin Object
+    
 
-  Assumes that extras.roboveroConfig() has been called to initialize the ADC.
+    Note: Assumes that extras.roboveroConfig() has been called to initialize the ADC.
   """
 
   if pin not in analog_pins:
@@ -215,6 +252,12 @@ pwm_pins = {
 
 def analogWrite(pin, value):
   """Writes an analog value (PWM wave) to a pin.
+  
+  Args:
+  
+  - pin(PWM1 to PWM6): A PWM pin
+  - value(int): Duty cycle, a value between 0 and 255
+  
   """
   global pwm_pins
 
@@ -246,6 +289,13 @@ def analogWrite(pin, value):
 
 def tone(pin, frequency, duration=None):
   """Generates a square wave of the specified frequency on pin.
+  
+  Args: 
+  
+  - pin(PWM1 to PWM6): A PWM pin
+  - frequency(int): A value between 1 and 500000
+  - duration(int): tone's durations in second
+  
   """
   global pwm_pins
 
@@ -273,6 +323,11 @@ def tone(pin, frequency, duration=None):
 
 def noTone(pin):
   """Stops the generation of a square wave on pin.
+  
+  Args: 
+  
+  - pin(PWM1 to PWM6): A PWM pin
+  
   """
   global pwm_pins
 
