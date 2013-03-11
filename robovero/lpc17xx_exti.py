@@ -29,13 +29,13 @@ class EXTI_MODE_ENUM:
 class EXTI_InitTypeDef(cstruct):
   '''EXTI Initialize structure.
   
-  EXTI_Line: Select external interrupt pin (EINT0, EINT1, EINT 2, EINT3)
-  EXTI_Mode: Choose between Level-sensitivity or Edge sensitivity
-  EXTI_polarity:  If EXTI mode is level-sensitive: this element use to select
+  - EXTI_Line: Select external interrupt pin (EINT0, EINT1, EINT 2, EINT3)
+  - EXTI_Mode: Choose between Level-sensitivity or Edge sensitivity
+  - EXTI_polarity:  If EXTI mode is level-sensitive: this element use to select
                   low or high active level
                   if EXTI mode is polarity-sensitive: this element use to select
                   falling or rising edge
-  ptr:  LPC1769 memory address where structure is stored. Use this in place of
+  - ptr:  LPC1769 memory address where structure is stored. Use this in place of
         the C reference operator (&).
         
   '''
@@ -69,11 +69,14 @@ def EXTI_Init():
 def EXTI_ClearEXTIFlag(EXTILine):
   '''Clear External interrupt flag.
   
-  EXTILine: external interrupt line, should be:
-            EXTI_EINT0: external interrupt line 0
-            EXTI_EINT1: external interrupt line 1
-            EXTI_EINT2: external interrupt line 2
-            EXTI_EINT3: external interrupt line 3
+  Args:
+  
+  - EXTILine: external interrupt line, should be:
+    
+    - EXTI_EINT0: external interrupt line 0
+    - EXTI_EINT1: external interrupt line 1
+    - EXTI_EINT2: external interrupt line 2
+    - EXTI_EINT3: external interrupt line 3
   
   '''
   return RoboCaller().call("EXTI_ClearEXTIFlag", "void", EXTILine)
@@ -81,7 +84,9 @@ def EXTI_ClearEXTIFlag(EXTILine):
 def EXTI_Config(EXTICfg):
   '''Configuration for EXT. Set EXTINT, EXTMODE, EXTPOLAR register.
   
-  EXTICfg:  Pointer to a EXTI_InitTypeDef structure that contains the
+  Args:
+  
+  - EXTICfg:  Pointer to a EXTI_InitTypeDef structure that contains the
             configuration information for the specified external interrupt
             
   '''
@@ -90,14 +95,19 @@ def EXTI_Config(EXTICfg):
 def EXTI_SetMode(EXTILine, mode):
   '''Set mode for EXTI pin.
   
-  EXTILine: external interrupt line, should be:
-            EXTI_EINT0: external interrupt line 0
-            EXTI_EINT1: external interrupt line 1
-            EXTI_EINT2: external interrupt line 2
-            EXTI_EINT3: external interrupt line 3
-  mode: external mode, should be:
-        EXTI_MODE_LEVEL_SENSITIVE
-        EXTI_MODE_EDGE_SENSITIVE
+  Args:
+  
+  - EXTILine: external interrupt line, should be:
+    
+    - EXTI_EINT0: external interrupt line 0
+    - EXTI_EINT1: external interrupt line 1
+    - EXTI_EINT2: external interrupt line 2
+    - EXTI_EINT3: external interrupt line 3
+  
+  - mode: external mode, should be:
+   
+    - EXTI_MODE_LEVEL_SENSITIVE
+    - EXTI_MODE_EDGE_SENSITIVE
   
   '''
   return RoboCaller().call("EXTI_SetMode", "void", EXTILine, mode)
@@ -110,14 +120,19 @@ def EXTI_DeInit():
 def EXTI_SetPolarity(EXTILine, polarity):
   '''Set polarity for EXTI pin.
   
-  EXTILine: external interrupt line, should be:
-            EXTI_EINT0: external interrupt line 0
-            EXTI_EINT1: external interrupt line 1
-            EXTI_EINT2: external interrupt line 2
-            EXTI_EINT3: external interrupt line 3
-  polarity: external polarity value, should be:
-            EXTI_POLARITY_LOW_ACTIVE_OR_FALLING_EDGE
-            EXTI_POLARITY_LOW_ACTIVE_OR_FALLING_EDGE
+  Args:
+  
+  - EXTILine: external interrupt line, should be:
+    
+    - EXTI_EINT0: external interrupt line 0
+    - EXTI_EINT1: external interrupt line 1
+    - EXTI_EINT2: external interrupt line 2
+    - EXTI_EINT3: external interrupt line 3
+  
+  - polarity: external polarity value, should be:
+    
+    - EXTI_POLARITY_LOW_ACTIVE_OR_FALLING_EDGE
+    - EXTI_POLARITY_LOW_ACTIVE_OR_FALLING_EDGE
             
   '''
   return RoboCaller().call("EXTI_SetPolarity", "void", EXTILine, polarity)

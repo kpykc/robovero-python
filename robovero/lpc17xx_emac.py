@@ -625,9 +625,9 @@ EMAC_PHY_BMSR_LINK_STATUS = (1<<2)
 class RX_Stat(cstruct):
   '''RX Status structure type definition.
   
-  Info: Receive Information Status
-  HashCRC: Receive Hash CRC Status
-  ptr:  LPC1769 memory address where structure is stored. Use this in place of
+  - Info: Receive Information Status
+  - HashCRC: Receive Hash CRC Status
+  - ptr:  LPC1769 memory address where structure is stored. Use this in place of
         the C reference operator (&).
         
   '''
@@ -636,15 +636,17 @@ class RX_Stat(cstruct):
 class EMAC_CFG_Type(cstruct):
   '''EMAC configuration structure definition.
   
-  Mode: Supported EMAC PHY device speed, should be one of the following:
-        EMAC_MODE_AUTO
-        EMAC_MODE_10M_FULL
-        EMAC_MODE_10M_HALF
-        EMAC_MODE_100M_FULL
-        EMAC_MODE_100M_HALF
-  pbEMAC_Addr:  Pointer to EMAC Station address that contains 6-bytes
+  - Mode: Supported EMAC PHY device speed, should be one of the following:
+    
+    - EMAC_MODE_AUTO
+    - EMAC_MODE_10M_FULL
+    - EMAC_MODE_10M_HALF
+    - EMAC_MODE_100M_FULL
+    - EMAC_MODE_100M_HALF
+  
+  - pbEMAC_Addr:  Pointer to EMAC Station address that contains 6-bytes
                 of MAC address, it must be sorted in order (bEMAC_Addr[0]..[5])
-  ptr:  LPC1769 memory address where structure is stored. Use this in place of
+  - ptr:  LPC1769 memory address where structure is stored. Use this in place of
         the C reference operator (&).
                  
   '''
@@ -653,9 +655,9 @@ class EMAC_CFG_Type(cstruct):
 class EMAC_PACKETBUF_Type(cstruct):
   '''TX Data Buffer structure definition.
   
-  ulDataLen: Data length
-  pbDataBuf: A word-align data pointer to data buffer
-  ptr:  LPC1769 memory address where structure is stored. Use this in place of
+  - ulDataLen: Data length
+  - pbDataBuf: A word-align data pointer to data buffer
+  - ptr:  LPC1769 memory address where structure is stored. Use this in place of
         the C reference operator (&).
         
   '''
@@ -664,9 +666,9 @@ class EMAC_PACKETBUF_Type(cstruct):
 class RX_Desc(cstruct):
   '''RX Descriptor structure type definition.
   
-  Packet: Receive Packet Descriptor
-  Ctrl: Receive Control Descriptor
-  ptr:  LPC1769 memory address where structure is stored. Use this in place of
+  - Packet: Receive Packet Descriptor
+  - Ctrl: Receive Control Descriptor
+  - ptr:  LPC1769 memory address where structure is stored. Use this in place of
         the C reference operator (&).
         
   '''
@@ -675,9 +677,9 @@ class RX_Desc(cstruct):
 class TX_Desc(cstruct):
   '''TX Descriptor structure type definition.
   
-  Packet: Transmit Packet Descriptor
-  Ctrl: Transmit Control Descriptor
-  ptr:  LPC1769 memory address where structure is stored. Use this in place of
+  - Packet: Transmit Packet Descriptor
+  - Ctrl: Transmit Control Descriptor
+  - ptr:  LPC1769 memory address where structure is stored. Use this in place of
         the C reference operator (&).
         
   '''
@@ -686,8 +688,8 @@ class TX_Desc(cstruct):
 class TX_Stat(cstruct):
   '''TX Status structure type definition.
   
-  Info: Transmit Information Status
-  ptr:  LPC1769 memory address where structure is stored. Use this in place of
+  - Info: Transmit Information Status
+  - ptr:  LPC1769 memory address where structure is stored. Use this in place of
         the C reference operator (&).
         
   '''
@@ -697,18 +699,24 @@ def EMAC_GetWoLStatus(ulWoLMode):
   '''Get status of Wake On LAN Filter for each specified type in EMAC 
   peripheral, clear this status if it is set.
   
-  ulWoLMode:  WoL Filter mode, should be:
-              EMAC_WOL_UCAST: unicast frames caused WoL
-              EMAC_WOL_UCAST: broadcast frame caused WoL
-              EMAC_WOL_MCAST: multicast frame caused WoL
-              EMAC_WOL_UCAST_HASH:  unicast frame that passes the imperfect hash
-                                    filter caused WoL
-              EMAC_WOL_MCAST_HASH:  multicast frame that passes the imperfect 
-                                    hash filter caused WoL
-              EMAC_WOL_PERFECT:perfect address matching filter caused WoL
-              EMAC_WOL_RX_FILTER: the receive filter caused WoL
-              EMAC_WOL_MAG_PACKET: the magic packet filter caused WoL
-  return: SET/RESET
+  Args:
+  
+  - ulWoLMode:  WoL Filter mode, should be:
+   
+    - EMAC_WOL_UCAST: unicast frames caused WoL
+    - EMAC_WOL_UCAST: broadcast frame caused WoL
+    - EMAC_WOL_MCAST: multicast frame caused WoL
+    - EMAC_WOL_UCAST_HASH:  unicast frame that passes the imperfect hash
+                          filter caused WoL
+    - EMAC_WOL_MCAST_HASH:  multicast frame that passes the imperfect 
+                          hash filter caused WoL
+    - EMAC_WOL_PERFECT:perfect address matching filter caused WoL
+    - EMAC_WOL_RX_FILTER: the receive filter caused WoL
+    - EMAC_WOL_MAG_PACKET: the magic packet filter caused WoL
+ 
+  Return: 
+  
+  - SET/RESET
   
   '''
   return RoboCaller().call("EMAC_GetWoLStatus", "FlagStatus", ulWoLMode)
@@ -717,7 +725,9 @@ def EMAC_Init(EMAC_ConfigStruct):
   '''Initializes the EMAC peripheral according to the specified parameters in 
   the EMAC_ConfigStruct.
   
-  EMAC_ConfigStruct:  Pointer to a EMAC_CFG_Type structure that contains the 
+  Args:
+  
+  - EMAC_ConfigStruct:  Pointer to a EMAC_CFG_Type structure that contains the 
                       configuration information for the specified EMAC
                       peripheral.
                       
@@ -727,22 +737,28 @@ def EMAC_Init(EMAC_ConfigStruct):
 def EMAC_CheckReceiveDataStatus(ulRxStatType):
   '''Get current status value of receive data (due to RxConsumeIndex).
   
-  ulRxStatType: Received Status type, should be one of following:
-                EMAC_RINFO_CTRL_FRAME: Control Frame
-                EMAC_RINFO_VLAN: VLAN Frame
-                EMAC_RINFO_FAIL_FILT: RX Filter Failed
-                EMAC_RINFO_MCAST: Multicast Frame
-                EMAC_RINFO_BCAST: Broadcast Frame
-                EMAC_RINFO_CRC_ERR: CRC Error in Frame
-                EMAC_RINFO_SYM_ERR: Symbol Error from PHY
-                EMAC_RINFO_LEN_ERR: Length Error
-                EMAC_RINFO_RANGE_ERR: Range error(exceeded max size)
-                EMAC_RINFO_ALIGN_ERR: Alignment error
-                EMAC_RINFO_OVERRUN: Receive overrun
-                EMAC_RINFO_NO_DESCR: No new Descriptor available
-                EMAC_RINFO_LAST_FLAG: last Fragment in Frame
-                EMAC_RINFO_ERR: Error Occurred (OR of all error)
-  return: Current value of receive data (due to RxConsumeIndex)
+  Args:
+  
+  - ulRxStatType: Received Status type, should be one of following:
+    
+    - EMAC_RINFO_CTRL_FRAME: Control Frame
+    - EMAC_RINFO_VLAN: VLAN Frame
+    - EMAC_RINFO_FAIL_FILT: RX Filter Failed
+    - EMAC_RINFO_MCAST: Multicast Frame
+    - EMAC_RINFO_BCAST: Broadcast Frame
+    - EMAC_RINFO_CRC_ERR: CRC Error in Frame
+    - EMAC_RINFO_SYM_ERR: Symbol Error from PHY
+    - EMAC_RINFO_LEN_ERR: Length Error
+    - EMAC_RINFO_RANGE_ERR: Range error(exceeded max size)
+    - EMAC_RINFO_ALIGN_ERR: Alignment error
+    - EMAC_RINFO_OVERRUN: Receive overrun
+    - EMAC_RINFO_NO_DESCR: No new Descriptor available
+    - EMAC_RINFO_LAST_FLAG: last Fragment in Frame
+    - EMAC_RINFO_ERR: Error Occurred (OR of all error)
+    
+  Return: 
+  
+  - Current value of receive data (due to RxConsumeIndex)
                 
   '''
   return RoboCaller().call("EMAC_CheckReceiveDataStatus", "FlagStatus", ulRxStatType)
@@ -751,7 +767,9 @@ def EMAC_CheckTransmitIndex():
   '''Check whether if the current TxProduceIndex is not equal to the current
   RxProduceIndex - 1.
   
-  return: TRUE if they're not equal, otherwise return FALSE
+  Return: 
+  
+  - TRUE if they're not equal, otherwise return FALSE
   
   '''
   return RoboCaller().call("EMAC_CheckTransmitIndex", "Bool")
@@ -759,20 +777,24 @@ def EMAC_CheckTransmitIndex():
 def EMAC_IntCmd(ulIntType, NewState):
   '''Enable/Disable interrupt for each type in EMAC.
   
-  ulIntType:  Interrupt Type, should be:
-              EMAC_INT_RX_OVERRUN: Receive Overrun
-              EMAC_INT_RX_ERR: Receive Error
-              EMAC_INT_RX_FIN: Receive Descriptor Finish
-              EMAC_INT_RX_DONE: Receive Done
-              EMAC_INT_TX_UNDERRUN: Transmit Under-run
-              EMAC_INT_TX_ERR: Transmit Error
-              EMAC_INT_TX_FIN: Transmit descriptor finish
-              EMAC_INT_TX_DONE: Transmit Done
-              EMAC_INT_SOFT_INT: Software interrupt
-              EMAC_INT_WAKEUP: Wakeup interrupt
-  NewState: New State of this function, should be:
-            ENABLE
-            DISABLE
+  Args:
+  
+  - ulIntType:  Interrupt Type, should be:
+    
+    - EMAC_INT_RX_OVERRUN: Receive Overrun
+    - EMAC_INT_RX_ERR: Receive Error
+    - EMAC_INT_RX_FIN: Receive Descriptor Finish
+    - EMAC_INT_RX_DONE: Receive Done
+    - EMAC_INT_TX_UNDERRUN: Transmit Under-run
+    - EMAC_INT_TX_ERR: Transmit Error
+    - EMAC_INT_TX_FIN: Transmit descriptor finish
+    - EMAC_INT_TX_DONE: Transmit Done
+    - EMAC_INT_SOFT_INT: Software interrupt
+    - EMAC_INT_WAKEUP: Wakeup interrupt
+  
+  - NewState: New State of this function, should be:
+    - ENABLE
+    - DISABLE
             
   '''
   return RoboCaller().call("EMAC_IntCmd", "void", ulIntType, NewState)
@@ -780,13 +802,20 @@ def EMAC_IntCmd(ulIntType, NewState):
 def EMAC_SetPHYMode(ulPHYMode):
   '''Set specified PHY mode in EMAC peripheral.
   
-  ulPHYMode:  Specified PHY mode, should be:
-              EMAC_MODE_AUTO
-              EMAC_MODE_10M_FULL
-              EMAC_MODE_10M_HALF
-              EMAC_MODE_100M_FULL
-              EMAC_MODE_100M_HALF
-  return: 0 if no error, otherwise -1
+  Args:
+  
+  - ulPHYMode:  Specified PHY mode, should be:
+
+    - EMAC_MODE_AUTO
+    - EMAC_MODE_10M_FULL
+    - EMAC_MODE_10M_HALF
+    - EMAC_MODE_100M_FULL
+    - EMAC_MODE_100M_HALF
+
+  Return: 
+  
+  - 0 if no error, otherwise -1
+  
   '''
   return RoboCaller().call("EMAC_SetPHYMode", "int32_t", ulPHYMode)
 
@@ -794,18 +823,24 @@ def EMAC_IntGetStatus(ulIntType):
   ''' Check whether if specified interrupt flag is set or not for each interrupt
   type in EMAC and clear interrupt pending if it is set.
   
-  ulIntType:  Interrupt Type, should be:
-              EMAC_INT_RX_OVERRUN: Receive Overrun
-              EMAC_INT_RX_ERR: Receive Error
-              EMAC_INT_RX_FIN: Receive Descriptor Finish
-              EMAC_INT_RX_DONE: Receive Done
-              EMAC_INT_TX_UNDERRUN: Transmit Under-run
-              EMAC_INT_TX_ERR: Transmit Error
-              EMAC_INT_TX_FIN: Transmit descriptor finish
-              EMAC_INT_TX_DONE: Transmit Done
-              EMAC_INT_SOFT_INT: Software interrupt
-              EMAC_INT_WAKEUP: Wakeup interrupt
-  return: New state of specified interrupt (SET or RESET)
+  Args:
+  
+  - ulIntType:  Interrupt Type, should be:
+  
+    - EMAC_INT_RX_OVERRUN: Receive Overrun
+    - EMAC_INT_RX_ERR: Receive Error
+    - EMAC_INT_RX_FIN: Receive Descriptor Finish
+    - EMAC_INT_RX_DONE: Receive Done
+    - EMAC_INT_TX_UNDERRUN: Transmit Under-run
+    - EMAC_INT_TX_ERR: Transmit Error
+    - EMAC_INT_TX_FIN: Transmit descriptor finish
+    - EMAC_INT_TX_DONE: Transmit Done
+    - EMAC_INT_SOFT_INT: Software interrupt
+    - EMAC_INT_WAKEUP: Wakeup interrupt
+  
+  Return: 
+  
+  - New state of specified interrupt (SET or RESET)
               
   '''
   return RoboCaller().call("EMAC_IntGetStatus", "IntStatus", ulIntType)
@@ -813,7 +848,9 @@ def EMAC_IntGetStatus(ulIntType):
 def EMAC_WritePacketBuffer(pDataStruct):
   '''Write data to Tx packet data buffer at current index due to TxProduceIndex.
   
-  pDataStruct:  Pointer to a EMAC_PACKETBUF_Type structure data that contain 
+  Args:
+  
+  - pDataStruct:  Pointer to a EMAC_PACKETBUF_Type structure data that contain 
                 specified information about Packet data buffer.
                 
   '''
@@ -822,12 +859,16 @@ def EMAC_WritePacketBuffer(pDataStruct):
 def EMAC_SetHashFilter(dstMAC_addr, NewState):
   '''Enable/Disable hash filter functionality for specified destination MAC 
   address in EMAC module.
+
+  Args:
   
-  dstMAC_addr:  Pointer to the first MAC destination address, should be 6-bytes
+  - dstMAC_addr:  Pointer to the first MAC destination address, should be 6-bytes
                 length, in order LSB to the MSB
-  NewState: New State of this command, should be:
-            ENABLE
-            DISABLE
+  - NewState: New State of this command, should be:
+    
+    - ENABLE
+    - DISABLE
+  
   '''
   return RoboCaller().call("EMAC_SetHashFilter", "void", dstMAC_addr, NewState)
 
@@ -835,7 +876,10 @@ def EMAC_CheckReceiveIndex():
   '''Check whether the current RxConsumeIndex is not equal to the current
   RxProduceIndex.
   
-  return: TRUE if they're not equal, otherwise return FALSE
+  Return: 
+  
+  - TRUE if they're not equal, otherwise return FALSE
+  
   '''
   return RoboCaller().call("EMAC_CheckReceiveIndex", "Bool")
 
@@ -843,19 +887,28 @@ def EMAC_UpdatePHYStatus():
   '''Auto-Configures value for the EMAC configuration register to match with 
   current PHY mode.
   
-  return: 0 if no error, otherwise -1
+  Return: 
+  
+  - 0 if no error, otherwise -1
+  
   '''
   return RoboCaller().call("EMAC_UpdatePHYStatus", "int32_t")
 
 def EMAC_CheckPHYStatus(ulPHYState):
   '''Check specified PHY status in EMAC peripheral.
   
-  ulPHYState: Specified PHY Status Type, should be:
-              EMAC_PHY_STAT_LINK: Link Status
-              EMAC_PHY_STAT_SPEED: Speed Status
-              EMAC_PHY_STAT_DUP: Duplex Status
-  return: Status of specified PHY status (0 or 1).
-          -1 if error.
+  Args:
+  
+  - ulPHYState: Specified PHY Status Type, should be:
+    
+    - EMAC_PHY_STAT_LINK: Link Status
+    - EMAC_PHY_STAT_SPEED: Speed Status
+    - EMAC_PHY_STAT_DUP: Duplex Status
+  
+  Return:
+  
+  - Status of specified PHY status (0 or 1). -1 if error.
+  
   '''
   return RoboCaller().call("EMAC_CheckPHYStatus", "int32_t", ulPHYState)
 
@@ -875,7 +928,9 @@ def EMAC_GetReceiveDataSize():
   '''Get size of current Received data in received buffer (due to 
   RxConsumeIndex).
   
-  return: Size of received data
+  Return: 
+  
+  - Size of received data
   
   '''
   return RoboCaller().call("EMAC_GetReceiveDataSize", "uint32_t", )
@@ -891,7 +946,9 @@ def EMAC_ReadPacketBuffer(pDataStruct):
   '''Read data from Rx packet data buffer at current index due to 
   RxConsumeIndex.
   
-  pDataStruct:  Pointer to a EMAC_PACKETBUF_Type structure data that contain 
+  Args:
+  
+  - pDataStruct:  Pointer to a EMAC_PACKETBUF_Type structure data that contain 
                 specified information about Packet data buffer.
                 
   '''
@@ -900,28 +957,23 @@ def EMAC_ReadPacketBuffer(pDataStruct):
 def EMAC_SetFilterMode(ulFilterMode, NewState):
   '''Enable/Disable Filter mode for each specified type EMAC peripheral.
   
-  ulFilterMode: Filter mode, should be:
-                EMAC_RFC_UCAST_EN:  all frames of unicast types will be accepted
-                EMAC_RFC_BCAST_EN:  broadcast frame will be accepted
-                EMAC_RFC_MCAST_EN:  all frames of multicast types will be
-                                    accepted
-                EMAC_RFC_UCAST_HASH_EN: The imperfect hash filter will be
-                                        applied to unicast addresses
-                EMAC_RFC_MCAST_HASH_EN: The imperfect hash filter will be
-                                        applied to multicast addresses
-                EMAC_RFC_PERFECT_EN:  the destination address will be compared
-                                      with the 6 byte station address programmed
-                                      in the station address by the filter
-                EMAC_RFC_MAGP_WOL_EN: the result of the magic packet filter will 
-                                      generate a WoL interrupt when there is a
-                                      match
-                EMAC_RFC_PFILT_WOL_EN:  the result of the perfect address 
-                                        matching filter and the imperfect hash
-                                        filter will generate a WoL interrupt 
-                                        when there is a match
-  NewState: New State of this command, should be:
-            ENABLE
-            DISABLE
+  Args:
+  
+  - ulFilterMode: Filter mode, should be:
+  
+    - EMAC_RFC_UCAST_EN:  all frames of unicast types will be accepted
+    - EMAC_RFC_BCAST_EN:  broadcast frame will be accepted
+    - EMAC_RFC_MCAST_EN:  all frames of multicast types will be accepted
+    - EMAC_RFC_UCAST_HASH_EN: The imperfect hash filter will be applied to unicast addresses
+    - EMAC_RFC_MCAST_HASH_EN: The imperfect hash filter will be applied to multicast addresses
+    - EMAC_RFC_PERFECT_EN:  the destination address will be compared with the 6 byte station address programmed in the station address by the filter
+    - EMAC_RFC_MAGP_WOL_EN: the result of the magic packet filter will generate a WoL interrupt when there is a match
+    - EMAC_RFC_PFILT_WOL_EN:  the result of the perfect address matching filter and the imperfect hash filter will generate a WoL interrupt when there is a match
+  
+  - NewState: New State of this command, should be:
+  
+    - ENABLE
+    - DISABLE
             
   '''
   return RoboCaller().call("EMAC_SetFilterMode", "void", ulFilterMode, NewState)

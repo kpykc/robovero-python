@@ -339,11 +339,11 @@ class GPDMA_StateClear_Type:
 class GPDMA_LLI_Type(cstruct):
   '''GPDMA Linker List Item structure type definition.
   
-  SrcAddr: Source Address
-  DstAddr: Destination address
-  NextLLI: Next LLI address, otherwise set to '0'
-  Control: GPDMA Control of this LLI
-  ptr:  LPC1769 memory address where structure is stored. Use this in place of
+  - SrcAddr: Source Address
+  - DstAddr: Destination address
+  - NextLLI: Next LLI address, otherwise set to '0'
+  - Control: GPDMA Control of this LLI
+  - ptr:  LPC1769 memory address where structure is stored. Use this in place of
         the C reference operator (&).
         
   '''
@@ -352,63 +352,66 @@ class GPDMA_LLI_Type(cstruct):
 class GPDMA_Channel_CFG_Type(cstruct):
   '''GPDMA Channel configuration structure type definition.
   
-  ChannelNum: DMA channel number, should be in range from 0 to 7. DMA channel 0
+  - ChannelNum: DMA channel number, should be in range from 0 to 7. DMA channel 0
               has the highest priority and DMA channel 7 the lowest priority.
-  TransferSize: Length/Size of transfer
-  TransferWidth:  Transfer width - used for TransferType is 
+  - TransferSize: Length/Size of transfer
+  - TransferWidth:  Transfer width - used for TransferType is 
                   GPDMA_TRANSFERTYPE_M2M only
-  SrcMemAddr: Physical Source Address, used in case TransferType is chosen as
+  - SrcMemAddr: Physical Source Address, used in case TransferType is chosen as
               GPDMA_TRANSFERTYPE_M2M or GPDMA_TRANSFERTYPE_M2P
-  DstMemAddr: Physical Destination Address, used in case TransferType is chosen
+  - DstMemAddr: Physical Destination Address, used in case TransferType is chosen
               as GPDMA_TRANSFERTYPE_M2M or GPDMA_TRANSFERTYPE_P2M
-  TransferType: Transfer Type, should be one of the following:
-                GPDMA_TRANSFERTYPE_M2M: Memory to memory - DMA control
-                GPDMA_TRANSFERTYPE_M2P: Memory to peripheral - DMA control
-                GPDMA_TRANSFERTYPE_P2M: Peripheral to memory - DMA control
-                GPDMA_TRANSFERTYPE_P2P: Source peripheral to destination 
+  - TransferType: Transfer Type, should be one of the following:
+  
+    - GPDMA_TRANSFERTYPE_M2M: Memory to memory - DMA control
+    - GPDMA_TRANSFERTYPE_M2P: Memory to peripheral - DMA control
+    - GPDMA_TRANSFERTYPE_P2M: Peripheral to memory - DMA control
+    - GPDMA_TRANSFERTYPE_P2P: Source peripheral to destination 
                                         peripheral - DMA control
-  SrcConn:  Peripheral Source Connection type, used in case TransferType is
+  - SrcConn:  Peripheral Source Connection type, used in case TransferType is
             chosen as GPDMA_TRANSFERTYPE_P2M or GPDMA_TRANSFERTYPE_P2P, should
             be one of:  
-            GPDMA_CONN_SSP0_Tx: SSP0, Tx
-            GPDMA_CONN_SSP0_Rx: SSP0, Rx
-            GPDMA_CONN_SSP1_Tx: SSP1, Tx
-            GPDMA_CONN_SSP1_Rx: SSP1, Rx
-            GPDMA_CONN_ADC: ADC
-            GPDMA_CONN_I2S_Channel_0: I2S Channel 0
-            GPDMA_CONN_I2S_Channel_1: I2S Channel 1
-            GPDMA_CONN_DAC: DAC
-            GPDMA_CONN_UART0_Tx_MAT0_0: UART0 Tx / MAT0.0
-            GPDMA_CONN_UART0_Rx_MAT0_1: UART0 Rx / MAT0.1
-            GPDMA_CONN_UART1_Tx_MAT1_0: UART1 Tx / MAT1.0
-            GPDMA_CONN_UART1_Rx_MAT1_1: UART1 Rx / MAT1.1
-            GPDMA_CONN_UART2_Tx_MAT2_0: UART2 Tx / MAT2.0
-            GPDMA_CONN_UART2_Rx_MAT2_1: UART2 Rx / MAT2.1
-            GPDMA_CONN_UART3_Tx_MAT3_0: UART3 Tx / MAT3.0
-            GPDMA_CONN_UART3_Rx_MAT3_1: UART3 Rx / MAT3.1
-  DstConn:  Peripheral Destination Connection type, used in case TransferType is
+   
+    - GPDMA_CONN_SSP0_Tx: SSP0, Tx
+    - GPDMA_CONN_SSP0_Rx: SSP0, Rx
+    - GPDMA_CONN_SSP1_Tx: SSP1, Tx
+    - GPDMA_CONN_SSP1_Rx: SSP1, Rx
+    - GPDMA_CONN_ADC: ADC
+    - GPDMA_CONN_I2S_Channel_0: I2S Channel 0
+    - GPDMA_CONN_I2S_Channel_1: I2S Channel 1
+    - GPDMA_CONN_DAC: DAC
+    - GPDMA_CONN_UART0_Tx_MAT0_0: UART0 Tx / MAT0.0
+    - GPDMA_CONN_UART0_Rx_MAT0_1: UART0 Rx / MAT0.1
+    - GPDMA_CONN_UART1_Tx_MAT1_0: UART1 Tx / MAT1.0
+    - GPDMA_CONN_UART1_Rx_MAT1_1: UART1 Rx / MAT1.1
+    - GPDMA_CONN_UART2_Tx_MAT2_0: UART2 Tx / MAT2.0
+    - GPDMA_CONN_UART2_Rx_MAT2_1: UART2 Rx / MAT2.1
+    - GPDMA_CONN_UART3_Tx_MAT3_0: UART3 Tx / MAT3.0
+    - GPDMA_CONN_UART3_Rx_MAT3_1: UART3 Rx / MAT3.1
+  
+  - DstConn:  Peripheral Destination Connection type, used in case TransferType is
             chosen as GPDMA_TRANSFERTYPE_M2P or GPDMA_TRANSFERTYPE_P2P, should 
             be one of:
-            GPDMA_CONN_SSP0_Tx: SSP0, Tx
-            GPDMA_CONN_SSP0_Rx: SSP0, Rx
-            GPDMA_CONN_SSP1_Tx: SSP1, Tx
-            GPDMA_CONN_SSP1_Rx: SSP1, Rx
-            GPDMA_CONN_ADC: ADC
-            GPDMA_CONN_I2S_Channel_0: I2S Channel 0
-            GPDMA_CONN_I2S_Channel_1: I2S Channel 1
-            GPDMA_CONN_DAC: DAC
-            GPDMA_CONN_UART0_Tx_MAT0_0: UART0 Tx / MAT0.0
-            GPDMA_CONN_UART0_Rx_MAT0_1: UART0 Rx / MAT0.1
-            GPDMA_CONN_UART1_Tx_MAT1_0: UART1 Tx / MAT1.0
-            GPDMA_CONN_UART1_Rx_MAT1_1: UART1 Rx / MAT1.1
-            GPDMA_CONN_UART2_Tx_MAT2_0: UART2 Tx / MAT2.0
-            GPDMA_CONN_UART2_Rx_MAT2_1: UART2 Rx / MAT2.1
-            GPDMA_CONN_UART3_Tx_MAT3_0: UART3 Tx / MAT3.0
-            GPDMA_CONN_UART3_Rx_MAT3_1: UART3 Rx / MAT3.1
-  DMALLI: Linker List Item structure data address if there's no Linker List, set
-          as '0'
-  ptr:  LPC1769 memory address where structure is stored. Use this in place of
-        the C reference operator (&).
+  
+    - GPDMA_CONN_SSP0_Tx: SSP0, Tx
+    - GPDMA_CONN_SSP0_Rx: SSP0, Rx
+    - GPDMA_CONN_SSP1_Tx: SSP1, Tx
+    - GPDMA_CONN_SSP1_Rx: SSP1, Rx
+    - GPDMA_CONN_ADC: ADC
+    - GPDMA_CONN_I2S_Channel_0: I2S Channel 0
+    - GPDMA_CONN_I2S_Channel_1: I2S Channel 1
+    - GPDMA_CONN_DAC: DAC
+    - GPDMA_CONN_UART0_Tx_MAT0_0: UART0 Tx / MAT0.0
+    - GPDMA_CONN_UART0_Rx_MAT0_1: UART0 Rx / MAT0.1
+    - GPDMA_CONN_UART1_Tx_MAT1_0: UART1 Tx / MAT1.0
+    - GPDMA_CONN_UART1_Rx_MAT1_1: UART1 Rx / MAT1.1
+    - GPDMA_CONN_UART2_Tx_MAT2_0: UART2 Tx / MAT2.0
+    - GPDMA_CONN_UART2_Rx_MAT2_1: UART2 Rx / MAT2.1
+    - GPDMA_CONN_UART3_Tx_MAT3_0: UART3 Tx / MAT3.0
+    - GPDMA_CONN_UART3_Rx_MAT3_1: UART3 Rx / MAT3.1
+  
+  - DMALLI: Linker List Item structure data address if there's no Linker List, set as '0'
+  - ptr:  LPC1769 memory address where structure is stored. Use this in place of the C reference operator (&).
         
   '''
   pass
@@ -437,10 +440,13 @@ def GPDMA_Init():
 def GPDMA_ChannelCmd(channelNum, NewState):
   '''Enable/Disable DMA channel.
   
-  channelNum: GPDMA channel, should be in range from 0 to 7
-  NewState: New State of this command, should be:
-            ENABLE
-            DISABLE
+  Args:
+  
+  - channelNum: GPDMA channel, should be in range from 0 to 7
+  - NewState: New State of this command, should be:
+   
+    - ENABLE
+    - DISABLE
             
   '''
   return RoboCaller().call("GPDMA_ChannelCmd", "void", channelNum, NewState)
@@ -449,11 +455,15 @@ def GPDMA_Setup(GPDMAChannelConfig):
   '''Setup GPDMA channel peripheral according to the specified parameters in the
   GPDMAChannelConfig.
   
-  GPDMAChannelConfig: Pointer to a GPDMA_CH_CFG_Type structure that contains the
+  Args:
+  
+  - GPDMAChannelConfig: Pointer to a GPDMA_CH_CFG_Type structure that contains the
                       configuration information for the specified GPDMA channel
                       peripheral.
-  return: ERROR if selected channel is enabled before
-          SUCCESS if channel is configured successfully
+  Return: 
+  
+  - ERROR if selected channel is enabled before
+  - SUCCESS if channel is configured successfully
           
   '''
   return RoboCaller().call("GPDMA_Setup", "Status", GPDMAChannelConfig)
@@ -462,17 +472,25 @@ def GPDMA_IntGetStatus(stat_type, channel):
   '''Check if corresponding channel does have an active interrupt request or
   not.
   
-  stat_type:  type of status, should be:
-              GPDMA_STAT_INT: GPDMA Interrupt Status
-              GPDMA_STAT_INTTC: GPDMA Interrupt Terminal Count Request Status
-              GPDMA_STAT_INTERR: GPDMA Interrupt Error Status
-              GPDMA_STAT_RAWINTTC: GPDMA Raw Interrupt Terminal Count Status
-              GPDMA_STAT_RAWINTERR: GPDMA Raw Error Interrupt Status
-              GPDMA_STAT_ENABLED_CH: GPDMA Enabled Channel Status
-  channel: GPDMA channel, should be in range from 0 to 7
-  return: status of DMA channel interrupt after masking
-          SET: the corresponding channel has no active interrupt request
-          RESET: the corresponding channel does have an active interrupt request
+  Args:
+  
+  - stat_type:  type of status, should be:
+  
+    - GPDMA_STAT_INT: GPDMA Interrupt Status
+    - GPDMA_STAT_INTTC: GPDMA Interrupt Terminal Count Request Status
+    - GPDMA_STAT_INTERR: GPDMA Interrupt Error Status
+    - GPDMA_STAT_RAWINTTC: GPDMA Raw Interrupt Terminal Count Status
+    - GPDMA_STAT_RAWINTERR: GPDMA Raw Error Interrupt Status
+    - GPDMA_STAT_ENABLED_CH: GPDMA Enabled Channel Status
+  
+  - channel: GPDMA channel, should be in range from 0 to 7
+  
+  Return: 
+  
+  - status of DMA channel interrupt after masking
+    
+    - SET: the corresponding channel has no active interrupt request
+    - RESET: the corresponding channel does have an active interrupt request
           
   '''
   return RoboCaller().call("GPDMA_IntGetStatus", "IntStatus", stat_type, channel)
@@ -480,9 +498,11 @@ def GPDMA_IntGetStatus(stat_type, channel):
 def GPDMA_ClearIntPending(int_type, channel):
   '''Clear one or more interrupt requests on DMA channels.
   
-  int_type: GPDMA_STATCLR_INTTC: GPDMA Interrupt Terminal Count Request Clear
+  Args:
+  
+  - int_type: GPDMA_STATCLR_INTTC: GPDMA Interrupt Terminal Count Request Clear
             GPDMA_STATCLR_INTERR: GPDMA Interrupt Error Clear
-  channel:  GPDMA channel, should be in range from 0 to 7
+  - channel:  GPDMA channel, should be in range from 0 to 7
   
   '''
   return RoboCaller().call("GPDMA_ClearIntPending", "void", int_type, channel)

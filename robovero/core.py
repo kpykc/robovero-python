@@ -13,13 +13,23 @@ __version__ =			"0.1"
 
 def NVIC_EnableIRQ(IRQn):
 	"""Enable an interrupt.
+	
+	Args:
+	
+	- IRQn(IRQn_Type): class IRQn_Type from LPC17XX.py
+	
 	"""
 	return RoboCaller().call("NVIC_EnableIRQ", "void", IRQn)
 
 def NVIC_ClearPendingIRQ(IRQn):
 	"""Clear a pending interrupt.
 	
+	Args:
+
+	- IRQn(IRQn_Type): class IRQn_Type from LPC17XX.py
+	
 	Note that this is automatically done for you after your ISR is called,
 	before 
+
 	"""
 	return RoboCaller().call("NVIC_ClearPendingIRQ", "void", IRQn)

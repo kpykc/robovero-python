@@ -13,13 +13,22 @@ __license__ =     "BSD 2-Clause"
 __version__ =     "0.1"
 
 def ADC_CR_CH_SEL(n):
-  '''Selects which of the AD0.0:7 pins is (are) to be sampled and converted.
+  '''Selects ADC pin to be sampled and converted.
+  
+  Args:
+    
+  - n(int): ADC pin number, between 0 to 7
+  
   '''
   return (1 << n)
 
 def ADC_CR_CLKDIV(n):
-  '''The APB clock (PCLK) is divided by (this value plus one) to produce the
-  clock for the A/D.
+  '''The APB clock (PCLK) is divided by (this value plus one) to produce the clock for the A/D.
+  
+  Args:
+    
+  - n(int): ADC pin number, between 0 to 7
+  
   '''
   return (n << 8)
 

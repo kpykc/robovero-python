@@ -17,8 +17,10 @@ MSG_ENABLE = ((0))
 MSG_DISABLE = ((1))
 CAN1_CTRL = ((0))
 CAN2_CTRL = ((1))
+
 def PARAM_FULLCAN_IC(n):
   return  ((n==FULLCAN_IC0) or (n==FULLCAN_IC1))
+
 ID_11 = 1
 MAX_HW_FULLCAN_OBJ = 64
 MAX_SW_FULLCAN_OBJ = 32
@@ -604,14 +606,18 @@ class SFF_Entry(cstruct):
   '''Standard ID Frame Format Entry structure.
   
   controller: CAN Controller, should be:
-              CAN1_CTRL: CAN1 Controller
-              CAN2_CTRL: CAN2 Controller
-  disable:  Disable bit, should be:
-            MSG_ENABLE: disable bit = 0
-            MSG_DISABLE: disable bit = 1
-  id_11:  Standard ID, should be 11-bit value
-  ptr:  LPC1769 memory address where structure is stored. Use this in place of
-        the C reference operator (&).
+    
+    - CAN1_CTRL: CAN1 Controller
+    - CAN2_CTRL: CAN2 Controller
+    
+  disable: Disable bit, should be:
+  
+    - MSG_ENABLE: disable bit = 0
+    - MSG_DISABLE: disable bit = 1
+    
+  id_11: Standard ID should be 11-bit value
+  
+  ptr: LPC1769 memory address where structure is stored. Use this in place of the C reference operator (&).
         
   '''
   pass
@@ -619,20 +625,30 @@ class SFF_Entry(cstruct):
 class CAN_MSG_Type(cstruct):
   '''CAN message object structure.
   
-  id: if format = STD_ID_FORMAT, id should be 11 bit identifier
-      if format = EXT_ID_FORMAT, id should be 29 bit identifier
-  dataA[4]: Data field A
-  dataB[4]: Data field B
-  len:  Length of data field in bytes, should be:
-        0000b-0111b: 0-7 bytes
-        1xxxb: 8 bytes
+  id: 
+  
+  - if format = STD_ID_FORMAT, id should be 11 bit identifier
+  
+  - if format = EXT_ID_FORMAT, id should be 29 bit identifier
+  
+    - dataA[4]: Data field A
+    - dataB[4]: Data field B
+    
+  len: Length of data field in bytes, should be:
+    
+    - 0000b-0111b: 0-7 bytes
+    - 1xxxb: 8 bytes
+    
   format: Identifier Format, should be:
-          STD_ID_FORMAT: Standard ID - 11 bit format
-          EXT_ID_FORMAT: Extended ID - 29 bit format
+      
+    - STD_ID_FORMAT: Standard ID - 11 bit format
+    - EXT_ID_FORMAT: Extended ID - 29 bit format
+  
   type: Remote Frame transmission, should be:
-        DATA_FRAME: the number of data bytes called out by the DLC
-                    field are send from the CANxTDA and CANxTDB registers
-        REMOTE_FRAME: Remote Frame is sent
+        
+  - DATA_FRAME: the number of data bytes called out by the DLC field are send from the CANxTDA and CANxTDB registers
+  - REMOTE_FRAME: Remote Frame is sent
+ 
   ptr:  LPC1769 memory address where structure is stored. Use this in place of
         the C reference operator (&).
         
@@ -711,15 +727,19 @@ class CAN_ID_FORMAT_Type:
 class FullCAN_Entry(cstruct):
   '''FullCAN Entry structure.
   
-  controller: CAN Controller, should be:
-              CAN1_CTRL: CAN1 Controller
-              CAN2_CTRL: CAN2 Controller
+  controller: CAN Controller, should be:  
+  
+  - CAN1_CTRL: CAN1 Controller
+  - CAN2_CTRL: CAN2 Controller
+  
   disable:  Disable bit, should be:
-            MSG_ENABLE: disable bit = 0
-            MSG_DISABLE: disable bit = 1
+  
+  - MSG_ENABLE: disable bit = 0
+  - MSG_DISABLE: disable bit = 1
+  
   id_11:  Standard ID, should be 11-bit value
-  ptr:  LPC1769 memory address where structure is stored. Use this in place of
-        the C reference operator (&).
+  
+  ptr:  LPC1769 memory address where structure is stored. Use this in place of the C reference operator (&).
         
   '''
   pass
@@ -728,15 +748,20 @@ class EFF_GPR_Entry(cstruct):
   ''' Group of Extended ID Frame Format Entry structure.
   
   controller1:  First CAN Controller, should be:
-                CAN1_CTRL: CAN1 Controller
-                CAN2_CTRL: CAN2 Controller
+  
+  - CAN1_CTRL: CAN1 Controller
+  - CAN2_CTRL: CAN2 Controller
+  
   controller2:  Second Disable bit, should be:
-                MSG_ENABLE: disable bit = 0(default)
-                MSG_DISABLE: disable bit = 1
+  
+  - MSG_ENABLE: disable bit = 0(default)
+  - MSG_DISABLE: disable bit = 1
+  
   lowerEID: Extended ID lower bound, should be 29-bit value
+  
   upperEID: Extended ID upper bound, should be 29-bit value
-  ptr:  LPC1769 memory address where structure is stored. Use this in place of
-        the C reference operator (&).
+  
+  ptr:  LPC1769 memory address where structure is stored. Use this in place of the C reference operator (&).
         
   '''
   pass
@@ -772,31 +797,40 @@ class CAN_INT_EN_Type:
 class CAN_PinCFG_Type(cstruct):
   '''Pin Configuration structure.
   
-  RD: For CAN1:
-      CAN_RD1_P0_0: RD pin is on P0.0
-      CAN_RD1_P0_21 : RD pin is on P0.21
-      For CAN2:
-      CAN_RD2_P0_4: RD pin is on P0.4
-      CAN_RD2_P2_7: RD pin is on P2.7
-  TD: For CAN1:
-      CAN_TD1_P0_1: TD pin is on P0.1
-      CAN_TD1_P0_22: TD pin is on P0.22
-      For CAN2:
-      CAN_TD2_P0_5: TD pin is on P0.5
-      CAN_TD2_P2_8: TD pin is on P2.8
-  ptr:  LPC1769 memory address where structure is stored. Use this in place of
-        the C reference operator (&).
-        
+  RD: 
+  
+  - For CAN1:
+  
+    - CAN_RD1_P0_0: RD pin is on P0.0
+    - CAN_RD1_P0_21 : RD pin is on P0.21
+  
+  - For CAN2:
+  
+    - CAN_RD2_P0_4: RD pin is on P0.4
+    - CAN_RD2_P2_7: RD pin is on P2.7
+  
+  TD: 
+  
+  - For CAN1:
+  
+    - CAN_TD1_P0_1: TD pin is on P0.1
+    - CAN_TD1_P0_22: TD pin is on P0.22
+      
+  - For CAN2:
+    
+    - CAN_TD2_P0_5: TD pin is on P0.5
+    - CAN_TD2_P2_8: TD pin is on P2.8
+  
+  ptr:  LPC1769 memory address where structure is stored. Use this in place of the C reference operator (&).
+
   '''
   pass
 
 class CAN_FRAME_Type:
   '''Symbolic names for type of CAN message.
   '''
-  # Data frame
-  DATA_FRAME = 0
-  # Remote frame
-  REMOTE_FRAME = 1
+  DATA_FRAME = 0   # Data frame
+  REMOTE_FRAME = 1   # Remote frame
 
 class FullCAN_IC_Type:
   '''FullCAN Interrupt Capture type definition.
@@ -810,22 +844,30 @@ class SFF_GPR_Entry(cstruct):
   '''Group of Standard ID Frame Format Entry structure.
   
   controller1:  First CAN Controller, should be:
-                CAN1_CTRL: CAN1 Controller
-                CAN2_CTRL: CAN2 Controller
+  
+  - CAN1_CTRL: CAN1 Controller
+  - CAN2_CTRL: CAN2 Controller
+  
   disable1: First Disable bit, should be:
-            MSG_ENABLE: disable bit = 0
-            MSG_DISABLE: disable bit = 1
+  
+  - MSG_ENABLE: disable bit = 0
+  - MSG_DISABLE: disable bit = 1
+  
   lowerID:  ID lower bound, should be 11-bit value
+  
   controller2:  Second CAN Controller, should be:
-                CAN1_CTRL: CAN1 Controller
-                CAN2_CTRL: CAN2 Controller
+  
+  - CAN1_CTRL: CAN1 Controller
+  - CAN2_CTRL: CAN2 Controller
+  
   disable2: Second Disable bit, should be:
-            MSG_ENABLE: disable bit = 0
-            MSG_DISABLE: disable bit = 1
-  upperID:  ID upper bound, should be 11-bit value and equal or greater than
-            lowerID
-  ptr:  LPC1769 memory address where structure is stored. Use this in place of
-        the C reference operator (&).
+  
+  - MSG_ENABLE: disable bit = 0
+  - MSG_DISABLE: disable bit = 1
+  
+  upperID:  ID upper bound, should be 11-bit value and equal or greater than lowerID
+  
+  ptr:  LPC1769 memory address where structure is stored. Use this in place of the C reference operator (&).
         
   '''
   pass
@@ -854,11 +896,13 @@ class EFF_Entry(cstruct):
   '''Extended ID Frame Format Entry structure.
   
   controller: CAN Controller, should be:
-              CAN1_CTRL: CAN1 Controller
-              CAN2_CTRL: CAN2 Controller
+  
+  - CAN1_CTRL: CAN1 Controller
+  - CAN2_CTRL: CAN2 Controller
+  
   ID_29:  Extend ID, shoud be 29-bit value
-  ptr:  LPC1769 memory address where structure is stored. Use this in place of
-        the C reference operator (&).
+  
+  ptr:  LPC1769 memory address where structure is stored. Use this in place of the C reference operator (&).
         
   '''
   pass
@@ -867,17 +911,26 @@ class AF_SectionDef(cstruct):
   '''Acceptance Filter Section Table structure.
   
   FullCAN_Sec: The pointer point to FullCAN_Entry
+  
   FC_NumEntry: FullCAN Entry Number
+  
   SFF_Sec: The pointer point to SFF_Entry
+  
   SFF_NumEntry: Standard ID Entry Number
+  
   SFF_GPR_Sec: The pointer point to SFF_GPR_Entry
+  
   SFF_GPR_NumEntry: Group Standard ID Entry Number
+  
   EFF_Sec: The pointer point to EFF_Entry
+  
   EFF_NumEntry: Extended ID Entry Number
+  
   EFF_GPR_Sec: The pointer point to EFF_GPR_Entry
+  
   EFF_GPR_NumEntry: Group Extended ID Entry Number
-  ptr:  LPC1769 memory address where structure is stored. Use this in place of
-        the C reference operator (&).
+  
+  ptr:  LPC1769 memory address where structure is stored. Use this in place of the C reference operator (&).
         
   '''
   pass
@@ -885,42 +938,57 @@ class AF_SectionDef(cstruct):
 def CAN_SetCommand(CANx, CMRType):
   '''Set CAN command request.
   
-  CANx: pointer to CAN peripheral selected, should be:
-        LPC_CAN1: CAN1 peripheral
-        LPC_CAN2: CAN2 peripheral
-  CMRType:  command request type, should be:
-            CAN_CMR_TR: Transmission request
-            CAN_CMR_AT: Abort Transmission request
-            CAN_CMR_RRB: Release Receive Buffer request
-            CAN_CMR_CDO: Clear Data Overrun request
-            CAN_CMR_SRR: Self Reception request
-            CAN_CMR_STB1: Select Tx Buffer 1 request
-            CAN_CMR_STB2: Select Tx Buffer 2 request
-            CAN_CMR_STB3: Select Tx Buffer 3 request
-  return: CANICR (CAN interrupt and Capture register) value
+  Args:
+  
+  - CANx: pointer to CAN peripheral selected, should be:
+    
+    - LPC_CAN1: CAN1 peripheral
+    - LPC_CAN2: CAN2 peripheral
+    
+  - CMRType:  command request type, should be:
+    
+    - CAN_CMR_TR: Transmission request
+    - CAN_CMR_AT: Abort Transmission request
+    - CAN_CMR_RRB: Release Receive Buffer request
+    - CAN_CMR_CDO: Clear Data Overrun request
+    - CAN_CMR_SRR: Self Reception request
+    - CAN_CMR_STB1: Select Tx Buffer 1 request
+    - CAN_CMR_STB2: Select Tx Buffer 2 request
+    - CAN_CMR_STB3: Select Tx Buffer 3 request
+    
+  Return: 
+  
+  - CANICR (CAN interrupt and Capture register) value
+  
   '''
   return RoboCaller().call("CAN_SetCommand", "void", CANx, CMRType)
 
 def CAN_IRQCmd(CANx, arg, NewState):
   '''Enable/Disable CAN Interrupt.
   
-  CANx: pointer to CAN peripheral selected, should be:
-        LPC_CAN1: CAN1 peripheral
-        LPC_CAN2: CAN2 peripheral
-  arg:  type of CAN interrupt that you want to enable/disable. Should be:
-        CANINT_RIE: CAN Receiver Interrupt Enable
-        CANINT_TIE1: CAN Transmit Interrupt Enable
-        CANINT_EIE: CAN Error Warning Interrupt Enable
-        CANINT_DOIE: CAN Data Overrun Interrupt Enable
-        CANINT_WUIE: CAN Wake-Up Interrupt Enable
-        CANINT_EPIE: CAN Error Passive Interrupt Enable
-        CANINT_ALIE: CAN Arbitration Lost Interrupt Enable
-        CANINT_BEIE: CAN Bus Error Interrupt Enable
-        CANINT_IDIE: CAN ID Ready Interrupt Enable
-        CANINT_TIE2: CAN Transmit Interrupt Enable for Buffer2
-        CANINT_TIE3: CAN Transmit Interrupt Enable for Buffer3
-        CANINT_FCE: FullCAN Interrupt Enable
-  NewState: New state of this function, should be: ENABLE or DISABLE
+  Args:
+  
+  - CANx: pointer to CAN peripheral selected, should be:
+  
+    - LPC_CAN1: CAN1 peripheral
+    - LPC_CAN2: CAN2 peripheral
+  
+  - arg: type of CAN interrupt that you want to enable/disable. Should be:
+    
+    - CANINT_RIE: CAN Receiver Interrupt Enable
+    - CANINT_TIE1: CAN Transmit Interrupt Enable
+    - CANINT_EIE: CAN Error Warning Interrupt Enable
+    - CANINT_DOIE: CAN Data Overrun Interrupt Enable
+    - CANINT_WUIE: CAN Wake-Up Interrupt Enable
+    - CANINT_EPIE: CAN Error Passive Interrupt Enable
+    - CANINT_ALIE: CAN Arbitration Lost Interrupt Enable
+    - CANINT_BEIE: CAN Bus Error Interrupt Enable
+    - CANINT_IDIE: CAN ID Ready Interrupt Enable
+    - CANINT_TIE2: CAN Transmit Interrupt Enable for Buffer2
+    - CANINT_TIE3: CAN Transmit Interrupt Enable for Buffer3
+    - CANINT_FCE: FullCAN Interrupt Enable
+  
+  - NewState: New state of this function, should be: ENABLE or DISABLE
   
   '''
   return RoboCaller().call("CAN_IRQCmd", "void", CANx, arg, NewState)
@@ -928,22 +996,31 @@ def CAN_IRQCmd(CANx, arg, NewState):
 def FCAN_ReadObj(CANAFx, CAN_Msg):
   '''Receive FullCAN Object.
   
-  CANAFx: CAN Acceptance Filter register, should be: LPC_CANAF
-  CAN_Msg:  pointer to the CAN_MSG_Type Struct, it will contain received
-            message information such as: ID, DLC, RTR, ID Format
-  return: CAN_ERROR, could be:
-          CAN_FULL_OBJ_NOT_RCV: FullCAN Object is not be received
-          CAN_OK: Received FullCAN Object successful
+  - Args:
+  
+    - CANAFx: CAN Acceptance Filter register, should be: LPC_CANAF
+    - CAN_Msg:  pointer to the CAN_MSG_Type Struct, it will contain 
+        received message information such as: ID, DLC, RTR, ID Format
+  
+  - Return: CAN_ERROR, could be:
+  
+    - CAN_FULL_OBJ_NOT_RCV: FullCAN Object is not be received
+    - CAN_OK: Received FullCAN Object successful
+  
   '''
   return RoboCaller().call("FCAN_ReadObj", "CAN_ERROR", CANAFx, CAN_Msg)
 
 def CAN_Init(CANx, baudrate):
   '''Initialize CAN peripheral with given baudrate.
   
-  CANx: pointer to CAN peripheral selected, should be:
-        LPC_CAN1: CAN1 peripheral
-        LPC_CAN2: CAN2 peripheral
-  baudrate: the value of CAN baudrate will be set (bps)
+  Args:
+  
+  - CANx: pointer to CAN peripheral selected, should be:
+    
+    - LPC_CAN1: CAN1 peripheral
+    - LPC_CAN2: CAN2 peripheral
+  
+  - baudrate: the value of CAN baudrate will be set (bps)
   
   '''
   return RoboCaller().call("CAN_Init", "void", CANx, baudrate)
@@ -951,20 +1028,25 @@ def CAN_Init(CANx, baudrate):
 def CAN_ModeConfig(CANx, mode, NewState):
   '''Enable/Disable CAN Mode.
   
-  CANx: pointer to CAN peripheral selected, should be:
-        LPC_CAN1: CAN1 peripheral
-        LPC_CAN2: CAN2 peripheral
+  Args:
+  
+  - CANx: pointer to CAN peripheral selected, should be:
+    
+    - LPC_CAN1: CAN1 peripheral
+    - LPC_CAN2: CAN2 peripheral
         
-  mode: type of CAN mode that you want to enable/disable, should be:
-        CAN_OPERATING_MODE: Normal Operating Mode
-        CAN_RESET_MODE: Reset Mode
-        CAN_LISTENONLY_MODE: Listen Only Mode
-        CAN_SELFTEST_MODE: Self Test Mode
-        CAN_TXPRIORITY_MODE: Transmit Priority Mode
-        CAN_SLEEP_MODE: Sleep Mode
-        CAN_RXPOLARITY_MODE: Receive Polarity Mode
-        CAN_TEST_MODE: Test Mode
-  NewState: New State of this function, should be: ENABLE or DISABLE
+  - mode: type of CAN mode that you want to enable/disable, should be:
+        
+    - CAN_OPERATING_MODE: Normal Operating Mode
+    - CAN_RESET_MODE: Reset Mode
+    - CAN_LISTENONLY_MODE: Listen Only Mode
+    - CAN_SELFTEST_MODE: Self Test Mode
+    - CAN_TXPRIORITY_MODE: Transmit Priority Mode
+    - CAN_SLEEP_MODE: Sleep Mode
+    - CAN_RXPOLARITY_MODE: Receive Polarity Mode
+    - CAN_TEST_MODE: Test Mode
+  
+  - NewState: New State of this function, should be: ENABLE or DISABLE
 
   '''
   return RoboCaller().call("CAN_ModeConfig", "void", CANx, mode, NewState)
@@ -972,17 +1054,27 @@ def CAN_ModeConfig(CANx, mode, NewState):
 def CAN_LoadExplicitEntry(CANx, ID, format):
   '''Add Explicit ID into AF Look-Up Table dynamically.
   
-  CANx: pointer to CAN peripheral selected, should be:
-        LPC_CAN1: CAN1 peripheral
-        LPC_CAN2: CAN2 peripheral
-  id: The ID of entry will be added
-  format: is the type of ID Frame Format, should be:
-          STD_ID_FORMAT: 11-bit ID value
-          EXT_ID_FORMAT: 29-bit ID value
-  return: CAN Error, could be:
-          CAN_OBJECTS_FULL_ERROR: No more rx or tx objects available
-          CAN_ID_EXIT_ERROR: ID exited in table
-          CAN_OK: ID is added into table successfully
+  Args:
+  
+  - CANx: pointer to CAN peripheral selected, should be:
+  
+    - LPC_CAN1: CAN1 peripheral
+    - LPC_CAN2: CAN2 peripheral
+  
+  - id: The ID of entry will be added
+  
+  - format: is the type of ID Frame Format, should be:
+    
+    - STD_ID_FORMAT: 11-bit ID value
+    - EXT_ID_FORMAT: 29-bit ID value
+    
+  Return: 
+  
+  - CAN Error, could be:
+  
+    - CAN_OBJECTS_FULL_ERROR: No more rx or tx objects available
+    - CAN_ID_EXIT_ERROR: ID exited in table
+    - CAN_OK: ID is added into table successfully
           
   '''
   return RoboCaller().call("CAN_LoadExplicitEntry", "CAN_ERROR", CANx, ID, format)
@@ -990,24 +1082,39 @@ def CAN_LoadExplicitEntry(CANx, ID, format):
 def CAN_LoadFullCANEntry(CANx, ID):
   '''Load FullCAN entry into AFLUT.
   
-  CANx: pointer to CAN peripheral selected, should be:
-        LPC_CAN1: CAN1 peripheral
-        LPC_CAN2: CAN2 peripheral
-  id: identifier of entry that will be added
-  return: CAN_ERROR, could be:
-          CAN_OK: loading is successful
-          CAN_ID_EXIT_ERROR: ID exited in FullCAN Section
-          CAN_OBJECTS_FULL_ERROR: no more space available
+  Args:
+  
+  - CANx: pointer to CAN peripheral selected, should be:
+    
+    - LPC_CAN1: CAN1 peripheral
+    - LPC_CAN2: CAN2 peripheral
+  
+  - id: identifier of entry that will be added
+  
+  Return: 
+  
+  - CAN_ERROR, could be:
+    
+    - CAN_OK: loading is successful
+    - CAN_ID_EXIT_ERROR: ID exited in FullCAN Section
+    - CAN_OBJECTS_FULL_ERROR: no more space available
+  
   '''
   return RoboCaller().call("CAN_LoadFullCANEntry", "CAN_ERROR", CANx, ID)
 
 def CAN_IntGetStatus(CANx):
   '''Get CAN interrupt status.
   
-  CANx: pointer to CAN peripheral selected, should be:
-        LPC_CAN1: CAN1 peripheral
-        LPC_CAN2: CAN2 peripheral
-  return: CANICR (CAN interrupt and Capture register) value
+  Args:
+  
+  - CANx: pointer to CAN peripheral selected, should be:
+  
+    - LPC_CAN1: CAN1 peripheral
+    - LPC_CAN2: CAN2 peripheral
+    
+  Return: 
+  
+  - CANICR (CAN interrupt and Capture register) value
   
   '''
   return RoboCaller().call("CAN_IntGetStatus", "uint32_t", CANx)
@@ -1015,10 +1122,16 @@ def CAN_IntGetStatus(CANx):
 def CAN_SetAFMode(CANAFx, AFmode):
   '''Check if FullCAN interrupt enable or not.
   
-  CANAFx: pointer to LPC_CANAF_TypeDef object, should be: LPC_CANAF
-  return: IntStatus, could be:
-          SET: if FullCAN interrupt is enable
-          RESET: if FullCAN interrupt is disable
+  Args:
+  
+  - CANAFx: pointer to LPC_CANAF_TypeDef object, should be: LPC_CANAF
+  
+  Return: 
+  
+  - IntStatus, could be:
+    
+    - SET: if FullCAN interrupt is enable
+    - RESET: if FullCAN interrupt is disable
   
   '''
   return RoboCaller().call("CAN_SetAFMode", "void", CANAFx, AFmode)
@@ -1026,14 +1139,22 @@ def CAN_SetAFMode(CANAFx, AFmode):
 def CAN_SendMsg(CANx, CAN_Msg):
   '''Send message data.
   
-  CANx: pointer to CAN peripheral selected, should be:
-        LPC_CAN1: CAN1 peripheral
-        LPC_CAN2: CAN2 peripheral
-  CAN_Msg:  pointer to CAN_MSG_Type Structure, it contains message information
-            such as: ID, DLC, RTR, ID Format
-  return: Status:
-          SUCCESS: send message successfully
-          ERROR: send message unsuccessfully
+  Args:
+  
+  - CANx: pointer to CAN peripheral selected, should be:
+  
+    - LPC_CAN1: CAN1 peripheral
+    - LPC_CAN2: CAN2 peripheral
+    
+  - CAN_Msg:  pointer to CAN_MSG_Type Structure, it contains message information
+          such as: ID, DLC, RTR, ID Format
+  
+  Return: 
+
+  - Status:
+    
+    - SUCCESS: send message successfully
+    - ERROR: send message unsuccessfully
           
   '''
   return RoboCaller().call("CAN_SendMsg", "Status", CANx, CAN_Msg)
@@ -1041,18 +1162,29 @@ def CAN_SendMsg(CANx, CAN_Msg):
 def CAN_LoadGroupEntry(CANx, lowerID, upperID, format):
   '''Load Group entry into AFLUT.
   
-  CANx: pointer to CAN peripheral selected, should be:
-        LPC_CAN1: CAN1 peripheral
-        LPC_CAN2: CAN2 peripheral
-  lowerID: lower identifier of entry
-  upperID: upper identifier of entry
-  format: format: type of ID format, should be:
-          STD_ID_FORMAT: Standard ID format (11-bit value)
-          EXT_ID_FORMAT: Extended ID format (29-bit value)
-  return: CAN_ERROR, could be:
-          CAN_OK: loading is successful
-          CAN_CONFLICT_ID_ERROR: Conflict ID occurs
-          CAN_OBJECTS_FULL_ERROR: no more space available
+  Args:
+  
+  - CANx: pointer to CAN peripheral selected, should be:
+   
+    - LPC_CAN1: CAN1 peripheral
+    - LPC_CAN2: CAN2 peripheral
+  
+  - lowerID: lower identifier of entry
+  
+  - upperID: upper identifier of entry
+  
+  - format: format: type of ID format, should be:
+    
+    - STD_ID_FORMAT: Standard ID format (11-bit value)
+    - EXT_ID_FORMAT: Extended ID format (29-bit value)
+  
+  Return: 
+  
+  - CAN_ERROR, could be:
+   
+    - CAN_OK: loading is successful
+    - CAN_CONFLICT_ID_ERROR: Conflict ID occurs
+    - CAN_OBJECTS_FULL_ERROR: no more space available
   
   '''
   return RoboCaller().call("CAN_LoadGroupEntry", "CAN_ERROR", CANx, lowerID, upperID, format)
@@ -1060,27 +1192,43 @@ def CAN_LoadGroupEntry(CANx, lowerID, upperID, format):
 def CAN_SetupAFLUT(CANAFx, AFSection):
   '''Setup Acceptance Filter Look-Up Table.
   
-  CANAFx: pointer to LPC_CANAF_TypeDef object, should be: LPC_CANAF
-  AFSection:  pointer to AF_SectionDef structure it contains information 
+  Args:
+    
+  - CANAFx: pointer to LPC_CANAF_TypeDef object, should be: LPC_CANAF
+  - AFSection:  pointer to AF_SectionDef structure it contains information 
               about 5 sections will be install in AFLUT
-  return: CAN Error  could be:
-          CAN_OBJECTS_FULL_ERROR: No more rx or tx objects available
-          CAN_AF_ENTRY_ERROR: table error-violation of ascending numerical order
-          CAN_OK: ID is added into table successfully
+ 
+  Return: 
+  
+  - CAN Error  could be:
+    
+    - CAN_OBJECTS_FULL_ERROR: No more rx or tx objects available
+    - CAN_AF_ENTRY_ERROR: table error-violation of ascending numerical order
+    - CAN_OK: ID is added into table successfully
+  
   '''
   return RoboCaller().call("CAN_SetupAFLUT", "CAN_ERROR", CANAFx, AFSection)
 
 def CAN_GetCTRLStatus(CANx, arg):
   '''Get CAN Control Status.
-  CANx: pointer to CAN peripheral selected, should be:
-        LPC_CAN1: CAN1 peripheral
-        LPC_CAN2: CAN2 peripheral
-  arg:  type of CAN status to get from CAN status register. Should be:
-        CANCTRL_GLOBAL_STS: CAN Global Status
-        CANCTRL_INT_CAP: CAN Interrupt and Capture
-        CANCTRL_ERR_WRN: CAN Error Warning Limit
-        CANCTRL_STS: CAN Control Status
-  return: Current Control Status that you want to get value
+  
+  Args:
+    
+  - CANx: pointer to CAN peripheral selected, should be:
+    
+    - LPC_CAN1: CAN1 peripheral
+    - LPC_CAN2: CAN2 peripheral
+  
+  - arg:  type of CAN status to get from CAN status register. Should be:
+    
+    - CANCTRL_GLOBAL_STS: CAN Global Status
+    - CANCTRL_INT_CAP: CAN Interrupt and Capture
+    - CANCTRL_ERR_WRN: CAN Error Warning Limit
+    - CANCTRL_STS: CAN Control Status
+  
+  Return: 
+    
+  - Current Control Status that you want to get value
   
   '''
   return RoboCaller().call("CAN_GetCTRLStatus", "uint32_t", CANx, arg)
@@ -1088,9 +1236,13 @@ def CAN_GetCTRLStatus(CANx, arg):
 def CAN_DeInit(CANx):
   '''Deinitialize CAN module.
   
-  CANx: pointer to CAN peripheral selected, should be:
-        LPC_CAN1: CAN1 peripheral
-        LPC_CAN2: CAN2 peripheral
+  Args:
+  
+  - CANx: pointer to CAN peripheral selected, should be:
+    
+    - LPC_CAN1: CAN1 peripheral
+    - LPC_CAN2: CAN2 peripheral
+  
   '''
   
   return RoboCaller().call("CAN_DeInit", "void", CANx)
@@ -1098,14 +1250,22 @@ def CAN_DeInit(CANx):
 def CAN_ReceiveMsg(CANx, CAN_Msg):
   '''Receive message data.
   
-  CANx: pointer to CAN peripheral selected, should be:
-        LPC_CAN1: CAN1 peripheral
-        LPC_CAN2: CAN2 peripheral
-  CAN_Msg:  pointer to the CAN_MSG_Type Struct, it will contain received message 
+  Args:
+  
+  - CANx: pointer to CAN peripheral selected, should be:
+    
+    - LPC_CAN1: CAN1 peripheral
+    - LPC_CAN2: CAN2 peripheral
+  
+  - CAN_Msg:  pointer to the CAN_MSG_Type Struct, it will contain received message 
             information such as: ID, DLC, RTR, ID Format
-  return: Status:
-          SUCCESS: receive message successfully
-          ERROR: receive message unsuccessfully
+  
+  Return: 
+  
+  - Status:
+  
+    - SUCCESS: receive message successfully
+    - ERROR: receive message unsuccessfully
           
   '''
   return RoboCaller().call("CAN_ReceiveMsg", "Status", CANx, CAN_Msg)
@@ -1113,11 +1273,17 @@ def CAN_ReceiveMsg(CANx, CAN_Msg):
 def CAN_FullCANPendGetStatus(CANAFx, ic_type):
   '''Get value of FullCAN interrupt and capture register.
   
-  CANAFx: pointer to LPC_CANAF_TypeDef object, should be: LPC_CANAF
-  ic_type:  FullCAN IC type, should be:
-            FULLCAN_IC0: FullCAN Interrupt Capture 0
-            FULLCAN_IC1: FullCAN Interrupt Capture 1
-  return: FCANIC0 or FCANIC1 (FullCAN interrupt and Capture register) value
+  Args:
+  
+  - CANAFx: pointer to LPC_CANAF_TypeDef object, should be: LPC_CANAF
+  - ic_type:  FullCAN IC type, should be:
+  
+    - FULLCAN_IC0: FullCAN Interrupt Capture 0
+    - FULLCAN_IC1: FullCAN Interrupt Capture 1
+  
+  Return: 
+  
+  - FCANIC0 or FCANIC1 (FullCAN interrupt and Capture register) value
   
   '''
   return RoboCaller().call("CAN_FullCANPendGetStatus", "uint32_t", CANAFx, ic_type)
@@ -1125,12 +1291,18 @@ def CAN_FullCANPendGetStatus(CANAFx, ic_type):
 def CAN_GetCRStatus(CANCRx, arg):
   '''Get CAN Central Status.
   
-  CANCRx: pointer to LPC_CANCR_TypeDef, should be: LPC_CANCR
-  arg:  type of CAN status to get from CAN Central status register. Should be:
-        CANCR_TX_STS: Central CAN Tx Status
-        CANCR_RX_STS: Central CAN Rx Status
-        CANCR_MS: Central CAN Miscellaneous Status
-  return: Current Central Status that you want to get value
+  Args:
+  
+  - CANCRx: pointer to LPC_CANCR_TypeDef, should be: LPC_CANCR
+  - arg:  type of CAN status to get from CAN Central status register. Should be:
+  
+    - CANCR_TX_STS: Central CAN Tx Status
+    - CANCR_RX_STS: Central CAN Rx Status
+    - CANCR_MS: Central CAN Miscellaneous Status
+  
+  Return: 
+  
+  - Current Central Status that you want to get value
   
   '''
   return RoboCaller().call("CAN_GetCRStatus", "uint32_t", CANCRx, arg)
@@ -1138,27 +1310,41 @@ def CAN_GetCRStatus(CANCRx, arg):
 def CAN_RemoveEntry(EntryType, position):
   '''Remove AFLUT entry (FullCAN entry and Explicit Standard entry).
   
-  EntryType:  the type of entry that want to remove, should be:
-              FULLCAN_ENTRY
-              EXPLICIT_STANDARD_ENTRY
-              GROUP_STANDARD_ENTRY
-              EXPLICIT_EXTEND_ENTRY
-              GROUP_EXTEND_ENTRY
-  position: the position of this entry in its section
-  return: CAN_ERROR, could be:
-          CAN_OK: removal successful
-          CAN_ENTRY_NOT_EXIT_ERROR: removal failed
+  Args:
+  
+  - EntryType:  the type of entry that want to remove, should be:
+    
+    - FULLCAN_ENTRY
+    - EXPLICIT_STANDARD_ENTRY
+    - GROUP_STANDARD_ENTRY
+    - EXPLICIT_EXTEND_ENTRY
+    - GROUP_EXTEND_ENTRY
+    
+  - position: the position of this entry in its section
+  
+  Return: 
+  
+  - CAN_ERROR, could be:
+    
+    - CAN_OK: removal successful
+    - CAN_ENTRY_NOT_EXIT_ERROR: removal failed
           
   '''
   return RoboCaller().call("CAN_RemoveEntry", "CAN_ERROR", EntryType, position)
 
 def CAN_FullCANIntGetStatus(CANAFx):
   '''Check if FullCAN interrupt enable or not.
+ 
+  Args:
   
-  CANAFx: pointer to LPC_CANAF_TypeDef object, should be: LPC_CANAF
-  return: IntStatus, could be:
-          SET: if FullCAN interrupt is enable
-          RESET: if FullCAN interrupt is disable
+  - CANAFx: pointer to LPC_CANAF_TypeDef object, should be: LPC_CANAF
+  
+  Return: 
+  
+  - IntStatus, could be:
+  
+    - SET: if FullCAN interrupt is enable
+    - RESET: if FullCAN interrupt is disable
   
   '''
   return RoboCaller().call("CAN_FullCANIntGetStatus", "IntStatus", CANAFx)

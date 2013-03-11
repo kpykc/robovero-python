@@ -14,7 +14,7 @@ __version__ =     "0.1"
 
 def DAC_VALUE(n):
   '''After the selected settling time after this field is written with a new
-  VALUE, the voltage on the AOUT pin (with respect to VSSA) is VALUE/1024 × VREF.
+  VALUE, the voltage on the AOUT pin (with respect to VSSA) is VALUE/1024 * VREF.
   '''
   return (((n&0x3FF)<<6))
 
@@ -51,12 +51,20 @@ def PARAM_DAC_CURRENT_OPT(OPTION):
 class DAC_CONVERTER_CFG_Type(cstruct):
   '''Configuration for DAC converter control register.
   
-  DBLBUF_ENA: 0: Disable DACR double buffering
-              1: when bit CNT_ENA, enable DACR double buffering feature
-  CNT_ENA:  0: Time out counter is disable
-            1: Time out conter is enable
-  DMA_ENA:  0: DMA access is disable
-            1: DMA burst request
+  - DBLBUF_ENA: 
+  
+    - 0: Disable DACR double buffering
+    - 1: when bit CNT_ENA, enable DACR double buffering feature
+  
+  - CNT_ENA:  
+    
+    - 0: Time out counter is disable
+    - 1: Time out conter is enable
+  
+  - DMA_ENA:  
+  
+    - 0: DMA access is disable
+    - 1: DMA burst request
   
   '''
   pass
@@ -72,9 +80,14 @@ class DAC_CURRENT_OPT:
 def DAC_SetBias(DACx, bias):
   '''Set Maximum current for DAC.
   
-  DACx: pointer to LPC_DAC_TypeDef, should be: LPC_DAC
-  bias: 0 is 700 uA
-        1 is 350 uA
+  Args:
+  
+  - DACx: pointer to LPC_DAC_TypeDef, should be: LPC_DAC
+  
+  - bias: 
+    
+    - 0 is 700 uA
+    - 1 is 350 uA
         
   '''
   return RoboCaller().call("DAC_SetBias", "void", DACx, bias)
@@ -82,8 +95,10 @@ def DAC_SetBias(DACx, bias):
 def DAC_ConfigDAConverterControl(DACx, DAC_ConverterConfigStruct):
   '''To enable the DMA operation and control DMA timer.
   
-  DACx: pointer to LPC_DAC_TypeDef, should be: LPC_DAC
-  DAC_ConverterConfigStruct: pointer to DAC_CONVERTER_CFG_Type
+  Args:
+  
+  - DACx: pointer to LPC_DAC_TypeDef, should be: LPC_DAC
+  - DAC_ConverterConfigStruct: pointer to DAC_CONVERTER_CFG_Type
   
   '''
   return RoboCaller().call("DAC_ConfigDAConverterControl", "void", DACx, DAC_ConverterConfigStruct)
@@ -91,16 +106,20 @@ def DAC_ConfigDAConverterControl(DACx, DAC_ConverterConfigStruct):
 def DAC_UpdateValue(DACx, dac_value):
   '''Update value to DAC.
   
-  DACx: pointer to LPC_DAC_TypeDef, should be: LPC_DAC
-  dac_value: value 10 bit to be converted to output
+  Args:
+  
+  - DACx: pointer to LPC_DAC_TypeDef, should be: LPC_DAC
+  - dac_value: value 10 bit to be converted to output
   
   '''
   return RoboCaller().call("DAC_UpdateValue", "void", DACx, dac_value)
 
 def DAC_Init(DACx):
   '''Initial ADC configuration. Maximum  current is 700 uA, Value to AOUT is 0.
-    
-  DACx: pointer to LPC_DAC_TypeDef, should be: LPC_DAC
+   
+  Args:
+   
+  - DACx: pointer to LPC_DAC_TypeDef, should be: LPC_DAC
   
   '''
   return RoboCaller().call("DAC_Init", "void", DACx)
@@ -108,8 +127,10 @@ def DAC_Init(DACx):
 def DAC_SetDMATimeOut(DACx, time_out):
   '''Set reload value for interrupt/DMA counter.
     
-  DACx: pointer to LPC_DAC_TypeDef, should be: LPC_DAC
-  time_out: time out to reload for interrupt/DMA counter
+  Args:
+  
+  - DACx: pointer to LPC_DAC_TypeDef, should be: LPC_DAC
+  - time_out: time out to reload for interrupt/DMA counter
   
   '''
   return RoboCaller().call("DAC_SetDMATimeOut", "void", DACx, time_out)

@@ -14,6 +14,19 @@ class Array(object):
   """Allocates and initializes an array in RoboVero RAM.
   """
   def __init__(self, length, size, values=[]):
+    """
+    Args:
+    
+    - length(int): length of array
+    - size(int): each item's size
+    - values(list/int/str): 
+      - list: try create array of the list
+      - int: try create array with initial value of values
+      - str: try create a string array 
+    
+    TODO: ensure the type of size
+    
+    """
     self.length = length
     self.size = size
     self.ptr = malloc(size * length)
@@ -35,11 +48,24 @@ class Array(object):
         self[i] = ord(values[i])
 
   def __getitem__(self, key):
+    """
+    Return:
+    
+    - (int):value of Array[key]
+    
+    """
     if key >= self.length:
       raise IndexError
     return RoboCaller().call("deref", "int", self.ptr + self.size*key, self.size)
 
   def __setitem__(self, key, value):
+    """
+    Args:
+    
+    - key(int): the index of the item in the array
+    - value(int): the value the item needs to set to
+    
+    """
     if key >= self.length:
       raise IndexError
     if type(value) != int:
@@ -73,6 +99,10 @@ def initMatch(ch, count):
 def registerCallback(IRQn, function):
   """Register a RoboVero interrupt service routine.
   
-  Pass the IRQ number and function to call when an interrupt occurs.
+  Args:
+  
+  - IRQn(int): Interrupt number
+  - function(function): A pointer to the function that is called when an interrupt occurs
+  
   """
   isr_list[IRQn] = function
