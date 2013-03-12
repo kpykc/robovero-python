@@ -1,7 +1,7 @@
 .. toctree::
 
 :mod:`extras` Module
----------------------
+-------------------------------
 
 .. automodule:: robovero.extras
     :members:

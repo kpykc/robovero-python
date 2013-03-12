@@ -1,7 +1,7 @@
 .. toctree::
 
 :mod:`internals` Module
----------------------
+-------------------------------
 
 .. automodule:: robovero.internals
     :members:

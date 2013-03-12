@@ -1,7 +1,7 @@
 .. toctree::
 
 :mod:`arduino` Module
----------------------
+-------------------------------
 
 .. automodule:: robovero.arduino
     :members:

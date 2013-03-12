@@ -1,7 +1,7 @@
 .. toctree::
 
 :mod:`core` Module
----------------------
+-------------------------------
 
 .. automodule:: robovero.core
     :members:
