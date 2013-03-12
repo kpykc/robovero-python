@@ -41,8 +41,7 @@ class RTC_TIME_Type(cstruct):
   - DOY:  Day of Year Register
   - MONTH:  Months Register
   - YEAR: Years Register
-  - ptr:  LPC1769 memory address where structure is stored. Use this in place of
-  the C reference operator (&).
+  - ptr:  LPC1769 memory address where structure is stored. Use this in place of the C reference operator (&).
   
   '''
   pass

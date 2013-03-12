@@ -125,18 +125,18 @@ class MCPWM_COUNT_CFG_Type(cstruct):
 class MCPWM_CAPTURE_CFG_Type(cstruct):
   '''MCPWM Capture Configuration type definition.
   
-  - captureChannel: Capture Channel Number, should be in range from 0 to 2 */
+  - captureChannel: Capture Channel Number, should be in range from 0 to 2
   - captureRising:  Enable/Disable Capture on Rising Edge event, should be:
-                  ENABLE or DISABLE.
+              ENABLE or DISABLE.
   - captureFalling: Enable/Disable Capture on Falling Edge event, should be:
-                  ENABLE or DISABLE.
+              ENABLE or DISABLE.
   - timerReset: Enable/Disable Timer reset function an capture, should be:
-              ENABLE or DISABLE.
+          ENABLE or DISABLE.
   - hnfEnable:  Enable/Disable Hardware noise filter function, should be:
-              ENABLE or DISABLE.
+          ENABLE or DISABLE.
   - ptr:  LPC1769 memory address where structure is stored. Use this in place of
-        the C reference operator (&).
-        
+    the C reference operator (&).
+    
   '''
   pass
 

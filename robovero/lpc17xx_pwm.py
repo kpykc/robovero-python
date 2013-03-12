@@ -72,15 +72,15 @@ class PWM_TIMERCFG_Type(cstruct):
   '''Configuration structure in PWM TIMER mode.
 
   - PrescaleOption: Prescale option, should be:
-    
+  
     - PWM_TIMER_PRESCALE_TICKVAL: Prescale in absolute value
     - PWM_TIMER_PRESCALE_USVAL: Prescale in microsecond value
   
   - PrescaleValue:  Prescale value, 32-bit long, should be matched with
-                  PrescaleOption
-  -ptr:  LPC1769 memory address where structure is stored. Use this in place of
-        the C reference operator (&).
-        
+                PrescaleOption
+  - ptr:  LPC1769 memory address where structure is stored. Use this in place of
+      the C reference operator (&).
+      
   '''
   pass
 
