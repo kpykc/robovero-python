@@ -16,7 +16,9 @@ __version__ =     "0.1"
 def NVIC_SetVTOR(offset):
   '''Set Vector Table Offset value.
   
-  offset: Offset value
+  Args:
+  
+  - offset: Offset value
   
   '''
   return RoboCaller().call("NVIC_SetVTOR", "void", offset)
@@ -25,6 +27,7 @@ def NVIC_SCBDeInit():
   '''De-initializes the SCB peripheral registers to their default reset values.
   
   These following SCB NVIC peripheral registers will be de-initialized:
+  
   - Interrupt Control State register
   - Interrupt Vector Table Offset register
   - Application Interrupt/Reset Control register
@@ -43,6 +46,7 @@ def NVIC_DeInit():
   '''De-initializes the NVIC peripheral registers to their default reset values.
   
   These following NVIC peripheral registers will be de-initialized:
+  
   - Disable Interrupt (32 IRQ interrupt sources that matched with LPC17xx)
   - Clear all Pending Interrupts (32 IRQ interrupt source that matched with LPC17xx)
   - Clear all Interrupt Priorities (32 IRQ interrupt source that matched with LPC17xx)

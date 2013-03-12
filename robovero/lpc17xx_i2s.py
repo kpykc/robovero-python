@@ -306,26 +306,38 @@ def PARAM_I2S_BITRATE(n):
 class I2S_CFG_Type(cstruct):
   '''I2S configuration structure definition.
   
-  wordwidth:  the number of bytes in data as follow:
-              I2S_WORDWIDTH_8: 8 bit data
-              I2S_WORDWIDTH_16: 16 bit data
-              I2S_WORDWIDTH_32: 32 bit data
-  mono: Set mono/stereo mode, should be:
-        I2S_STEREO: stereo mode
-        I2S_MONO: mono mode
-  stop: Disables accesses on FIFOs, should be:
-        I2S_STOP_ENABLE: enable stop mode
-        I2S_STOP_DISABLE: disable stop mode
-  reset:  Asynchronously reset tje transmit channel and FIFO, should be:
-          I2S_RESET_ENABLE: enable reset mode
-          I2S_RESET_DISABLE: disable reset mode
-  ws_sel: Set Master/Slave mode, should be:
-          I2S_MASTER_MODE: I2S master mode
-          I2S_SLAVE_MODE: I2S slave mode
-  mute: MUTE mode: when true, the transmit channel sends only zeroes, shoule be:
-        I2S_MUTE_ENABLE: enable mute mode
-        I2S_MUTE_DISABLE: disable mute mode
-  ptr:  LPC1769 memory address where structure is stored. Use this in place of
+  - wordwidth:  the number of bytes in data as follow:
+    
+    - I2S_WORDWIDTH_8: 8 bit data
+    - I2S_WORDWIDTH_16: 16 bit data
+    - I2S_WORDWIDTH_32: 32 bit data
+ 
+  - mono: Set mono/stereo mode, should be:
+    
+    - I2S_STEREO: stereo mode
+    - I2S_MONO: mono mode
+  
+  - stop: Disables accesses on FIFOs, should be:
+    
+    - I2S_STOP_ENABLE: enable stop mode
+    - I2S_STOP_DISABLE: disable stop mode
+  
+  - reset:  Asynchronously reset tje transmit channel and FIFO, should be:
+    
+    - I2S_RESET_ENABLE: enable reset mode
+    - I2S_RESET_DISABLE: disable reset mode
+  
+  - ws_sel: Set Master/Slave mode, should be:
+    
+    - I2S_MASTER_MODE: I2S master mode
+    - I2S_SLAVE_MODE: I2S slave mode
+  
+  - mute: MUTE mode: when true, the transmit channel sends only zeroes, shoule be:
+    
+    - I2S_MUTE_ENABLE: enable mute mode
+    - I2S_MUTE_DISABLE: disable mute mode
+  
+  - ptr:  LPC1769 memory address where structure is stored. Use this in place of
         the C reference operator (&).
         
   '''
@@ -334,11 +346,14 @@ class I2S_CFG_Type(cstruct):
 class I2S_DMAConf_Type(cstruct):
   '''I2S DMA configuration structure definition.
   
-  DMAIndex: Select DMA1 or DMA2, should be:
-            I2S_DMA_1: DMA1
-            I2S_DMA_2: DMA2
-  depth:  FIFO level that triggers a DMA request 
-  ptr:  LPC1769 memory address where structure is stored. Use this in place of
+  - DMAIndex: Select DMA1 or DMA2, should be:
+    
+    - I2S_DMA_1: DMA1
+    - I2S_DMA_2: DMA2
+  
+  - depth:  FIFO level that triggers a DMA request 
+  
+  - ptr:  LPC1769 memory address where structure is stored. Use this in place of
         the C reference operator (&).
   
   '''
@@ -347,16 +362,22 @@ class I2S_DMAConf_Type(cstruct):
 class I2S_MODEConf_Type(cstruct):
   '''I2S mode configuration structure definition.
   
-  clksel: Clock source selection, should be:
-          I2S_CLKSEL_FRDCLK: Select the fractional rate divider clock output
-          I2S_CLKSEL_MCLK: Select the MCLK signal as the clock source
-  fpin: Select four pin mode, should be:
-        I2S_4PIN_ENABLE: 4-pin enable
-        I2S_4PIN_DISABLE: 4-pin disable
-  mcena:  Select MCLK mode, should be:
-          I2S_MCLK_ENABLE: MCLK enable for output
-          I2S_MCLK_DISABLE: MCLK disable for output
-  ptr:  LPC1769 memory address where structure is stored. Use this in place of
+  - clksel: Clock source selection, should be:
+    
+    - I2S_CLKSEL_FRDCLK: Select the fractional rate divider clock output
+    - I2S_CLKSEL_MCLK: Select the MCLK signal as the clock source
+  
+  - fpin: Select four pin mode, should be:
+    
+    - I2S_4PIN_ENABLE: 4-pin enable
+    - I2S_4PIN_DISABLE: 4-pin disable
+  
+  - mcena:  Select MCLK mode, should be:
+    
+    - I2S_MCLK_ENABLE: MCLK enable for output
+    - I2S_MCLK_DISABLE: MCLK disable for output
+  
+  - ptr:  LPC1769 memory address where structure is stored. Use this in place of
         the C reference operator (&).
         
   '''
@@ -365,23 +386,35 @@ class I2S_MODEConf_Type(cstruct):
 def I2S_GetLevel(I2Sx, TRMode):
   '''Get I2S Buffer Level.
   
-  I2Sx: I2S peripheral selected, should be: LPC_I2S
-  TRMode: Transmit/receive mode, should be:
-          I2S_TX_MODE = 0: transmit mode
-          I2S_RX_MODE = 1: receive mode
-  return: current level of Transmit/Receive Buffer
+  Args:
+  
+  - I2Sx: I2S peripheral selected, should be: LPC_I2S
+  
+  - TRMode: Transmit/receive mode, should be:
+    
+    - I2S_TX_MODE = 0: transmit mode
+    - I2S_RX_MODE = 1: receive mode
+  
+  Return: 
+  
+  - current level of Transmit/Receive Buffer
   
   '''
   return RoboCaller().call("I2S_GetLevel", "uint8_t", I2Sx, TRMode)
 
 def I2S_GetIRQDepth(I2Sx, TRMode):
   '''Get I2S interrupt depth.
+  Args:
   
-  I2Sx: I2S peripheral selected, should be: LPC_I2S
-  TRMode: Transmit/receive mode, should be:
-          I2S_TX_MODE = 0: transmit mode
-          I2S_RX_MODE = 1: receive mode 
-  return: depth of FIFO level on which to create an irq request
+  - I2Sx: I2S peripheral selected, should be: LPC_I2S
+  - TRMode: Transmit/receive mode, should be:
+          
+    - I2S_TX_MODE = 0: transmit mode
+    - I2S_RX_MODE = 1: receive mode 
+  
+  Return: 
+  
+  - depth of FIFO level on which to create an irq request
   
   '''
   return RoboCaller().call("I2S_GetIRQDepth", "uint8_t", I2Sx, TRMode)
@@ -389,18 +422,23 @@ def I2S_GetIRQDepth(I2Sx, TRMode):
 def I2S_Mute(I2Sx, TRMode):
   '''I2S Mute.
   
-  I2Sx: I2S peripheral selected, should be: LPC_I2S
-  TRMode: Transmit/receive mode, should be:
-          I2S_TX_MODE = 0: transmit mode
-          I2S_RX_MODE = 1: receive mode 
+  Args:
+  
+  - I2Sx: I2S peripheral selected, should be: LPC_I2S
+  - TRMode: Transmit/receive mode, should be:
+    
+    - I2S_TX_MODE = 0: transmit mode
+    - I2S_RX_MODE = 1: receive mode 
   
   '''
   return RoboCaller().call("I2S_Mute", "void", I2Sx, TRMode)
 
 def I2S_Start(I2Sx):
   '''Clear all STOP,RESET and MUTE bit, ready to operate.
+  
+  Args:
    
-  I2Sx: I2S peripheral selected, should be: LPC_I2S
+  - I2Sx: I2S peripheral selected, should be: LPC_I2S
   
   '''
   return RoboCaller().call("I2S_Start", "void", I2Sx)
@@ -408,10 +446,13 @@ def I2S_Start(I2Sx):
 def I2S_Pause(I2Sx, TRMode):
   '''I2S Pause.
   
-  I2Sx: I2S peripheral selected, should be: LPC_I2S
-  TRMode: Transmit/receive mode, should be:
-          I2S_TX_MODE = 0: transmit mode
-          I2S_RX_MODE = 1: receive mode 
+  Args:
+  
+  - I2Sx: I2S peripheral selected, should be: LPC_I2S
+  - TRMode: Transmit/receive mode, should be:
+    
+    - I2S_TX_MODE = 0: transmit mode
+    - I2S_RX_MODE = 1: receive mode 
   
   '''
   return RoboCaller().call("I2S_Pause", "void", I2Sx, TRMode)
@@ -419,7 +460,9 @@ def I2S_Pause(I2Sx, TRMode):
 def I2S_Init(I2Sx):
   '''Initialize I2S.
   
-  I2Sx: I2S peripheral selected, should be: LPC_I2S
+  Args:
+  
+  - I2Sx: I2S peripheral selected, should be: LPC_I2S
 
   '''
   return RoboCaller().call("I2S_Init", "void", I2Sx)
@@ -427,11 +470,14 @@ def I2S_Init(I2Sx):
 def I2S_SetBitRate(I2Sx, bitrate, TRMode):
   '''I2S set bitrate.
   
-  I2Sx: I2S peripheral selected, should be: LPC_I2S
-  bitrate:  bitrate value should be in range: 0 .. 63
-  TRMode: Transmit/receive mode, should be:
-          I2S_TX_MODE = 0: transmit mode
-          I2S_RX_MODE = 1: receive mode 
+  Args:
+  
+  - I2Sx: I2S peripheral selected, should be: LPC_I2S
+  - bitrate:  bitrate value should be in range: 0 .. 63
+  - TRMode: Transmit/receive mode, should be:
+    
+    - I2S_TX_MODE = 0: transmit mode
+    - I2S_RX_MODE = 1: receive mode 
   
   '''
   return RoboCaller().call("I2S_SetBitRate", "void", I2Sx, bitrate, TRMode)
@@ -439,13 +485,19 @@ def I2S_SetBitRate(I2Sx, bitrate, TRMode):
 def I2S_FreqConfig(I2Sx, Freq, TRMode):
   '''Set frequency for I2S.
   
-  I2Sx: I2S peripheral selected, should be: LPC_I2S
-  Freq: The frequency to be set. It can range from 16-96 kHz(16, 22.05, 32, 
+  Args:
+  
+  - I2Sx: I2S peripheral selected, should be: LPC_I2S
+  - Freq: The frequency to be set. It can range from 16-96 kHz(16, 22.05, 32, 
         44.1, 48, 96kHz)
-  TRMode: Transmit/receive mode, should be:
-          I2S_TX_MODE = 0: transmit mode
-          I2S_RX_MODE = 1: receive mode 
-  return: Status: ERROR or SUCCESS
+  - TRMode: Transmit/receive mode, should be:
+    
+    - I2S_TX_MODE = 0: transmit mode
+    - I2S_RX_MODE = 1: receive mode 
+ 
+  Return: 
+  
+  - Status: ERROR or SUCCESS
   
   '''
   return RoboCaller().call("I2S_FreqConfig", "Status", I2Sx, Freq, TRMode)
@@ -453,16 +505,23 @@ def I2S_FreqConfig(I2Sx, Freq, TRMode):
 def I2S_DMACmd(I2Sx, DMAIndex, TRMode, NewState):
   '''Enable/Disable DMA operation for I2S.
   
-  I2Sx: I2S peripheral selected, should be: LPC_I2S
-  DMAIndex: DMAIndex chose what DMA is used, should be:
-            I2S_DMA_1 = 0: DMA1
-            I2S_DMA_2 = 1: DMA2
-  TRMode: Transmit/receive mode, should be:
-          I2S_TX_MODE = 0: transmit mode
-          I2S_RX_MODE = 1: receive mode 
-  NewState: new state of DMA operation, should be:
-            ENABLE
-            DISABLE
+  Args:
+  
+  - I2Sx: I2S peripheral selected, should be: LPC_I2S
+  - DMAIndex: DMAIndex chose what DMA is used, should be:
+    
+    - I2S_DMA_1 = 0: DMA1
+    - I2S_DMA_2 = 1: DMA2
+ 
+  - TRMode: Transmit/receive mode, should be:
+    
+    - I2S_TX_MODE = 0: transmit mode
+    - I2S_RX_MODE = 1: receive mode 
+  
+  - NewState: new state of DMA operation, should be:
+    
+    - ENABLE
+    - DISABLE
   
   '''
   return RoboCaller().call("I2S_DMACmd", "void", I2Sx, DMAIndex, TRMode, NewState)
@@ -470,8 +529,10 @@ def I2S_DMACmd(I2Sx, DMAIndex, TRMode, NewState):
 def I2S_Send(I2Sx, BufferData):
   '''I2S Send data.
   
-  I2Sx: I2S peripheral selected, should be: LPC_I2S
-  BufferData: pointer to uint32_t is the data will be send
+  Args:
+  
+  - I2Sx: I2S peripheral selected, should be: LPC_I2S
+  - BufferData: pointer to uint32_t is the data will be send
   
   '''
   return RoboCaller().call("I2S_Send", "void", I2Sx, BufferData)
@@ -479,8 +540,13 @@ def I2S_Send(I2Sx, BufferData):
 def I2S_Receive(I2Sx):
   '''I2S Receive Data.
   
-  I2Sx: I2S peripheral selected, should be: LPC_I2S
-  return: received value
+  Args:
+  
+  - I2Sx: I2S peripheral selected, should be: LPC_I2S
+  
+  Return: 
+  
+  - received value
   
   '''
   return RoboCaller().call("I2S_Receive", "uint32_t", I2Sx)
@@ -488,7 +554,9 @@ def I2S_Receive(I2Sx):
 def I2S_DeInit(I2Sx):
   '''Deinitialize I2S transmit or receive.
   
-  I2Sx: I2S peripheral selected, should be: LPC_I2S
+  Args:
+  
+  - I2Sx: I2S peripheral selected, should be: LPC_I2S
 
   '''
   return RoboCaller().call("I2S_DeInit", "void", I2Sx)
@@ -496,11 +564,15 @@ def I2S_DeInit(I2Sx):
 def I2S_Config(I2Sx, TRMode, ConfigStruct):
   '''Configure I2S.
   
-  I2Sx: I2S peripheral selected, should be: LPC_I2S
-  TRMode: Transmit/receive mode, should be:
-          I2S_TX_MODE = 0: transmit mode
-          I2S_RX_MODE = 1: receive mode 
-  ConfigStruct: pointer to I2S_CFG_Type structure which will be initialized
+  Args:
+  
+  - I2Sx: I2S peripheral selected, should be: LPC_I2S
+  - TRMode: Transmit/receive mode, should be:
+    
+    - I2S_TX_MODE = 0: transmit mode
+    - I2S_RX_MODE = 1: receive mode 
+  
+  - ConfigStruct: pointer to I2S_CFG_Type structure which will be initialized
   
   '''
   return RoboCaller().call("I2S_Config", "void", I2Sx, TRMode, ConfigStruct)
@@ -508,11 +580,15 @@ def I2S_Config(I2Sx, TRMode, ConfigStruct):
 def I2S_IRQCmd(I2Sx, TRMode, NewState):
   '''Enable/Disable IRQ for I2S.
   
-  I2Sx: I2S peripheral selected, should be: LPC_I2S
-  TRMode: Transmit/receive mode, should be:
-          I2S_TX_MODE = 0: transmit mode
-          I2S_RX_MODE = 1: receive mode 
-  NewState: ENABLE or DISABLE
+  Args:
+  
+  - I2Sx: I2S peripheral selected, should be: LPC_I2S
+  - TRMode: Transmit/receive mode, should be:
+    
+    - I2S_TX_MODE = 0: transmit mode
+    - I2S_RX_MODE = 1: receive mode 
+  
+  - NewState: ENABLE or DISABLE
   
   '''
   return RoboCaller().call("I2S_IRQCmd", "void", I2Sx, TRMode, NewState)
@@ -520,11 +596,15 @@ def I2S_IRQCmd(I2Sx, TRMode, NewState):
 def I2S_IRQConfig(I2Sx, TRMode, level):
   '''Configure IRQ for I2S.
   
-  I2Sx: I2S peripheral selected, should be: LPC_I2S
-  TRMode: Transmit/receive mode, should be:
-          I2S_TX_MODE = 0: transmit mode
-          I2S_RX_MODE = 1: receive mode 
-  level:  the FIFO level that triggers IRQ request
+  Args:
+  
+  - I2Sx: I2S peripheral selected, should be: LPC_I2S
+  - TRMode: Transmit/receive mode, should be:
+    
+    - I2S_TX_MODE = 0: transmit mode
+    - I2S_RX_MODE = 1: receive mode 
+  
+  - level:  the FIFO level that triggers IRQ request
   
   '''
   return RoboCaller().call("I2S_IRQConfig", "void", I2Sx, TRMode, level)
@@ -532,10 +612,13 @@ def I2S_IRQConfig(I2Sx, TRMode, level):
 def I2S_Stop(I2Sx, TRMode):
   '''I2S Stop.
   
-  I2Sx: I2S peripheral selected, should be: LPC_I2S
-  TRMode: Transmit/receive mode, should be:
-          I2S_TX_MODE = 0: transmit mode
-          I2S_RX_MODE = 1: receive mode 
+  Args:
+  
+  - I2Sx: I2S peripheral selected, should be: LPC_I2S
+  - TRMode: Transmit/receive mode, should be:
+    
+    - I2S_TX_MODE = 0: transmit mode
+    - I2S_RX_MODE = 1: receive mode 
   
   '''
   return RoboCaller().call("I2S_Stop", "void", I2Sx, TRMode)
@@ -543,11 +626,14 @@ def I2S_Stop(I2Sx, TRMode):
 def I2S_DMAConfig(I2Sx, DMAConfig, TRMode):
   '''Configure DMA operation for I2S.
   
-  I2Sx: I2S peripheral selected, should be: LPC_I2S
-  DMAConfig:  pointer to I2S_DMAConf_Type used for configuration
-  TRMode: Transmit/receive mode, should be:
-          I2S_TX_MODE = 0: transmit mode
-          I2S_RX_MODE = 1: receive mode 
+  Args:
+  
+  - I2Sx: I2S peripheral selected, should be: LPC_I2S
+  - DMAConfig:  pointer to I2S_DMAConf_Type used for configuration
+  - TRMode: Transmit/receive mode, should be:
+      
+    - I2S_TX_MODE = 0: transmit mode
+    - I2S_RX_MODE = 1: receive mode 
   
   '''
   return RoboCaller().call("I2S_DMAConfig", "void", I2Sx, DMAConfig, TRMode)
@@ -555,11 +641,14 @@ def I2S_DMAConfig(I2Sx, DMAConfig, TRMode):
 def I2S_ModeConfig(I2Sx, ModeConfig, TRMode):
   '''Configuration operating mode for I2S.
   
-  I2Sx: I2S peripheral selected, should be: LPC_I2S
-  ModeConfig: pointer to I2S_MODEConf_Type used for configuration
-  TRMode: Transmit/receive mode, should be:
-          I2S_TX_MODE = 0: transmit mode
-          I2S_RX_MODE = 1: receive mode 
+  Args:
+  
+  - I2Sx: I2S peripheral selected, should be: LPC_I2S
+  - ModeConfig: pointer to I2S_MODEConf_Type used for configuration
+  - TRMode: Transmit/receive mode, should be:
+    
+    - I2S_TX_MODE = 0: transmit mode
+    - I2S_RX_MODE = 1: receive mode 
   
   '''
   return RoboCaller().call("I2S_ModeConfig", "void", I2Sx, ModeConfig, TRMode)
@@ -567,11 +656,17 @@ def I2S_ModeConfig(I2Sx, ModeConfig, TRMode):
 def I2S_GetIRQStatus(I2Sx, TRMode):
   '''Get I2S interrupt status.
   
-  I2Sx: I2S peripheral selected, should be: LPC_I2S
-  TRMode: Transmit/receive mode, should be:
-          I2S_TX_MODE = 0: transmit mode
-          I2S_RX_MODE = 1: receive mode 
-  return: FunctionalState should be: ENABLE or DISABLE
+  Args:
+  
+  - I2Sx: I2S peripheral selected, should be: LPC_I2S
+  - TRMode: Transmit/receive mode, should be:
+    
+    - I2S_TX_MODE = 0: transmit mode
+    - I2S_RX_MODE = 1: receive mode 
+  
+  Return: 
+  
+  - FunctionalState should be: ENABLE or DISABLE
   
   '''
   return RoboCaller().call("I2S_GetIRQStatus", "FunctionalState", I2Sx, TRMode)

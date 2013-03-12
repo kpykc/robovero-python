@@ -19,7 +19,9 @@ def RIT_DeInit(RITx):
   - Turn off power and clock
   - Reset default register values
   
-  RITx: peripheral selected, should be: LPC_RIT
+  Args:
+  
+  - RITx: peripheral selected, should be: LPC_RIT
   
   '''
   return RoboCaller().call("RIT_DeInit", "void", RITx)
@@ -30,7 +32,9 @@ def RIT_Init(RITx):
   - Turn on power and clock
   - Setup default register values
   
-  RITx: peripheral selected, should be: LPC_RIT
+  Args:
+  
+  - RITx: peripheral selected, should be: LPC_RIT
   
   '''
   return RoboCaller().call("RIT_Init", "void", RITx)
@@ -38,19 +42,27 @@ def RIT_Init(RITx):
 def RIT_Cmd(RITx, NewState):
   '''Enable/Disable Timer.
   
-  RITx: peripheral selected, should be: LPC_RIT
-  NewState   New state of this function:
-            - ENABLE: Enable Timer
-            - DISABLE: Disable Timer
-            
+  Args:
+  
+  - RITx: peripheral selected, should be: LPC_RIT
+  - NewState   New state of this function:
+
+    - ENABLE: Enable Timer
+    - DISABLE: Disable Timer
+        
   '''
   return RoboCaller().call("RIT_Cmd", "void", RITx, NewState)
 
 def RIT_GetIntStatus(RITx):
   '''Check whether interrupt flag is set or not.
   
-  RITx: peripheral selected, should be: LPC_RIT
-  return: Current interrupt status, could be: SET/RESET
+  Args:
+  
+  - RITx: peripheral selected, should be: LPC_RIT
+  
+  Return: 
+  
+  - Current interrupt status, could be: SET/RESET
   
   '''
   return RoboCaller().call("RIT_GetIntStatus", "IntStatus", RITx)
@@ -58,8 +70,10 @@ def RIT_GetIntStatus(RITx):
 def RIT_TimerConfig(RITx, time_interval):
   '''Set compare value, mask value and time counter value.
   
-  RITx: peripheral selected, should be: LPC_RIT
-  time_interval:  timer interval value (ms)
+  Args:
+  
+  - RITx: peripheral selected, should be: LPC_RIT
+  - time_interval:  timer interval value (ms)
   
   '''
   return RoboCaller().call("RIT_TimerConfig", "void", RITx, time_interval)
@@ -67,10 +81,13 @@ def RIT_TimerConfig(RITx, time_interval):
 def RIT_TimerDebugCmd(RITx, NewState):
   '''Timer Enable/Disable on debug.
   
-  RITx: peripheral selected, should be: LPC_RIT
-  NewState: New State of this function
-            -ENABLE: The timer is halted whenever a hardware break condition occurs
-            -DISABLE: Hardware break has no effect on the timer operation
+  Args:
+  
+  - RITx: peripheral selected, should be: LPC_RIT
+  - NewState: New State of this function
+    
+    -ENABLE: The timer is halted whenever a hardware break condition occurs
+    -DISABLE: Hardware break has no effect on the timer operation
   
   '''
   return RoboCaller().call("RIT_TimerDebugCmd", "void", RITx, NewState)

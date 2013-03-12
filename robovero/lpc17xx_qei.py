@@ -97,20 +97,28 @@ QEI_INTFLAG_POS2REV_Int = (1<<12)
 class QEI_CFG_Type(cstruct):
   '''QEI Configuration structure type definition.
   
-   DirectionInvert:  1-bit Direction invert option:
-                    - QEI_DIRINV_NONE: QEI Direction is normal
-                    - QEI_DIRINV_CMPL: QEI Direction is complemented
-  SignalMode: 1-bit Signal mode Option:
-              - QEI_SIGNALMODE_QUAD: Signal is in Quadrature phase mode
-              - QEI_SIGNALMODE_CLKDIR: Signal is in Clock/Direction mode
-  CaptureMode:  1-bit Capture Mode Option:
-                - QEI_CAPMODE_2X: Only Phase-A edges are counted (2X)
-                - QEI_CAPMODE_4X: BOTH Phase-A and Phase-B edges are counted (4X)
-  InvertIndex:  1-bit Invert Index Option:
-                - QEI_INVINX_NONE: the sense of the index input is normal
-                - QEI_INVINX_EN: inverts the sense of the index input
-  ptr:  LPC1769 memory address where structure is stored. Use this in place of
-        the C reference operator (&).
+
+  - DirectionInvert:  1-bit Direction invert option:
+  
+    - QEI_DIRINV_NONE: QEI Direction is normal
+    - QEI_DIRINV_CMPL: QEI Direction is complemented
+  
+  - SignalMode: 1-bit Signal mode Option:
+  
+    - QEI_SIGNALMODE_QUAD: Signal is in Quadrature phase mode
+    - QEI_SIGNALMODE_CLKDIR: Signal is in Clock/Direction mode
+  
+  - CaptureMode:  1-bit Capture Mode Option:
+  
+    - QEI_CAPMODE_2X: Only Phase-A edges are counted (2X)
+    - QEI_CAPMODE_4X: BOTH Phase-A and Phase-B edges are counted (4X)
+  
+  - InvertIndex:  1-bit Invert Index Option:
+  
+    - QEI_INVINX_NONE: the sense of the index input is normal
+    - QEI_INVINX_EN: inverts the sense of the index input
+  
+  - ptr:  LPC1769 memory address where structure is stored. Use this in place of the C reference operator (&).
   
   '''
   pass
@@ -118,12 +126,14 @@ class QEI_CFG_Type(cstruct):
 class QEI_RELOADCFG_Type(cstruct):
   '''Timer Reload Configuration structure type definition.
   
-   ReloadOption: Velocity Timer Reload Option, should be:
-                - QEI_TIMERRELOAD_TICKVAL: Reload value in absolute value
-                - QEI_TIMERRELOAD_USVAL: Reload value in microsecond value
-  ReloadValue:  Velocity Timer Reload Value, 32-bit long, should be matched
+  - ReloadOption: Velocity Timer Reload Option, should be:
+
+    - QEI_TIMERRELOAD_TICKVAL: Reload value in absolute value
+    - QEI_TIMERRELOAD_USVAL: Reload value in microsecond value
+
+  - ReloadValue:  Velocity Timer Reload Value, 32-bit long, should be matched
                 with Velocity Timer Reload Option
-  ptr:  LPC1769 memory address where structure is stored. Use this in place of
+  - ptr:  LPC1769 memory address where structure is stored. Use this in place of
         the C reference operator (&).
         
   '''
@@ -132,8 +142,11 @@ class QEI_RELOADCFG_Type(cstruct):
 def QEI_GetTimer(QEIx):
   '''Get current timer counter in QEI peripheral.
   
-  QEIx: QEI peripheral, should be LPC_QEI
-  return: Current timer counter in QEI peripheral
+  Args:
+  
+  - QEIx: QEI peripheral, should be LPC_QEI
+  
+  Return: Current timer counter in QEI peripheral
   
   '''
   return RoboCaller().call("QEI_GetTimer", "uint32_t", QEIx)
@@ -141,7 +154,9 @@ def QEI_GetTimer(QEIx):
 def QEI_DeInit(QEIx):
   '''De-initializes the QEI peripheral registers to their default reset values.
   
-  QEIx: QEI peripheral, should be LPC_QEI
+  Args:
+  
+  - QEIx: QEI peripheral, should be LPC_QEI
   
   '''
   return RoboCaller().call("QEI_DeInit", "void", QEIx)
@@ -149,8 +164,11 @@ def QEI_DeInit(QEIx):
 def QEI_GetPosition(QEIx):
   '''Get current position value in QEI peripheral.
   
-  QEIx: QEI peripheral, should be LPC_QEI
-  return: Current position value of QEI peripheral
+  Args:
+  
+  - QEIx: QEI peripheral, should be LPC_QEI
+  
+  Return: Current position value of QEI peripheral
   
   '''
   return RoboCaller().call("QEI_GetPosition", "uint32_t", QEIx)
@@ -158,10 +176,14 @@ def QEI_GetPosition(QEIx):
 def QEI_GetStatus(QEIx, ulFlagType):
   '''Check whether if specified flag status is set or not.
   
-  QEIx: QEI peripheral, should be LPC_QEI
-  ulFlagType: Status Flag Type, should be one of the following:
-              - QEI_STATUS_DIR: Direction Status
-  return: New Status of this status flag (SET or RESET)
+  Args:
+  
+  - QEIx: QEI peripheral, should be LPC_QEI
+  - ulFlagType: Status Flag Type, should be one of the following:
+    
+    - QEI_STATUS_DIR: Direction Status
+  
+  Return: New Status of this status flag (SET or RESET)
   
   '''
   return RoboCaller().call("QEI_GetStatus", "FlagStatus", QEIx, ulFlagType)
@@ -170,21 +192,26 @@ def QEI_Reset(QEIx, ulResetType):
   '''Resets value for each type of QEI value, such as velocity, counter, 
   position, etc.
   
-  QEIx: QEI peripheral, should be LPC_QEI
-  ulResetType: QEI Reset Type, should be one of the following:
-              - QEI_RESET_POS: Reset Position Counter
-              - QEI_RESET_POSOnIDX: Reset Position Counter on Index signal
-              - QEI_RESET_VEL: Reset Velocity
-              - QEI_RESET_IDX: Reset Index Counter
+  Args:
   
+  - QEIx: QEI peripheral, should be LPC_QEI
+  - ulResetType: QEI Reset Type, should be one of the following:
+
+    - QEI_RESET_POS: Reset Position Counter
+    - QEI_RESET_POSOnIDX: Reset Position Counter on Index signal
+    - QEI_RESET_VEL: Reset Velocity
+    - QEI_RESET_IDX: Reset Index Counter
+
   '''
   return RoboCaller().call("QEI_Reset", "void", QEIx, ulResetType)
 
 def QEI_SetMaxPosition(QEIx, ulMaxPos):
   '''Set max position value for QEI peripheral.
   
-  QEIx: QEI peripheral, should be LPC_QEI
-  ulMaxPos: Max position value to set
+  Args:
+  
+  - QEIx: QEI peripheral, should be LPC_QEI
+  - ulMaxPos: Max position value to set
   
   '''
   return RoboCaller().call("QEI_SetMaxPosition", "void", QEIx, ulMaxPos)
@@ -192,8 +219,11 @@ def QEI_SetMaxPosition(QEIx, ulMaxPos):
 def QEI_GetVelocity(QEIx):
   '''Get current velocity pulse counter in current time period.
   
-  QEIx: QEI peripheral, should be LPC_QEI
-  return: Current velocity pulse counter value
+  Args:
+  
+  - QEIx: QEI peripheral, should be LPC_QEI
+  
+  Return: Current velocity pulse counter value
   
   '''
   return RoboCaller().call("QEI_GetVelocity", "uint32_t", QEIx)
@@ -203,8 +233,11 @@ def QEI_GetVelocityCap(QEIx):
   in QEI is over-flow, the current velocity value will be loaded into Velocity 
   Capture register..
   
-  QEIx: QEI peripheral, should be LPC_QEI
-  return: The most recently measured velocity value
+  Args:
+  
+  - QEIx: QEI peripheral, should be LPC_QEI
+  
+  Return: The most recently measured velocity value
   
   '''
   return RoboCaller().call("QEI_GetVelocityCap", "uint32_t", QEIx)
@@ -212,12 +245,16 @@ def QEI_GetVelocityCap(QEIx):
 def QEI_SetPositionComp(QEIx, bPosCompCh, ulPosComp):
   '''Set position compare value for QEI peripheral.
   
-  QEIx: QEI peripheral, should be LPC_QEI
-  bPosCompCh: Compare Position channel, should be:
-               - QEI_COMPPOS_CH_0: QEI compare position channel 0
-               - QEI_COMPPOS_CH_1: QEI compare position channel 1
-               - QEI_COMPPOS_CH_2: QEI compare position channel 2
-  ulPosComp:  Compare Position value to set
+  Args:
+  
+  - QEIx: QEI peripheral, should be LPC_QEI
+  - bPosCompCh: Compare Position channel, should be:
+    
+    - QEI_COMPPOS_CH_0: QEI compare position channel 0
+    - QEI_COMPPOS_CH_1: QEI compare position channel 1
+    - QEI_COMPPOS_CH_2: QEI compare position channel 2
+  
+  - ulPosComp:  Compare Position value to set
     
   '''
   return RoboCaller().call("QEI_SetPositionComp", "void", QEIx, bPosCompCh, ulPosComp)
@@ -225,8 +262,10 @@ def QEI_SetPositionComp(QEIx, bPosCompCh, ulPosComp):
 def QEI_SetDigiFilter(QEIx, ulSamplingPulse):
   '''Set value of sampling count for the digital filter in QEI peripheral.
   
-  QEIx: QEI peripheral, should be LPC_QEI
-  ulSamplingPulse: Value of sampling count to set
+  Args:
+  
+  - QEIx: QEI peripheral, should be LPC_QEI
+  - ulSamplingPulse: Value of sampling count to set
   
   '''
   return RoboCaller().call("QEI_SetDigiFilter", "void", QEIx, ulSamplingPulse)
@@ -234,39 +273,45 @@ def QEI_SetDigiFilter(QEIx, ulSamplingPulse):
 def QEI_IntSet(QEIx, ulIntType):
   '''Sets (forces) specified interrupt in QEI peripheral.
   
-  QEIx: QEI peripheral, should be LPC_QEI
-  ulIntType:  Interrupt Flag Status type, should be:
-              - QEI_INTFLAG_INX_Int: index pulse was detected interrupt
-              - QEI_INTFLAG_TIM_Int: Velocity timer over flow interrupt
-              - QEI_INTFLAG_VELC_Int: Capture velocity is less than compare
-                interrupt
-              - QEI_INTFLAG_DIR_Int: Change of direction interrupt
-              - QEI_INTFLAG_ERR_Int: An encoder phase error interrupt
-              - QEI_INTFLAG_ENCLK_Int: An encoder clock pulse was detected
-                interrupt
-              - QEI_INTFLAG_POS0_Int: position 0 compare value is equal to the
-                current position interrupt
-              - QEI_INTFLAG_POS1_Int: position 1 compare value is equal to the
-                current position interrupt
-              - QEI_INTFLAG_POS2_Int: position 2 compare value is equal to the
-                current position interrupt
-              - QEI_INTFLAG_REV_Int: Index compare value is equal to the current
-                index count interrupt
-              - QEI_INTFLAG_POS0REV_Int: Combined position 0 and revolution 
-                count interrupt
-              - QEI_INTFLAG_POS1REV_Int: Combined position 1 and revolution 
-                count interrupt
-              - QEI_INTFLAG_POS2REV_Int: Combined position 2 and revolution 
-                count interrupt
+  Args:
+  
+  - QEIx: QEI peripheral, should be LPC_QEI
+  - ulIntType:  Interrupt Flag Status type, should be:
+
+    - QEI_INTFLAG_INX_Int: index pulse was detected interrupt
+    - QEI_INTFLAG_TIM_Int: Velocity timer over flow interrupt
+    - QEI_INTFLAG_VELC_Int: Capture velocity is less than compare
+      interrupt
+    - QEI_INTFLAG_DIR_Int: Change of direction interrupt
+    - QEI_INTFLAG_ERR_Int: An encoder phase error interrupt
+    - QEI_INTFLAG_ENCLK_Int: An encoder clock pulse was detected
+      interrupt
+    - QEI_INTFLAG_POS0_Int: position 0 compare value is equal to the
+      current position interrupt
+    - QEI_INTFLAG_POS1_Int: position 1 compare value is equal to the
+      current position interrupt
+    - QEI_INTFLAG_POS2_Int: position 2 compare value is equal to the
+      current position interrupt
+    - QEI_INTFLAG_REV_Int: Index compare value is equal to the current
+      index count interrupt
+    - QEI_INTFLAG_POS0REV_Int: Combined position 0 and revolution 
+      count interrupt
+    - QEI_INTFLAG_POS1REV_Int: Combined position 1 and revolution 
+      count interrupt
+    - QEI_INTFLAG_POS2REV_Int: Combined position 2 and revolution 
+      count interrupt
   
   '''
   return RoboCaller().call("QEI_IntSet", "void", QEIx, ulIntType)
 
 def QEI_GetIndex(QEIx):
   '''Get current index counter of QEI peripheral.
+
+  Args:
   
-  QEIx: QEI peripheral, should be LPC_QEI
-  return: Current value of QEI index counter
+  - QEIx: QEI peripheral, should be LPC_QEI
+  
+  Return: Current value of QEI index counter
   
   '''
   return RoboCaller().call("QEI_GetIndex", "uint32_t", QEIx)
@@ -277,8 +322,10 @@ def QEI_SetTimerReload(QEIx, QEIReloadStruct):
   into the velocity timer for next period. The calculated velocity in RPM
   therefore will be affect by this value..
   
-  QEIx: QEI peripheral, should be LPC_QEI
-  QEIReloadStruct: QEI reload structure
+  Args:
+  
+  - QEIx: QEI peripheral, should be LPC_QEI
+  - QEIReloadStruct: QEI reload structure
   
   '''
   return RoboCaller().call("QEI_SetTimerReload", "void", QEIx, QEIReloadStruct)
@@ -291,8 +338,9 @@ def QEI_ConfigStructInit(QIE_InitStruct):
   - CaptureMode = QEI_CAPMODE_4X
   - InvertIndex = QEI_INVINX_NONE.
   
-  QIE_InitStruct: Pointer to a QEI_CFG_Type structure which will be 
-                  initialized.
+  Args:
+  
+  - QIE_InitStruct: Pointer to a QEI_CFG_Type structure which will be initialized.
   
   '''
   return RoboCaller().call("QEI_ConfigStructInit", "void", QIE_InitStruct)
@@ -300,8 +348,10 @@ def QEI_ConfigStructInit(QIE_InitStruct):
 def QEI_SetVelocityComp(QEIx, ulVelComp):
   '''Set Velocity Compare value for QEI peripheral.
   
-  QEIx: QEI peripheral, should be LPC_QEI
-  ulVelComp:  Compare Velocity value to set
+  Args:
+  
+  - QEIx: QEI peripheral, should be LPC_QEI
+  - ulVelComp:  Compare Velocity value to set
     
   '''
   return RoboCaller().call("QEI_SetVelocityComp", "void", QEIx, ulVelComp)
@@ -310,8 +360,10 @@ def QEI_Init(QEIx, QEI_ConfigStruct):
   '''Initializes the QEI peripheral according to the specified parameters in the
   QEI_ConfigStruct.
   
-  QEIx: QEI peripheral, should be LPC_QEI
-  QEI_ConfigStruct: Pointer to a QEI_CFG_Type structure that contains the 
+  Args:
+  
+  - QEIx: QEI peripheral, should be LPC_QEI
+  - QEI_ConfigStruct: Pointer to a QEI_CFG_Type structure that contains the 
                     configuration information for the specified QEI peripheral
     
   '''
@@ -320,64 +372,72 @@ def QEI_Init(QEIx, QEI_ConfigStruct):
 def QEI_IntCmd(QEIx, ulIntType, NewState):
   '''Enable/Disable specified interrupt in QEI peripheral.
   
-  QEIx: QEI peripheral, should be LPC_QEI
-  ulIntType:  Interrupt Flag Status type, should be:
-              - QEI_INTFLAG_INX_Int: index pulse was detected interrupt
-              - QEI_INTFLAG_TIM_Int: Velocity timer over flow interrupt
-              - QEI_INTFLAG_VELC_Int: Capture velocity is less than compare
-                interrupt
-              - QEI_INTFLAG_DIR_Int: Change of direction interrupt
-              - QEI_INTFLAG_ERR_Int: An encoder phase error interrupt
-              - QEI_INTFLAG_ENCLK_Int: An encoder clock pulse was detected
-                interrupt
-              - QEI_INTFLAG_POS0_Int: position 0 compare value is equal to the
-                current position interrupt
-              - QEI_INTFLAG_POS1_Int: position 1 compare value is equal to the
-                current position interrupt
-              - QEI_INTFLAG_POS2_Int: position 2 compare value is equal to the
-                current position interrupt
-              - QEI_INTFLAG_REV_Int: Index compare value is equal to the current
-                index count interrupt
-              - QEI_INTFLAG_POS0REV_Int: Combined position 0 and revolution 
-                count interrupt
-              - QEI_INTFLAG_POS1REV_Int: Combined position 1 and revolution 
-                count interrupt
-              - QEI_INTFLAG_POS2REV_Int: Combined position 2 and revolution 
-                count interrupt
-  NewState: New function state, should be:
-            - DISABLE
-            - ENABLE
+  Args:
   
+  - QEIx: QEI peripheral, should be LPC_QEI
+  - ulIntType:  Interrupt Flag Status type, should be:
+
+    - QEI_INTFLAG_INX_Int: index pulse was detected interrupt
+    - QEI_INTFLAG_TIM_Int: Velocity timer over flow interrupt
+    - QEI_INTFLAG_VELC_Int: Capture velocity is less than compare
+      interrupt
+    - QEI_INTFLAG_DIR_Int: Change of direction interrupt
+    - QEI_INTFLAG_ERR_Int: An encoder phase error interrupt
+    - QEI_INTFLAG_ENCLK_Int: An encoder clock pulse was detected
+      interrupt
+    - QEI_INTFLAG_POS0_Int: position 0 compare value is equal to the
+      current position interrupt
+    - QEI_INTFLAG_POS1_Int: position 1 compare value is equal to the
+      current position interrupt
+    - QEI_INTFLAG_POS2_Int: position 2 compare value is equal to the
+      current position interrupt
+    - QEI_INTFLAG_REV_Int: Index compare value is equal to the current
+      index count interrupt
+    - QEI_INTFLAG_POS0REV_Int: Combined position 0 and revolution 
+      count interrupt
+    - QEI_INTFLAG_POS1REV_Int: Combined position 1 and revolution 
+      count interrupt
+    - QEI_INTFLAG_POS2REV_Int: Combined position 2 and revolution 
+      count interrupt
+  
+  - NewState: New function state, should be:
+  
+    - DISABLE
+    - ENABLE
+
   '''
   return RoboCaller().call("QEI_IntCmd", "void", QEIx, ulIntType, NewState)
 
 def QEI_IntClear(QEIx, ulIntType):
   '''Clear (force) specified interrupt (pending) in QEI peripheral.
   
-  QEIx: QEI peripheral, should be LPC_QEI
-  ulIntType:  Interrupt Flag Status type, should be:
-              - QEI_INTFLAG_INX_Int: index pulse was detected interrupt
-              - QEI_INTFLAG_TIM_Int: Velocity timer over flow interrupt
-              - QEI_INTFLAG_VELC_Int: Capture velocity is less than compare
-                interrupt
-              - QEI_INTFLAG_DIR_Int: Change of direction interrupt
-              - QEI_INTFLAG_ERR_Int: An encoder phase error interrupt
-              - QEI_INTFLAG_ENCLK_Int: An encoder clock pulse was detected
-                interrupt
-              - QEI_INTFLAG_POS0_Int: position 0 compare value is equal to the
-                current position interrupt
-              - QEI_INTFLAG_POS1_Int: position 1 compare value is equal to the
-                current position interrupt
-              - QEI_INTFLAG_POS2_Int: position 2 compare value is equal to the
-                current position interrupt
-              - QEI_INTFLAG_REV_Int: Index compare value is equal to the current
-                index count interrupt
-              - QEI_INTFLAG_POS0REV_Int: Combined position 0 and revolution 
-                count interrupt
-              - QEI_INTFLAG_POS1REV_Int: Combined position 1 and revolution 
-                count interrupt
-              - QEI_INTFLAG_POS2REV_Int: Combined position 2 and revolution 
-                count interrupt
+  Args:
+  
+  - QEIx: QEI peripheral, should be LPC_QEI
+  - ulIntType:  Interrupt Flag Status type, should be:
+
+    - QEI_INTFLAG_INX_Int: index pulse was detected interrupt
+    - QEI_INTFLAG_TIM_Int: Velocity timer over flow interrupt
+    - QEI_INTFLAG_VELC_Int: Capture velocity is less than compare
+      interrupt
+    - QEI_INTFLAG_DIR_Int: Change of direction interrupt
+    - QEI_INTFLAG_ERR_Int: An encoder phase error interrupt
+    - QEI_INTFLAG_ENCLK_Int: An encoder clock pulse was detected
+      interrupt
+    - QEI_INTFLAG_POS0_Int: position 0 compare value is equal to the
+      current position interrupt
+    - QEI_INTFLAG_POS1_Int: position 1 compare value is equal to the
+      current position interrupt
+    - QEI_INTFLAG_POS2_Int: position 2 compare value is equal to the
+      current position interrupt
+    - QEI_INTFLAG_REV_Int: Index compare value is equal to the current
+      index count interrupt
+    - QEI_INTFLAG_POS0REV_Int: Combined position 0 and revolution 
+      count interrupt
+    - QEI_INTFLAG_POS1REV_Int: Combined position 1 and revolution 
+      count interrupt
+    - QEI_INTFLAG_POS2REV_Int: Combined position 2 and revolution 
+      count interrupt
   
   '''
   return RoboCaller().call("QEI_IntClear", "void", QEIx, ulIntType)
@@ -386,31 +446,35 @@ def QEI_GetIntStatus(QEIx, ulIntType):
   '''Check whether if specified interrupt flag status in QEI peripheral
   is set or not.
   
-  QEIx: QEI peripheral, should be LPC_QEI
-  ulIntType:  Interrupt Flag Status type, should be:
-              - QEI_INTFLAG_INX_Int: index pulse was detected interrupt
-              - QEI_INTFLAG_TIM_Int: Velocity timer over flow interrupt
-              - QEI_INTFLAG_VELC_Int: Capture velocity is less than compare
-                interrupt
-              - QEI_INTFLAG_DIR_Int: Change of direction interrupt
-              - QEI_INTFLAG_ERR_Int: An encoder phase error interrupt
-              - QEI_INTFLAG_ENCLK_Int: An encoder clock pulse was detected
-                interrupt
-              - QEI_INTFLAG_POS0_Int: position 0 compare value is equal to the
-                current position interrupt
-              - QEI_INTFLAG_POS1_Int: position 1 compare value is equal to the
-                current position interrupt
-              - QEI_INTFLAG_POS2_Int: position 2 compare value is equal to the
-                current position interrupt
-              - QEI_INTFLAG_REV_Int: Index compare value is equal to the current
-                index count interrupt
-              - QEI_INTFLAG_POS0REV_Int: Combined position 0 and revolution 
-                count interrupt
-              - QEI_INTFLAG_POS1REV_Int: Combined position 1 and revolution 
-                count interrupt
-              - QEI_INTFLAG_POS2REV_Int: Combined position 2 and revolution 
-                count interrupt 
-  return: New State of specified interrupt flag status (SET or RESET)
+  Args:
+  
+  - QEIx: QEI peripheral, should be LPC_QEI
+  - ulIntType:  Interrupt Flag Status type, should be:
+
+    - QEI_INTFLAG_INX_Int: index pulse was detected interrupt
+    - QEI_INTFLAG_TIM_Int: Velocity timer over flow interrupt
+    - QEI_INTFLAG_VELC_Int: Capture velocity is less than compare
+      interrupt
+    - QEI_INTFLAG_DIR_Int: Change of direction interrupt
+    - QEI_INTFLAG_ERR_Int: An encoder phase error interrupt
+    - QEI_INTFLAG_ENCLK_Int: An encoder clock pulse was detected
+      interrupt
+    - QEI_INTFLAG_POS0_Int: position 0 compare value is equal to the
+      current position interrupt
+    - QEI_INTFLAG_POS1_Int: position 1 compare value is equal to the
+      current position interrupt
+    - QEI_INTFLAG_POS2_Int: position 2 compare value is equal to the
+      current position interrupt
+    - QEI_INTFLAG_REV_Int: Index compare value is equal to the current
+      index count interrupt
+    - QEI_INTFLAG_POS0REV_Int: Combined position 0 and revolution 
+      count interrupt
+    - QEI_INTFLAG_POS1REV_Int: Combined position 1 and revolution 
+      count interrupt
+    - QEI_INTFLAG_POS2REV_Int: Combined position 2 and revolution 
+      count interrupt 
+  
+  Return: New State of specified interrupt flag status (SET or RESET)
   
   '''
   return RoboCaller().call("QEI_GetIntStatus", "FlagStatus", QEIx, ulIntType)
@@ -419,11 +483,14 @@ def QEI_CalculateRPM(QEIx, ulVelCapValue, ulPPR):
   '''Calculates the actual velocity in RPM passed via velocity capture value and
   Pulse Per Round (of the encoder) value parameter input.
   
-  QEIx: QEI peripheral, should be LPC_QEI
-  ulVelCapValue:  Velocity capture input value from QEI_GetVelocityCap() 
+  Args:
+  
+  - QEIx: QEI peripheral, should be LPC_QEI
+  - ulVelCapValue:  Velocity capture input value from QEI_GetVelocityCap() 
                   function
-  ulPPR:  Pulse per round of encoder
-  return: The actual value of velocity in RPM (revolutions per minute)
+  - ulPPR:  Pulse per round of encoder
+  
+  Return: The actual value of velocity in RPM (revolutions per minute)
   
   '''
   return RoboCaller().call("QEI_CalculateRPM", "uint32_t", QEIx, ulVelCapValue, ulPPR)
@@ -431,8 +498,10 @@ def QEI_CalculateRPM(QEIx, ulVelCapValue, ulPPR):
 def QEI_SetIndexComp(QEIx, ulIndexComp):
   '''Set value for index compare in QEI peripheral.
   
-  QEIx: QEI peripheral, should be LPC_QEI
-  ulIndexComp:  Compare Index Value to set
+  Args:
+  
+  - QEIx: QEI peripheral, should be LPC_QEI
+  - ulIndexComp:  Compare Index Value to set
   
   '''
   return RoboCaller().call("QEI_SetIndexComp", "void", QEIx, ulIndexComp)

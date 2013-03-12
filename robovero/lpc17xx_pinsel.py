@@ -121,20 +121,24 @@ PINSEL_I2C_Fast_Mode = ((1))
 class PINSEL_CFG_Type(cstruct):
   '''Pin configuration structure.
   
-  Portnum:  Port Number, should be PINSEL_PORT_x, where x should be in range
+  - Portnum:  Port Number, should be PINSEL_PORT_x, where x should be in range
             from 0 to 4
-  Pinnum: Pin Number, should be PINSEL_PIN_x, where x should be in range from 0
+  - Pinnum: Pin Number, should be PINSEL_PIN_x, where x should be in range from 0
           to 31
-  Funcnum:  Function Number, should be PINSEL_FUNC_x, where x should be in range
+  - Funcnum:  Function Number, should be PINSEL_FUNC_x, where x should be in range
             from 0 to 3
-  Pinmode:  Pin Mode, should be:
-            PINSEL_PINMODE_PULLUP: Internal pull-up resistor
-            PINSEL_PINMODE_TRISTATE: Tri-state
-            PINSEL_PINMODE_PULLDOWN: Internal pull-down resistor
-  OpenDrain:  OpenDrain mode, should be:
-              PINSEL_PINMODE_NORMAL: Pin is in the normal (not open drain) mode
-              PINSEL_PINMODE_OPENDRAIN: Pin is in the open drain mode  
-  ptr:  LPC1769 memory address where structure is stored. Use this in place of
+  - Pinmode:  Pin Mode, should be:
+  
+    - PINSEL_PINMODE_PULLUP: Internal pull-up resistor
+    - PINSEL_PINMODE_TRISTATE: Tri-state
+    - PINSEL_PINMODE_PULLDOWN: Internal pull-down resistor
+  
+  - OpenDrain:  OpenDrain mode, should be:
+  
+    - PINSEL_PINMODE_NORMAL: Pin is in the normal (not open drain) mode
+    - PINSEL_PINMODE_OPENDRAIN: Pin is in the open drain mode  
+  
+  - ptr:  LPC1769 memory address where structure is stored. Use this in place of
         the C reference operator (&).
           
   '''
@@ -143,12 +147,17 @@ class PINSEL_CFG_Type(cstruct):
 def PINSEL_SetI2C0Pins(i2cPinMode, filterSlewRateEnable):
   '''Setup I2C0 pins.
   
-  i2cPinMode: I2C pin mode, should be one of the following:
-              PINSEL_I2C_Normal_Mode : The standard drive mode
-              PINSEL_I2C_Fast_Mode : Fast Mode Plus drive mode
-  filterSlewRateEnable: should be:
-                        ENABLE: Enable filter and slew rate.
-                        DISABLE: Disable filter and slew rate.
+  Args:
+  
+  - i2cPinMode: I2C pin mode, should be one of the following:
+    
+    - PINSEL_I2C_Normal_Mode : The standard drive mode
+    - PINSEL_I2C_Fast_Mode : Fast Mode Plus drive mode
+  
+  - filterSlewRateEnable: should be:
+    
+    - ENABLE: Enable filter and slew rate.
+    - DISABLE: Disable filter and slew rate.
     
   '''
   return RoboCaller().call("PINSEL_SetI2C0Pins", "void", i2cPinMode, filterSlewRateEnable)
@@ -156,7 +165,9 @@ def PINSEL_SetI2C0Pins(i2cPinMode, filterSlewRateEnable):
 def PINSEL_ConfigPin(PinCfg):
   '''Configure Pin corresponding to specified parameters passed in the PinCfg.
   
-  PinCfg: Pointer to a PINSEL_CFG_Type structure that contains the configuration
+  Args:
+  
+  - PinCfg: Pointer to a PINSEL_CFG_Type structure that contains the configuration
           information for the specified pin.
   
   '''
@@ -165,9 +176,12 @@ def PINSEL_ConfigPin(PinCfg):
 def PINSEL_ConfigTraceFunc(NewState):
   '''Configure trace function.
   
-  NewState: should be one of the following:
-            ENABLE : Enable Trace Function
-            DISABLE : Disable Trace Function
+  Args:
+  
+  - NewState: should be one of the following:
+    
+    - ENABLE : Enable Trace Function
+    - DISABLE : Disable Trace Function
   
   '''
   return RoboCaller().call("PINSEL_ConfigTraceFunc", "void", NewState)

@@ -188,19 +188,19 @@ def PARAM_I2C_MONITOR_CFG(n):
 class I2C_M_SETUP_Type(cstruct):
   '''Master transfer setup data structure definitions.
   
-  sl_addr7bit:  Slave address in 7bit mode
-  tx_data:  Pointer to Transmit data - NULL if data transmit is not used
-  tx_length:  Transmit data length - 0 if data transmit is not used
-  tx_count: Current Transmit data counter
-  rx_data:  Pointer to Receive data - NULL if data receive is not used
-  rx_length:  Receive data length - 0 if data receive is not used
-  rx_count: Current Receive data counter
-  retransmissions_max:  Max Re-Transmission value
-  retransmissions_count:  Current Re-Transmission counter
-  status: Current status of I2C activity
-  callback: Pointer to Call back function when transmission complete used in 
+  - sl_addr7bit:  Slave address in 7bit mode
+  - tx_data:  Pointer to Transmit data - NULL if data transmit is not used
+  - tx_length:  Transmit data length - 0 if data transmit is not used
+  - tx_count: Current Transmit data counter
+  - rx_data:  Pointer to Receive data - NULL if data receive is not used
+  - rx_length:  Receive data length - 0 if data receive is not used
+  - rx_count: Current Receive data counter
+  - retransmissions_max:  Max Re-Transmission value
+  - retransmissions_count:  Current Re-Transmission counter
+  - status: Current status of I2C activity
+  - callback: Pointer to Call back function when transmission complete used in 
             interrupt transfer mode
-  ptr:  LPC1769 memory address where structure is stored. Use this in place of
+  - ptr:  LPC1769 memory address where structure is stored. Use this in place of
         the C reference operator (&).
         
   '''
@@ -209,21 +209,21 @@ class I2C_M_SETUP_Type(cstruct):
 class I2C_OWNSLAVEADDR_CFG_Type(cstruct):
   '''I2C Own slave address setting structure.
   
-  SlaveAddrChannel: Slave Address channel in I2C control, should be in range
+  - SlaveAddrChannel: Slave Address channel in I2C control, should be in range
                     from 0..3
-  SlaveAddr_7bit: Value of 7-bit slave address
-  GeneralCallState: Enable/Disable General Call Functionality when I2C control 
+  - SlaveAddr_7bit: Value of 7-bit slave address
+  - GeneralCallState: Enable/Disable General Call Functionality when I2C control 
                     being in Slave mode, should be:
                     ENABLE: Enable General Call function.
                     DISABLE: Disable General Call function.
-  SlaveAddrMaskValue: Any bit in this 8-bit value (bit 7:1) which is set to '1'
+  - SlaveAddrMaskValue: Any bit in this 8-bit value (bit 7:1) which is set to '1'
                       will cause an automatic compare on the corresponding bit
                       of the received address when it is compared to the 
                       SlaveAddr_7bit value associated with this mask register.
                       In other words, bits in SlaveAddr_7bit value which are 
                       masked are not taken into account in determining an 
                       address match
-  ptr:  LPC1769 memory address where structure is stored. Use this in place of
+  - ptr:  LPC1769 memory address where structure is stored. Use this in place of
         the C reference operator (&).
                           
   '''
@@ -240,16 +240,16 @@ class I2C_TRANSFER_OPT_Type:
 class I2C_S_SETUP_Type(cstruct):
   '''Slave transfer setup data structure definitions.
   
-  tx_data:  Pointer to Transmit data - NULL if data transmit is not used
-  tx_length:  Transmit data length - 0 if data transmit is not used
-  tx_count: Current Transmit data counter
-  rx_data:  Pointer to Receive data - NULL if data receive is not used
-  rx_length:  Receive data length - 0 if data receive is not used
-  rx_count: Current Receive data counter
-  status: Current status of I2C activity
-  callback: Pointer to Call back function when transmission complete used in 
+  - tx_data:  Pointer to Transmit data - NULL if data transmit is not used
+  - tx_length:  Transmit data length - 0 if data transmit is not used
+  - tx_count: Current Transmit data counter
+  - rx_data:  Pointer to Receive data - NULL if data receive is not used
+  - rx_length:  Receive data length - 0 if data receive is not used
+  - rx_count: Current Receive data counter
+  - status: Current status of I2C activity
+  - callback: Pointer to Call back function when transmission complete used in 
             interrupt transfer mode
-  ptr:  LPC1769 memory address where structure is stored. Use this in place of
+  - ptr:  LPC1769 memory address where structure is stored. Use this in place of
         the C reference operator (&).
             
   '''
@@ -258,13 +258,18 @@ class I2C_S_SETUP_Type(cstruct):
 def I2C_MonitorModeCmd(I2Cx, NewState):
   '''Enable/Disable I2C monitor mode.
   
-  I2Cx: I2C peripheral selected, should be
-        LPC_I2C0
-        LPC_I2C1
-        LPC_I2C2
-  NewState: New State of this function, should be:
-            ENABLE: Enable monitor mode.
-            DISABLE: Disable monitor mode.
+  Args:
+  
+  - I2Cx: I2C peripheral selected, should be
+    
+    - LPC_I2C0
+    - LPC_I2C1
+    - LPC_I2C2
+  
+  - NewState: New State of this function, should be:
+    
+    - ENABLE: Enable monitor mode.
+    - DISABLE: Disable monitor mode.
             
   '''
   return RoboCaller().call("I2C_MonitorModeCmd", "void", I2Cx, NewState)
@@ -272,13 +277,18 @@ def I2C_MonitorModeCmd(I2Cx, NewState):
 def I2C_IntCmd(I2Cx, NewState):
   '''Enable/Disable interrupt for I2C peripheral.
   
-  I2Cx: I2C peripheral selected, should be
-        LPC_I2C0
-        LPC_I2C1
-        LPC_I2C2
-  NewState: New State of I2C peripheral interrupt in NVIC core should be:
-            ENABLE: enable interrupt for this I2C peripheral
-            DISABLE: disable interrupt for this I2C peripheral
+  Args:
+  
+  - I2Cx: I2C peripheral selected, should be
+
+    - LPC_I2C0
+    - LPC_I2C1
+    - LPC_I2C2
+
+  - NewState: New State of I2C peripheral interrupt in NVIC core should be:
+    
+    - ENABLE: enable interrupt for this I2C peripheral
+    - DISABLE: disable interrupt for this I2C peripheral
 
   '''
   return RoboCaller().call("I2C_IntCmd", "void", I2Cx, NewState)
@@ -286,10 +296,13 @@ def I2C_IntCmd(I2Cx, NewState):
 def I2C_DeInit(I2Cx):
   '''De-initializes the I2C peripheral registers to their default reset values.
   
-  I2Cx: I2C peripheral selected, should be
-        LPC_I2C0
-        LPC_I2C1
-        LPC_I2C2
+  Args:
+  
+  - I2Cx: I2C peripheral selected, should be
+    
+    - LPC_I2C0
+    - LPC_I2C1
+    - LPC_I2C2
         
   '''
   return RoboCaller().call("I2C_DeInit", "void", I2Cx)
@@ -297,10 +310,13 @@ def I2C_DeInit(I2Cx):
 def I2C_SlaveHandler(I2Cx):
   '''General Slave Interrupt handler for I2C peripheral.
   
-  I2Cx: I2C peripheral selected, should be
-        LPC_I2C0
-        LPC_I2C1
-        LPC_I2C2
+  Args:
+  
+  - I2Cx: I2C peripheral selected, should be
+    
+    - LPC_I2C0
+    - LPC_I2C1
+    - LPC_I2C2
         
   '''
   return RoboCaller().call("I2C_SlaveHandler", "void", I2Cx)
@@ -308,36 +324,49 @@ def I2C_SlaveHandler(I2Cx):
 def I2C_MonitorModeConfig(I2Cx, MonitorCfgType, NewState):
   '''Configures functionality in I2C monitor mode.
   
-  I2Cx: I2C peripheral selected, should be
-        LPC_I2C0
-        LPC_I2C1
-        LPC_I2C2
-  MonitorCfgType: Monitor Configuration type, should be:
-                  I2C_MONITOR_CFG_SCL_OUTPUT: I2C module can 'stretch' the clock
-                  line (hold it low) until it has had time to respond to an I2C 
-                  interrupt.
-                  I2C_MONITOR_CFG_MATCHALL: When this bit is set to '1' and the 
-                  I2C is in monitor mode, an interrupt will be generated on ANY 
-                  address received.
-  NewState: New State of this function, should be:
-            ENABLE: Enable this function.
-            DISABLE: Disable this function.
+  Args:
+  
+  - I2Cx: I2C peripheral selected, should be
+
+    - LPC_I2C0
+    - LPC_I2C1
+    - LPC_I2C2
+
+  - MonitorCfgType: Monitor Configuration type, should be:
+
+    - I2C_MONITOR_CFG_SCL_OUTPUT: I2C module can 'stretch' the clock
+        line (hold it low) until it has had time to respond to an I2C 
+        interrupt.
+    - I2C_MONITOR_CFG_MATCHALL: When this bit is set to '1' and the 
+        I2C is in monitor mode, an interrupt will be generated on ANY 
+        address received.
+
+  - NewState: New State of this function, should be:
+
+    - ENABLE: Enable this function.
+    - DISABLE: Disable this function.
             
   '''
   return RoboCaller().call("I2C_MonitorModeConfig", "void", I2Cx, MonitorCfgType, NewState)
 
 def I2C_MasterTransferData(I2Cx, TransferCfg, Opt):
   '''Transmit and Receive data in master mode.
+
+  Args:  
   
-  I2Cx: I2C peripheral selected, should be
-        LPC_I2C0
-        LPC_I2C1
-        LPC_I2C2
+  - I2Cx: I2C peripheral selected, should be
+    
+    - LPC_I2C0
+    - LPC_I2C1
+    - LPC_I2C2
         
-  TransferCfg:  Pointer to a I2C_M_SETUP_Type structure that contains specified
+  - TransferCfg:  Pointer to a I2C_M_SETUP_Type structure that contains specified
                 information about the configuration for master transfer.
-  Opt:  a I2C_TRANSFER_OPT_Type type that selected for interrupt or polling mode
-  return: SUCCESS or ERROR
+  - Opt:  a I2C_TRANSFER_OPT_Type type that selected for interrupt or polling mode
+  
+  Return: 
+  
+  - SUCCESS or ERROR
   
    '''
   return RoboCaller().call("I2C_MasterTransferData", "Status", I2Cx, TransferCfg, Opt)
@@ -345,11 +374,17 @@ def I2C_MasterTransferData(I2Cx, TransferCfg, Opt):
 def I2C_SlaveTransferComplete(I2Cx):
   '''Get status of Slave Transfer.
   
-  I2Cx: I2C peripheral selected, should be
-      LPC_I2C0
-      LPC_I2C1
-      LPC_I2C2
-  return: Complete status, could be: TRUE/FALSE
+  Args:
+  
+  - I2Cx: I2C peripheral selected, should be
+
+    - LPC_I2C0
+    - LPC_I2C1
+    - LPC_I2C2
+ 
+  Return: 
+  
+  - Complete status, could be: TRUE/FALSE
   
   '''
   return RoboCaller().call("I2C_SlaveTransferComplete", "uint32_t", I2Cx)
@@ -357,11 +392,17 @@ def I2C_SlaveTransferComplete(I2Cx):
 def I2C_SlaveTransferData(I2Cx, TransferCfg, Opt):
   '''Get status of Slave Transfer.
   
-  I2Cx: I2C peripheral selected, should be
-        LPC_I2C0
-        LPC_I2C1
-        LPC_I2C2
-  return: Complete status, could be: TRUE/FALSE
+  Args:
+  
+  - I2Cx: I2C peripheral selected, should be
+    
+    - LPC_I2C0
+    - LPC_I2C1
+    - LPC_I2C2
+  
+  Return: 
+  
+  - Complete status, could be: TRUE/FALSE
   
   '''
   return RoboCaller().call("I2C_SlaveTransferData", "Status", I2Cx, TransferCfg, Opt)
@@ -370,11 +411,15 @@ def I2C_SetOwnSlaveAddr(I2Cx, OwnSlaveAddrConfigStruct):
   '''Set Own slave address in I2C peripheral corresponding to parameter 
   specified in OwnSlaveAddrConfigStruct.
   
-  I2Cx: I2C peripheral selected, should be
-        LPC_I2C0
-        LPC_I2C1
-        LPC_I2C2
-  OwnSlaveAddrConfigStruct: Pointer to a I2C_OWNSLAVEADDR_CFG_Type structure
+  Args:
+  
+  - I2Cx: I2C peripheral selected, should be
+    
+    - LPC_I2C0
+    - LPC_I2C1
+    - LPC_I2C2
+  
+  - OwnSlaveAddrConfigStruct: Pointer to a I2C_OWNSLAVEADDR_CFG_Type structure
                             that contains the configuration information for the
                             specified I2C slave address.
                             
@@ -384,13 +429,20 @@ def I2C_SetOwnSlaveAddr(I2Cx, OwnSlaveAddrConfigStruct):
 def I2C_MasterTransferComplete(I2Cx):
   '''Get status of Master Transfer.
   
-  I2Cx: I2C peripheral selected, should be
-        LPC_I2C0
-        LPC_I2C1
-        LPC_I2C2
-  return: Master transfer status, could be:
-          TRUE: master transfer completed
-          FALSE: master transfer have not completed yet
+  Args:
+  
+  - I2Cx: I2C peripheral selected, should be
+    
+    - LPC_I2C0
+    - LPC_I2C1
+    - LPC_I2C2
+  
+  Return: 
+  
+  - Master transfer status, could be:
+    
+    - TRUE: master transfer completed
+    - FALSE: master transfer have not completed yet
           
   '''
   return RoboCaller().call("I2C_MasterTransferComplete", "uint32_t", I2Cx)
@@ -398,32 +450,45 @@ def I2C_MasterTransferComplete(I2Cx):
 def I2C_MasterHandler(I2Cx):
   '''General Master Interrupt handler for I2C peripheral.
   
-  I2Cx: I2C peripheral selected, should be
-        LPC_I2C0
-        LPC_I2C1
-        LPC_I2C2
+  Args:
+  
+  - I2Cx: I2C peripheral selected, should be
+    
+    - LPC_I2C0
+    - LPC_I2C1
+    - LPC_I2C2
         
   '''
   return RoboCaller().call("I2C_MasterHandler", "void", I2Cx)
 
 def I2C_MonitorHandler(I2Cx, buffer, size):
-  '''.
- 
-  I2Cx: I2C peripheral selected, should be
-        LPC_I2C0
-        LPC_I2C1
-        LPC_I2C2
+  '''
+  
+  Args:
+  
+  - I2Cx: I2C peripheral selected, should be
+    
+    - LPC_I2C0
+    - LPC_I2C1
+    - LPC_I2C2
+  
+  TODO: Add Args documentation for buffer, size 
+  
   '''
   return RoboCaller().call("I2C_MonitorHandler", "BOOL_8", I2Cx, buffer, size)
 
 def I2C_Init(I2Cx, clockrate):
   '''Initializes the I2Cx peripheral with specified parameter.
   
-  I2Cx: I2C peripheral selected, should be
-        LPC_I2C0
-        LPC_I2C1
-        LPC_I2C2
-  clockrate: Target clock rate value to initialized I2C peripheral (Hz)
+  Args
+  
+  - I2Cx: I2C peripheral selected, should be
+    
+    - LPC_I2C0
+    - LPC_I2C1
+    - LPC_I2C2
+    
+  - clockrate: Target clock rate value to initialized I2C peripheral (Hz)
   
   '''
   return RoboCaller().call("I2C_Init", "void", I2Cx, clockrate)
@@ -438,11 +503,17 @@ def I2C_MonitorGetDatabuffer(I2Cx):
   would, it could have only one bit-time to respond to the interrupt before the
   received data is overwritten by new data.
   
-  I2Cx: I2C peripheral selected, should be
-        LPC_I2C0
-        LPC_I2C1
-        LPC_I2C2
-  return: uint8_t
+  Args:
+  
+  - I2Cx: I2C peripheral selected, should be
+    
+    - LPC_I2C0
+    - LPC_I2C1
+    - LPC_I2C2
+  
+  Return: 
+    
+  - (uint8_t)
   
   '''
   return RoboCaller().call("I2C_MonitorGetDatabuffer", "uint8_t", I2Cx)
@@ -450,11 +521,15 @@ def I2C_MonitorGetDatabuffer(I2Cx):
 def I2C_Cmd(I2Cx, NewState):
   '''Enable or disable I2C peripheral's operation.
   
-  I2Cx: I2C peripheral selected, should be
-        LPC_I2C0
-        LPC_I2C1
-        LPC_I2C2
-  NewState: New State of I2Cx peripheral's operation
+  Args:
+  
+  - I2Cx: I2C peripheral selected, should be
+    
+    - LPC_I2C0
+    - LPC_I2C1
+    - LPC_I2C2
+ 
+  - NewState: New State of I2Cx peripheral's operation
   
   '''
   return RoboCaller().call("I2C_Cmd", "void", I2Cx, NewState)

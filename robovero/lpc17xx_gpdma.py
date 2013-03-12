@@ -460,6 +460,7 @@ def GPDMA_Setup(GPDMAChannelConfig):
   - GPDMAChannelConfig: Pointer to a GPDMA_CH_CFG_Type structure that contains the
                       configuration information for the specified GPDMA channel
                       peripheral.
+                      
   Return: 
   
   - ERROR if selected channel is enabled before

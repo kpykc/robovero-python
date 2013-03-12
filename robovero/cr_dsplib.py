@@ -15,7 +15,7 @@ class tS_ResonatorStateCoeff(cstruct):
   '''  
   '''
   pass
-  
+
 def vF_dspl_resonator(psi_Output, pS_ResonatorStateCoeff, i_NSamples):
   '''
   '''
