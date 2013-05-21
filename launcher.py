@@ -16,7 +16,8 @@ from examples import \
   stepper,\
   uart_recv,\
   uart_send,\
-  range_finder
+  range_finder,\
+  mcpwm_brushless
 
 EXAMPLES=[
   'IMU',
@@ -34,6 +35,7 @@ EXAMPLES=[
   'uart_recv',
   'uart_send',
   'range_finder',
+  'mcpwm_brushless',
 ]
 
 def parse_argv(argv):
@@ -97,6 +99,8 @@ def run_example(example):
     uart_recv.run()
   elif example_id is 13:
     uart_send.run()
+  elif example_id is 15:
+    mcpwm_brushless.run()
 
 def list_examples():
   for i in range(len(EXAMPLES)):
