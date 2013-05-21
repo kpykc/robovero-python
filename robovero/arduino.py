@@ -15,7 +15,7 @@ from robovero.lpc_types import FunctionalState
 from time import sleep
 import threading
 
-from robovero.internals import getStatus
+from robovero.internals import getStatus, robocaller
 
 __author__ =			"Neil MacMunn"
 __email__ =       "neil@gumstix.com"
@@ -338,3 +338,23 @@ def noTone(pin):
     exit(1)
 
   PWM_ChannelCmd(LPC_PWM1, pwm_pins[pin], FunctionalState.DISABLE)
+
+def pulseIn(trig_pin, echo_pin, pulse_width):
+  """Sends a pulse pulse_width nanoseconds long to trig_pin. Returns 
+  length of pulse in microseconds on echo_pin. Returns -1 if no echo.
+  """
+  global digital_pins
+  
+  if trig_pin not in digital_pins:
+    print "Trig Pin must be one of:"
+    for key in digital_pins:
+      print key
+    exit(1)
+    
+  if echo_pin not in digital_pins:
+    print "Echo Pin must be one of:"
+    for key in digital_pins:
+      print key
+    exit(1)
+    
+  return robocaller("pulseIn","int", digital_pins[echo_pin].portnum, (1 << digital_pins[echo_pin].pinnum), digital_pins[trig_pin].portnum, (1 << digital_pins[trig_pin].pinnum), pulse_width)
