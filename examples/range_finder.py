@@ -11,15 +11,17 @@ __copyright__ = 	"Copyright 2012, Gumstix Inc"
 __license__ = 		"BSD 2-Clause"
 __version__ =			"0.1"
 
-echo_pin = P0_5
-trig_pin = P0_4
 
-pinMode(trig_pin,OUTPUT)
-pinMode(echo_pin,INPUT)
+def run():
+  echo_pin = P0_5
+  trig_pin = P0_4
 
-try:
-  while True:
-    print pulseIn(trig_pin, echo_pin, 9850)/58 # cm. Divide by 148 for in.
-    sleep(.1)
-except:
-  print "goodbye"
+  pinMode(trig_pin,OUTPUT)
+  pinMode(echo_pin,INPUT)
+
+  try:
+    while True:
+      print pulseIn(trig_pin, echo_pin, 9850)/58 # cm. Divide by 148 for in.
+      sleep(.1)
+  except:
+    print "goodbye"

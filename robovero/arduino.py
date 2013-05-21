@@ -15,7 +15,7 @@ from robovero.lpc_types import FunctionalState
 from time import sleep
 import threading
 
-from robovero.internals import getStatus, robocaller
+from robovero.internals import getStatus, RoboCaller
 
 __author__ =			"Neil MacMunn"
 __email__ =       "neil@gumstix.com"
@@ -58,10 +58,10 @@ class DigitalPin(object):
   def __init__(self, portnum, pinnum):
     """
     Args:
-    
+
     - portnum(int): The port number of the pin
     - pinnum(int): Thin pin number of the pin
-    
+
     Example: Pin 2_10 has port number 2 and pin number 10
     """
     self.portnum = portnum
@@ -89,12 +89,12 @@ digital_pins = {
 
 def pinMode(pin, mode):
   """Configures the specified pin to behave either as an input or an output.
-  
+
   Args:
-  
+
   - pin(DigitalPin): A DigitalPin Object
   - mode(OUTPUT/INPUT):The direction of the pin
-  
+
   """
   global digital_pins, modes
 
@@ -118,10 +118,10 @@ def digitalWrite(pin, value):
   """Write a HIGH or a LOW value to a digital pin.
 
   Args:
-  
+
   - pin(DigitalPin): A DigitalPin Object
   - value(HIGH/LOW): The value of the pin
-  
+
   """
   global digital_pins, values
 
@@ -147,9 +147,9 @@ def digitalRead(pin):
   """Reads the value from a specified digital pin, either HIGH or LOW.
 
   Args:
-  
+
   - pin(DigitalPin): A DigitalPin Object
-  
+
   """
   global digital_pins
 
@@ -182,10 +182,10 @@ class AnalogPin(object):
   def __init__(self, channel, interrupt):
     """
     Args:
-    
+
     - channel(int): The channel of the pin, choose from class ADC_CHANNEL_SELECTION
     - interrupt(int): Thin interrupt of the pin, choose from class ADC_TYPE_INT_OPT
-    
+
     """
     self.channel = channel
     self.interrupt = interrupt
@@ -202,11 +202,11 @@ analog_pins = {
 
 def analogRead(pin):
   """Reads the value from the specified analog pin.
-  
+
     Args:
-    
+
     - pin(int): An ADC AnalogPin Object
-    
+
 
     Note: Assumes that extras.roboveroConfig() has been called to initialize the ADC.
   """
@@ -252,12 +252,12 @@ pwm_pins = {
 
 def analogWrite(pin, value):
   """Writes an analog value (PWM wave) to a pin.
-  
+
   Args:
-  
+
   - pin(PWM1 to PWM6): A PWM pin
   - value(int): Duty cycle, a value between 0 and 255
-  
+
   """
   global pwm_pins
 
@@ -289,13 +289,13 @@ def analogWrite(pin, value):
 
 def tone(pin, frequency, duration=None):
   """Generates a square wave of the specified frequency on pin.
-  
-  Args: 
-  
+
+  Args:
+
   - pin(PWM1 to PWM6): A PWM pin
   - frequency(int): A value between 1 and 500000
   - duration(int): tone's durations in second
-  
+
   """
   global pwm_pins
 
@@ -323,11 +323,11 @@ def tone(pin, frequency, duration=None):
 
 def noTone(pin):
   """Stops the generation of a square wave on pin.
-  
-  Args: 
-  
+
+  Args:
+
   - pin(PWM1 to PWM6): A PWM pin
-  
+
   """
   global pwm_pins
 
@@ -340,21 +340,21 @@ def noTone(pin):
   PWM_ChannelCmd(LPC_PWM1, pwm_pins[pin], FunctionalState.DISABLE)
 
 def pulseIn(trig_pin, echo_pin, pulse_width):
-  """Sends a pulse pulse_width nanoseconds long to trig_pin. Returns 
+  """Sends a pulse pulse_width nanoseconds long to trig_pin. Returns
   length of pulse in microseconds on echo_pin. Returns -1 if no echo.
   """
   global digital_pins
-  
+
   if trig_pin not in digital_pins:
     print "Trig Pin must be one of:"
     for key in digital_pins:
       print key
     exit(1)
-    
+
   if echo_pin not in digital_pins:
     print "Echo Pin must be one of:"
     for key in digital_pins:
       print key
     exit(1)
-    
-  return robocaller("pulseIn","int", digital_pins[echo_pin].portnum, (1 << digital_pins[echo_pin].pinnum), digital_pins[trig_pin].portnum, (1 << digital_pins[trig_pin].pinnum), pulse_width)
+
+  return RoboCaller("pulseIn","int", digital_pins[echo_pin].portnum, (1 << digital_pins[echo_pin].pinnum), digital_pins[trig_pin].portnum, (1 << digital_pins[trig_pin].pinnum), pulse_width)

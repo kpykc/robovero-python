@@ -15,7 +15,8 @@ from examples import \
   servo,\
   stepper,\
   uart_recv,\
-  uart_send
+  uart_send,\
+  range_finder
 
 EXAMPLES=[
   'IMU',
@@ -32,6 +33,7 @@ EXAMPLES=[
   'stepper',
   'uart_recv',
   'uart_send',
+  'range_finder',
 ]
 
 def parse_argv(argv):
