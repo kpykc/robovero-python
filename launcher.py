@@ -99,6 +99,8 @@ def run_example(example):
     uart_recv.run()
   elif example_id is 13:
     uart_send.run()
+  elif example_id is 14:
+    range_finder.run()
   elif example_id is 15:
     mcpwm_brushless.run()
 
