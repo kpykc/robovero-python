@@ -1,5 +1,5 @@
-from robovero.extras import roboveroConfig,
-robovero.internals import RoboCaller
+from robovero.extras import roboveroConfig
+from robovero.internals import RoboCaller
 
 def getServoAngle():
 	"""Get an angle from the user and calculate new duty cycle.
@@ -14,4 +14,4 @@ def run():
   while True:
     match_value = getServoAngle()
     if match_value:
-    RoboCaller.call('PWM_SetSpeed', 'void', 1, match_value)
+      RoboCaller.call('PWM_SetSpeed', 'void', 1, match_value)
