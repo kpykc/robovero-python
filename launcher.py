@@ -19,7 +19,8 @@ from examples import \
   range_finder,\
   mcpwm_brushless,\
   servo_driver,\
-  aerothing
+  aerothing,\
+  script
 
 EXAMPLES=[
   'IMU',
@@ -40,6 +41,7 @@ EXAMPLES=[
   'mcpwm_brushless',
   'servo_driver',
   'aerothing',
+  'script',
 ]
 
 def parse_argv(argv):
@@ -111,6 +113,8 @@ def run_example(example):
     servo_driver.run()
   elif example_id is 17:
     aerothing.run()
+  elif example_id is 18:
+    script.run()
 
 def list_examples():
   for i in range(len(EXAMPLES)):

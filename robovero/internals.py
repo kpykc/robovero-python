@@ -59,19 +59,19 @@ class RoboCaller:
     if not RoboCaller._init_already:
       # These functions get called once when a peripheral driver module is
       # imported. A serial connection to the device is established.
-      global robovero 
+      global robovero
       robovero = Robovero()
       robovero.startListening()
       atexit.register(resetConfig)
       RoboCaller._init_already = True
-  
+
   def call(self, function, ret_type, *args):
     global robovero
     with robovero.lock:
       # Check if index is in dictionary, if not, add it to dictionary
       # Debugging log will only contain indices and not the function name
       # Comment out to restore to normal debug log
-  
+
       if function not in robovero.indices:
         search_string = "search " + function + "\r\n"
         robovero.debug.write("[%f] ADD TO DICTIONARY: %s\r\n" % (time.time() - robovero.start_time, function))
@@ -80,7 +80,7 @@ class RoboCaller:
         robovero.debug.write("[%f] INDEX: %s\r\n" % (time.time() - robovero.start_time, ret))
         robovero.indices[function] = ret
       function = robovero.indices[function]
-  
+
       for arg in args:
         if type(arg) == list:
           for sub_arg in arg:
@@ -263,6 +263,6 @@ class Robovero(object):
       self.serial.flush()
       self.serial.close()
       print 'Serial connection closed correctly.'
-    except AttributeError:  
+    except AttributeError:
       pass
-      
+
