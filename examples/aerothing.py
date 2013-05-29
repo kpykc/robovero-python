@@ -8,7 +8,7 @@ from time import sleep, time
 
 import csv
 
-import sys    
+import sys
 import termios
 import fcntl
 import os
@@ -32,13 +32,13 @@ I2 = 0
 D1 = 0
 D2 = 0
 
-SCALE_LEVEL_PID = 30 
+SCALE_LEVEL_PID = 30
 SCALE_LEVEL_GYRO_PID = 15
 INIT_THROTTLE = 1400 # us initial PPM signal to ESC
 TAKE_OFF_LIMIT=1550 # us for ESC control
 
 def setPID():
-  setLevelRollPID ( P1 , I1, D1)  # 3.5, 0, 0 
+  setLevelRollPID ( P1 , I1, D1)  # 3.5, 0, 0
   setLevelPitchPID(-P1 , -I1, D1)
   setLevelGyroRollPID (P2, I2, D2) # .149, .039. -.01
   setLevelGyroPitchPID(-P2, -I2, D2)
@@ -49,7 +49,7 @@ def dontCrash():
   angles = getFlightAngles()
   accel = getAccelReadings()
   global throttle
-  
+
   for i in range(len(angles)-1):
     if (abs(angles[i]) > LIMIT_ANGLE):
       logData(0)
@@ -69,11 +69,11 @@ def dontCrash():
 
       print "restabilized"
       setPID()
-      
+
       for x in range(75):
         sleep(0.02)
         maintainConnection()"""
-    
+
   if (abs(accel[2]) > ACCEL_LIMIT):
     print "accel limit reached"
     logData(0)
@@ -82,23 +82,23 @@ def dontCrash():
     stopAllMotors()
     accel = getAccelReadings()
     aeroLoopOff()
-    
+
     """while (abs(accel[2]) > ACCEL_LIMIT):
       accel = getAccelReadings()
       print accel
       logData(0)
       maintainConnection()
       sleep(0.02)
-      
+
     print "restabilized"
     setPID()
-    
+
     for x in range(75):
       sleep(0.02)
       maintainConnection()
-      
+
   armMotors()"""
-  
+
 def logData(show_on_screen):
   data = [getMotorCommands()]
   maintainConnection()
@@ -117,7 +117,7 @@ def logData(show_on_screen):
   if (show_on_screen):
     print data[0], data[1], data[2]
   writer.writerow(data)
-  
+
 def myGetch():
   fd = sys.stdin.fileno()
 
@@ -128,10 +128,10 @@ def myGetch():
 
   oldflags = fcntl.fcntl(fd, fcntl.F_GETFL)
   fcntl.fcntl(fd, fcntl.F_SETFL, oldflags | os.O_NONBLOCK)
-  
+
   c=''
 
-  try:        
+  try:
     try:
       c = sys.stdin.read(1)
     except IOError: pass
@@ -140,58 +140,59 @@ def myGetch():
     fcntl.fcntl(fd, fcntl.F_SETFL, oldflags)
     return c
 
-#roboveroConfig()
+def run():
+  #roboveroConfig()
 
-heartbeatOff()
-aeroInit()
-setPID()
-setAngleLimit(LIMIT_ANGLE)
-toggleAltitudeControl(ALTITUDE_CONTROL)
-setTargetAltitude(TARGET_ALTITUDE)
-changeMew(MEW)
-setLowPassU(LOW_PASS_U)
-maintainConnection()
+  heartbeatOff()
+  aeroInit()
+  setPID()
+  setAngleLimit(LIMIT_ANGLE)
+  toggleAltitudeControl(ALTITUDE_CONTROL)
+  setTargetAltitude(TARGET_ALTITUDE)
+  changeMew(MEW)
+  setLowPassU(LOW_PASS_U)
+  maintainConnection()
 
-writer.writerow([P1, P2, I1, I2, D1, D2])
+  writer.writerow([P1, P2, I1, I2, D1, D2])
 
-aeroLoopOn()
+  aeroLoopOn()
 
-setThrottle(INIT_THROTTLE)
-maintainConnection()
+  setThrottle(INIT_THROTTLE)
+  maintainConnection()
 
-throttle = INIT_THROTTLE
-count = 0
+  throttle = INIT_THROTTLE
+  count = 0
 
-try:
-  while True:
-    maintainConnection()
-    logData(1)
-    maintainConnection()
-    c=myGetch()
-    maintainConnection()
-    if c=='s':
-      throttle += 3
-    
-      if (throttle > TAKE_OFF_LIMIT):
-        throttle = TAKE_OFF_LIMIT
-        
-      setThrottle(throttle)
-    elif c=='a':
-      throttle -=3
-    
-      if (throttle < INIT_THROTTLE):
-        throttle = INIT_THROTTLE
-          
-      setThrottle(throttle)
-    elif c=='':
-      pass
-    else:
-      print "killed by key press"
-      aeroLoopOff()
-      exit()
-          
-    maintainConnection()
-    
-except:
-  print "killed due to exception"
-  aeroLoopOff()
+  try:
+    while True:
+      maintainConnection()
+      logData(1)
+      maintainConnection()
+      c=myGetch()
+      maintainConnection()
+      if c=='s':
+        throttle += 3
+
+        if (throttle > TAKE_OFF_LIMIT):
+          throttle = TAKE_OFF_LIMIT
+
+        setThrottle(throttle)
+      elif c=='a':
+        throttle -=3
+
+        if (throttle < INIT_THROTTLE):
+          throttle = INIT_THROTTLE
+
+        setThrottle(throttle)
+      elif c=='':
+        pass
+      else:
+        print "killed by key press"
+        aeroLoopOff()
+        exit()
+
+      maintainConnection()
+
+  except:
+    print "killed due to exception"
+    aeroLoopOff()
